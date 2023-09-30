@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"runtime"
@@ -70,7 +69,7 @@ func Init() {
 			panic(fmt.Sprintf("[Error]: %s", err))
 		}
 
-		l.SetOutput(ioutil.Discard) // Send all logs to nowhere by default
+		l.SetOutput(io.Discard) // Send all logs to nowhere by default
 
 		l.AddHook(&writerHook{
 			Writer:    []io.Writer{allFile, os.Stdout},

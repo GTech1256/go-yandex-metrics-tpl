@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
-	update_interface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
+	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	"github.com/sirupsen/logrus"
 	"strconv"
@@ -13,10 +13,10 @@ import (
 )
 
 var (
-	// ErrNotCorrectUrl возвращает ошибку, если формат url не подошел
-	ErrNotCorrectUrl   = errors.New("Not Correct Url")
-	ErrNotCorrectType  = errors.New("Not Correct metricType")
-	ErrNotCorrectValue = errors.New("Not Correct metricValue")
+	// ErrNotCorrectURL возвращает ошибку, если формат url не подошел
+	ErrNotCorrectURL   = errors.New("not correct url")
+	ErrNotCorrectType  = errors.New("not correct metricType")
+	ErrNotCorrectValue = errors.New("not correct metricValue")
 )
 
 type updateService struct {
@@ -24,7 +24,7 @@ type updateService struct {
 	storage metric2.Storage
 }
 
-func NewUpdateService(logger *logrus.Entry, storage metric2.Storage) update_interface.Service {
+func NewUpdateService(logger *logrus.Entry, storage metric2.Storage) updateInterface.Service {
 	return &updateService{logger: logger, storage: storage}
 }
 
@@ -38,7 +38,7 @@ func (u updateService) GetMetric(ctx context.Context, url string) (*entity.Metri
 		u.logger.Info("len(splitted) != count", len(splitted), splitted)
 		fmt.Printf("%+v", splitted)
 
-		return nil, ErrNotCorrectUrl
+		return nil, ErrNotCorrectURL
 	}
 
 	metricTypUnsafe, metricName, metricValueUnsafe := splitted[2], splitted[3], splitted[4]

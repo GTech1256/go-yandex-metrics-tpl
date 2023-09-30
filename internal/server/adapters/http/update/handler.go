@@ -4,17 +4,18 @@ import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http"
-	update_interface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
+	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"github.com/sirupsen/logrus"
 	"net/http"
 )
 
 type handler struct {
 	logger        *logrus.Entry
-	updateService update_interface.Service
+	updateService updateInterface.Service
 }
 
-func NewHandler(logger *logrus.Entry, updateService update_interface.Service) http2.Handler {
+func NewHandler(logger *logrus.Entry, updateService updateInterface.Service) http2.Handler {
 	return &handler{
 		logger:        logger,
 		updateService: updateService,
@@ -34,8 +35,19 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	metric, err := h.updateService.GetMetric(context.Background(), request.RequestURI)
-	if err != nil {
+
+	if err == service.ErrNotCorrectValue {
 		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if err == service.ErrNotCorrectType {
+		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if err != nil {
+		writer.WriteHeader(http.StatusNotFound)
 		return
 	}
 
