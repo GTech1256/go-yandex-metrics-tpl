@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"io"
-	"io/ioutil"
 	"path"
 	"runtime"
 )
@@ -49,7 +48,7 @@ func (l *Logger) GetLoggerWithField(k string, v interface{}) Logger {
 
 func Init() {
 	l := logrus.New()
-	l.SetOutput(ioutil.Discard)
+	l.SetOutput(io.Discard)
 	l.SetReportCaller(true)
 	l.Formatter = &logrus.TextFormatter{
 		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
