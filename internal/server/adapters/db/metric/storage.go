@@ -37,7 +37,7 @@ func (s storage) SaveGauge(ctx context.Context, gauge *entity.MetricGauge) error
 
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
 func (s storage) SaveCounter(ctx context.Context, counter *entity.MetricCounter) error {
-	if _, isOk := gauge[counter.Name]; isOk == false {
+	if _, isOk := gauge[counter.Name]; !isOk {
 		MemStorageContainer.counter[counter.Name] = int64(counter.Value)
 	} else {
 		MemStorageContainer.counter[counter.Name] += int64(counter.Value)
