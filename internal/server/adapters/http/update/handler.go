@@ -5,6 +5,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http"
 	update_interface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"github.com/sirupsen/logrus"
 	"net/http"
 )
@@ -34,6 +35,12 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	metric, err := h.updateService.GetMetric(context.Background(), request.RequestURI)
+
+	if err == service.ErrNotCorrectValue {
+		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
 	if err != nil {
 		writer.WriteHeader(http.StatusNotFound)
 		return
