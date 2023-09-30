@@ -37,10 +37,6 @@ func New(port string, logger *logrus.Entry) (App, error) {
 	updateHandler := update.NewHandler(logger, updateService)
 	updateHandler.Register(router)
 
-	router.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		writer.Write([]byte("index"))
-	})
-
 	logger.Info(fmt.Sprintf("Start Listen Port %v", port))
 	log.Fatal(http.ListenAndServe(port, logging.WithLogging(router, logger)))
 
