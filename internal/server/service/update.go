@@ -14,9 +14,9 @@ import (
 
 var (
 	// ErrNotCorrectURL возвращает ошибку, если формат url не подошел
-	ErrNotCorrectURL   = errors.New("Not Correct Url")
-	ErrNotCorrectType  = errors.New("Not Correct metricType")
-	ErrNotCorrectValue = errors.New("Not Correct metricValue")
+	ErrNotCorrectURL   = errors.New("not correct url")
+	ErrNotCorrectType  = errors.New("not correct metricType")
+	ErrNotCorrectValue = errors.New("not correct metricValue")
 )
 
 type updateService struct {
