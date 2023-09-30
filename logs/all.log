@@ -1,0 +1,922 @@
+time="2023-09-29T20:54:13+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T20:54:13+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T20:54:13+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:54:13+03:00" level=info msg="Start Listen Port %v8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:54:34+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T20:54:34+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T20:54:34+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:54:34+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:54:51+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:54:51+03:00" level=info msg="len(splitted) != count" func="handler.go:35" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:54:51+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="681.834µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T20:55:46+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T20:55:46+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T20:55:46+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:55:46+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:55:46+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:55:46+03:00" level=info msg="len(splitted) != count" func="handler.go:35" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:55:46+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="592.833µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T20:55:47+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:55:47+03:00" level=info msg="len(splitted) != count" func="handler.go:35" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:55:47+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="141.542µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T20:56:24+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T20:56:24+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T20:56:24+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:56:24+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:56:24+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:56:24+03:00" level=info msg="len(splitted) != count5" func="handler.go:35" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:56:24+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="247.333µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T20:56:59+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T20:56:59+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T20:56:59+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:56:59+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:57:00+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:57:00+03:00" level=info msg="[ update type name value]" func="handler.go:35" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:57:00+03:00" level=info msg="len(splitted) != count5" func="handler.go:36" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:57:00+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="354.25µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T20:57:24+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T20:57:24+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T20:57:24+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:57:24+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:57:24+03:00" level=info msg="[ update type name]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:57:24+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="484.875µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T20:57:27+03:00" level=info msg="[ update type name]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:57:27+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="483.959µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T20:57:41+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T20:57:41+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T20:57:41+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:57:41+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:57:42+03:00" level=info msg="[update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:57:42+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="694.917µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T20:58:29+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T20:58:29+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T20:58:29+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:58:29+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T20:58:29+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T20:58:29+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="344.417µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T21:20:58+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:20:58+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:20:58+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:20:58+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:20:58+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T21:20:58+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="369.25µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T21:21:16+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T21:21:16+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="356.709µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T21:21:17+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T21:21:17+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="110.625µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T21:22:09+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:22:09+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:22:09+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:22:09+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:22:10+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T21:22:10+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration=1.5355ms method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T21:22:54+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:22:54+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:22:54+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:22:54+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:22:55+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T21:22:55+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="351.333µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T21:22:58+03:00" level=info msg="[ update type name value]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T21:22:58+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="113.458µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T21:23:36+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:23:36+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:23:36+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:23:36+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:24:51+03:00" level=info msg="[ update one two three]" func="handler.go:32" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T21:24:51+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration=2.495375ms method=GET prefix=SERVER size=0 status=0 uri=/update/one/two/three
+time="2023-09-29T21:31:06+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:31:06+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:31:06+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:31:06+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:31:13+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:31:13+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:31:13+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:31:13+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:35:00+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:35:00+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:35:00+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:35:00+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:35:00+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:35:00+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:35:00+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:35:00+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:35:03+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:35:03+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:35:03+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:35:03+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:36:22+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:36:22+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:36:22+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:36:22+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:40:48+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:40:48+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:40:48+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:40:48+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:41:32+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:41:32+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:41:32+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:41:32+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:44:11+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:44:11+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:44:11+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:44:11+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:44:29+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:44:29+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:44:29+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:44:29+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:45:08+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:45:08+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:45:08+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:45:08+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:45:08+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:45:08+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:45:08+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:45:08+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:46:14+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:46:14+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:46:14+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:46:14+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:47:22+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:47:22+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:47:22+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:47:22+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:52:21+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:52:21+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:52:21+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:52:21+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:54:36+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:54:36+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:54:36+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:54:36+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:54:36+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T21:54:36+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T21:54:36+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T21:54:36+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:00:31+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:00:31+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:00:31+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:00:31+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:00:46+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:00:46+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:00:46+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:00:46+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:03:16+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:03:16+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:03:16+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:03:16+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:03:35+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:03:35+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:03:35+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:03:35+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:36+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:36+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:36+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:36+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:36+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:36+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:36+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:36+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:39+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:39+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:39+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:39+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:39+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:39+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:39+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:39+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:48+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:48+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:48+03:00" level=info msg="Register /update Router" func="app.go:20" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:48+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:49+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:49+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:49+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:49+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:49+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:49+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:49+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:49+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:55+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:55+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-29T22:04:55+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:04:55+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-29T22:05:05+03:00" level=info msg="Allow Only Method POST " func="handler.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T22:05:05+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="243.083µs" method=GET prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-29T22:05:52+03:00" level=info msg="[ update type name value]" func="handler.go:37" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-29T22:05:52+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration=1.116708ms method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T00:43:30+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T00:43:30+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T00:43:30+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T00:43:30+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:10:03+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:10:03+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:10:03+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:10:03+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:10:08+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:10:08+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:10:08+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:10:08+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:11:57+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:11:57+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:11:57+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:11:57+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:12:08+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:12:08+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:12:08+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:12:08+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:12:19+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:12:19+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:12:19+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:12:19+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:12:30+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:12:30+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:12:30+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:12:30+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:15:34+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:15:34+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:15:34+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:15:34+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:17:41+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:17:41+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:17:41+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:17:41+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:18:26+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:18:26+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:18:26+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:18:26+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:18:43+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:18:43+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:18:43+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:18:43+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:22:12+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:22:12+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:22:12+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:22:12+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:22:36+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:22:36+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:22:36+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:22:36+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:22:57+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:22:57+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:22:57+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:22:57+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:23:40+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:23:40+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:23:40+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:23:40+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:29:03+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:29:03+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:29:03+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:29:03+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:30:02+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:30:02+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:30:02+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:30:02+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:33:00+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:33:00+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:33:00+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:33:00+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:33:43+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:33:43+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:33:43+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:33:43+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:12+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:12+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:12+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:12+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:15+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:15+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:15+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:15+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:23+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:23+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:23+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:23+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:32+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:32+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:32+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:32+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:33+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:33+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:34:33+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:34:33+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:35:51+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:35:51+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:35:51+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:35:51+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:35:59+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:35:59+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:35:59+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:35:59+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:23+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:23+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:23+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:23+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:29+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:29+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:29+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:29+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:31+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:31+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:31+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:31+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:31+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:31+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:31+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:31+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:43+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:43+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:36:43+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:36:43+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:37:01+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:37:01+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:37:01+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:37:01+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:37:06+03:00" level=info msg="[ update type name value]" func="handler.go:37" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-30T01:37:06+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="156.833µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:37:22+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:37:22+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:37:22+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:37:22+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:37:25+03:00" level=info msg="[ update type name value]" func="handler.go:37" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-30T01:37:25+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="124.75µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:37:43+03:00" level=info msg="[ update type name value]" func="handler.go:37" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-30T01:37:43+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="157.333µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:38:47+03:00" level=info msg="[ update type name value]" func="handler.go:37" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-30T01:38:47+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="968.083µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:40:32+03:00" level=info msg="[ update type name value]" func="handler.go:37" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-30T01:40:32+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="492.333µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:40:39+03:00" level=info msg="[ update type name value]" func="handler.go:37" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-30T01:40:39+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="152.625µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:41:38+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:41:38+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:41:38+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:41:38+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:41:40+03:00" level=info msg="[ update type name value]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:41:40+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="281.5µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:42:18+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:42:18+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:42:18+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:42:18+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:42:23+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:42:23+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:42:23+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:42:23+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:42:24+03:00" level=info msg="[ update type name value]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:42:24+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="248.5µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:42:48+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:42:48+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:42:48+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:42:48+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:42:54+03:00" level=info msg="[ update type name value]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:42:54+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="535.791µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:44:26+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:44:26+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:44:26+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:44:26+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:46:31+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:46:31+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:46:31+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:46:31+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:46:44+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:46:44+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:46:44+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:46:44+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:47:46+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:47:46+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:47:46+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:47:46+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:47:53+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:47:53+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:47:53+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:47:53+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:48:06+03:00" level=info msg="[ update type name value]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:48:06+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="290.25µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:48:22+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:48:22+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:48:22+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:48:22+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:49:28+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:49:28+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:49:28+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:49:28+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:49:58+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:49:58+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:49:58+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:49:58+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:53:09+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T01:53:09+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T01:53:09+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:53:09+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T01:53:15+03:00" level=info msg="[ update type name value]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:53:15+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="257.5µs" method=POST prefix=SERVER size=0 status=0 uri=/update/type/name/value
+time="2023-09-30T01:53:29+03:00" level=info msg="[ update cauge name value]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:53:29+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="318µs" method=POST prefix=SERVER size=0 status=0 uri=/update/cauge/name/value
+time="2023-09-30T01:53:34+03:00" level=info msg="[ update cauge name 10]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:53:34+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="131.125µs" method=POST prefix=SERVER size=0 status=0 uri=/update/cauge/name/10
+time="2023-09-30T01:55:08+03:00" level=info msg="[ update gauge name 10]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:55:08+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration=1.364583ms method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/10
+time="2023-09-30T01:55:20+03:00" level=info msg="[ update gauge name 10]" func="update.go:44" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T01:55:20+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration=1.1835ms method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/10
+time="2023-09-30T02:02:06+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:02:06+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:02:06+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:02:06+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:02:20+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:02:20+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:02:20+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:02:20+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:02:40+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:02:40+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:02:40+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:02:40+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:03:39+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:03:39+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:03:39+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:03:39+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:04:50+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:04:50+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:04:50+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:04:50+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:10+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:10+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:10+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:10+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:28+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:37+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:37+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:37+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:37+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:38+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:38+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:06:38+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:06:38+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:08:44+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:08:44+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:08:44+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:08:44+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:12:20+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:12:20+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:12:20+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:12:20+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:12:59+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:12:59+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:12:59+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:12:59+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:13:08+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:13:08+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:13:08+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:13:08+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:13:23+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:13:23+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:13:23+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:13:23+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:13:33+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:13:33+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:13:33+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:13:33+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:13:35+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:13:35+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:13:35+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:13:35+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:17:16+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:18:00+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:18:00+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:18:00+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:18:00+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:19:41+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:19:41+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:19:41+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:19:41+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:19:57+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:19:57+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:19:57+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:19:57+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:19:57+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:19:57+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:19:57+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:19:57+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:20:01+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:20:01+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:20:01+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:20:01+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:20:03+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:20:03+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:20:03+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:20:03+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:21:00+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:21:00+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:21:00+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:21:00+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:21:03+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:21:03+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:21:03+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:21:03+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:21:05+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:21:05+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:21:05+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:21:05+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:21:49+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:21:49+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:21:49+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:21:49+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:24:38+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:24:38+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:24:38+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:24:38+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:25:05+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:25:05+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:25:05+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:25:05+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:26:38+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:26:38+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:26:38+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:26:38+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:26:52+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:26:52+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:26:52+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:26:52+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:26:54+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:26:54+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:26:54+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:26:54+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:29:01+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:29:01+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:29:01+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:29:01+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:29:02+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:29:02+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:29:02+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:29:02+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:30:02+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:30:02+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:30:02+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:30:02+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:30:40+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:30:40+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:30:40+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:30:40+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:30:52+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:30:52+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:30:52+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:30:52+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:31:50+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:31:50+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:31:50+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:31:50+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:32:05+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:32:05+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:32:05+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:32:05+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:33:55+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:33:55+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:33:55+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:33:55+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:07+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:07+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:07+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:07+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:07+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:07+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:07+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:07+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:13+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:13+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:13+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:13+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:13+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:13+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:13+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:13+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:42+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:42+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:42+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:42+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:42+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:42+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:35:42+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:35:42+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:36:48+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:36:48+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:36:48+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:36:48+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:37:57+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:37:57+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:37:57+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:37:57+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:37:57+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:37:57+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:37:57+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:37:57+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:38:35+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:38:45+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:38:45+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:38:45+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:38:45+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:42:14+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:42:14+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:42:14+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:42:14+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:42:14+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:42:14+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:42:14+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:42:14+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:42:21+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:42:21+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:42:21+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:42:21+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:42:32+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:42:32+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:42:32+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:42:32+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:44:35+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:44:35+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:44:35+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:44:35+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:44:35+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:44:35+03:00" level=info msg="Register /update Router" func="app.go:22" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:44:35+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:44:35+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:26" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:45:28+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:45:28+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:45:28+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:45:28+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:45:28+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:45:28+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:45:28+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:45:28+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:46:14+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:46:14+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:46:14+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:46:14+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:47:18+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:47:18+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:47:18+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:47:18+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:47:49+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:47:49+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:47:49+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:47:49+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:47:50+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:47:50+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:47:50+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:47:50+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:47:50+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:47:50+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:47:50+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:47:50+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:48:26+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:48:26+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:48:26+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:48:26+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:48:26+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:48:26+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:48:26+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:48:26+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:49:06+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:49:06+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:49:06+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:49:06+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:51:52+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:51:52+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:51:52+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:51:52+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:51:52+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:51:52+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:51:52+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:51:52+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:09+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:53:09+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:53:09+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:09+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:30+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:53:30+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:53:30+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:30+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:31+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:53:31+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:53:31+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:31+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:41+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:53:41+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:53:41+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:41+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:53:46+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:54:44+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:54:44+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:54:44+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:54:44+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:54:47+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:54:47+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="394.875µs" method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/10
+time="2023-09-30T02:54:58+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:54:58+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:54:58+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:54:58+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:55:00+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:55:28+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:55:28+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:55:28+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:55:28+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:55:31+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:56:25+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:56:25+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:56:25+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:56:25+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:56:38+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:56:38+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:56:38+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:56:38+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:56:41+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:57:02+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:02+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:02+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:02+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:05+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:57:18+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:18+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:18+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:18+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:29+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:29+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:29+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:29+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:40+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:40+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:40+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:40+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:42+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:57:57+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:57+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:57:57+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:57:57+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:58:00+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:58:10+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:58:10+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:58:10+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:58:10+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:58:13+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:58:44+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:58:44+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:58:44+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:58:44+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:58:47+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:59:07+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:07+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:07+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:07+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:10+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:10+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:10+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:10+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:12+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:12+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:12+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:12+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:13+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:13+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:13+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:13+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:15+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:59:29+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:29+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:29+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:29+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:32+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:59:41+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:41+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:41+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:41+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:43+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T02:59:52+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:52+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T02:59:52+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:52+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T02:59:56+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:00:05+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:00:05+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:00:05+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:00:05+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:00:11+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:00:11+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:00:11+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:00:11+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:00:13+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:00:28+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:00:28+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:00:28+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:00:28+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:00:30+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:00:43+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:00:43+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:00:43+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:00:43+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:00:45+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:01:08+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:01:08+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:01:08+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:01:08+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:01:12+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:02:17+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:02:17+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:02:17+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:02:17+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:02:57+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:02:57+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:02:57+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:02:57+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:03:01+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:05:45+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:05:45+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:05:45+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:05:45+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:05:50+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:06:05+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:06:05+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:06:05+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:06:05+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:06:08+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:06:08+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration=2.512ms method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/10
+time="2023-09-30T03:07:00+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:07:00+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:07:00+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:07:00+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:07:02+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:15:41+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:15:41+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:15:41+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:15:41+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:15:45+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:16:05+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:16:05+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:16:05+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:16:05+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:16:07+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:16:07+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration=2.247417ms method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/10
+time="2023-09-30T03:16:31+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:16:31+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:16:31+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:16:31+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:16:34+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:16:34+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="454.709µs" method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/10
+time="2023-09-30T03:18:16+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:18:16+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:18:16+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:18:16+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:18:18+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:18:18+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="429.709µs" method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/10
+time="2023-09-30T03:18:23+03:00" level=info msg="[ update gauge name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:18:23+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="108.625µs" method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/10
+time="2023-09-30T03:18:30+03:00" level=info msg="[ update counter name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:18:30+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="701.417µs" method=POST prefix=SERVER size=0 status=0 uri=/update/counter/name/10
+time="2023-09-30T03:18:35+03:00" level=info msg="[ update counter name 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:18:35+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="146.959µs" method=POST prefix=SERVER size=0 status=0 uri=/update/counter/name/10
+time="2023-09-30T03:18:41+03:00" level=info msg="[ update counter name2 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:18:41+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="569.958µs" method=POST prefix=SERVER size=0 status=0 uri=/update/counter/name2/10
+time="2023-09-30T03:18:53+03:00" level=info msg="[ update gauge name2 10]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:18:53+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="576.167µs" method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name2/10
+time="2023-09-30T03:19:01+03:00" level=info msg="[ update gauge name2 20]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:19:01+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="166.375µs" method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name2/20
+time="2023-09-30T03:19:32+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="50.083µs" method=POST prefix=SERVER size=0 status=0 uri=/update/gauge//20
+time="2023-09-30T03:19:32+03:00" level=info msg="Allow Only Method POST " func="handler.go:31" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update.handler.Update()" prefix=SERVER
+time="2023-09-30T03:19:32+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="71.792µs" method=GET prefix=SERVER size=0 status=0 uri=/update/gauge/20
+time="2023-09-30T03:25:41+03:00" level=info msg="[ update gauge name 20]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:25:41+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration=1.381792ms method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/20
+time="2023-09-30T03:26:13+03:00" level=info func="main.go:15" file="main.main()" prefix=SERVER
+time="2023-09-30T03:26:13+03:00" level=info msg="Starting app" func="main.go:16" file="main.main()" prefix=SERVER
+time="2023-09-30T03:26:13+03:00" level=info msg="Register /update Router" func="app.go:24" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:26:13+03:00" level=info msg="Start Listen Port %v:8080" func="app.go:28" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server.New()" prefix=SERVER
+time="2023-09-30T03:26:16+03:00" level=info msg="[ update gauge name 20]" func="update.go:34" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service.updateService.GetMetric()" prefix=SERVER
+time="2023-09-30T03:26:16+03:00" level=info msg="request completed" func="logging.go:45" file="github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging.WithLogging.func1()" duration="425.416µs" method=POST prefix=SERVER size=0 status=0 uri=/update/gauge/name/20
