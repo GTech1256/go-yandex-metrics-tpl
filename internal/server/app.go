@@ -26,7 +26,7 @@ func New(port string, logger *logrus.Entry) (App, error) {
 	updateHandler := update.NewHandler(logger, updateService)
 	updateHandler.Register(router)
 
-	logger.Info(fmt.Printf("Start Listen Port %v", port))
+	logger.Info(fmt.Sprintf("Start Listen Port %v", port))
 	log.Fatal(http.ListenAndServe(port, logging.WithLogging(router, logger)))
 
 	return &app{}, nil

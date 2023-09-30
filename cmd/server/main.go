@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server"
-	logger2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 )
 
 const (
@@ -10,8 +10,10 @@ const (
 )
 
 func main() {
-	logger2.Init()
-	logger := logger2.GetLogger().WithField("prefix", "SERVER")
+	logging.Init()
+	logger := logging.GetLogger().WithField("prefix", "SERVER")
+
+	//logger.SetOutput(ioutil.Discard)
 	logger.Info()
 	logger.Info("Starting app")
 	_, err := internal.New(PORT, logger)
