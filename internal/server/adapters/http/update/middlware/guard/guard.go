@@ -1,7 +1,6 @@
 package guard
 
 import (
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/util"
 	"github.com/sirupsen/logrus"
@@ -15,19 +14,6 @@ const (
 
 func WithMetricGuarding(next http.Handler, logger *logrus.Entry) http.Handler {
 	guardFn := func(rw http.ResponseWriter, req *http.Request) {
-		fmt.Println("")
-		fmt.Println("")
-		logger.Info("WithMetricGuarding ", req.RequestURI, "", req.Header.Get("content-type"), " ", req.Method)
-		fmt.Println("")
-		fmt.Println("")
-		isCorrectContentType := req.Header.Get("content-type") == ExpectContentType
-		fmt.Println(req.Header)
-		if !isCorrectContentType {
-			logger.Info("Content-Type should be ", ExpectContentType, " Got: ", req.Header.Get("content-type"))
-			rw.WriteHeader(http.StatusBadRequest)
-			return
-		}
-
 		isCorrectMethod := req.Method == ExpectMethod
 		if !isCorrectMethod {
 			logger.Info("Allow Only Method POST, Got: ", req.Method)
