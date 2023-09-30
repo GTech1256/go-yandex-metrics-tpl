@@ -35,7 +35,7 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 
 	metric, err := h.updateService.GetMetric(context.Background(), request.RequestURI)
 	if err != nil {
-		writer.WriteHeader(http.StatusBadRequest)
+		writer.WriteHeader(http.StatusNotFound)
 		return
 	}
 
