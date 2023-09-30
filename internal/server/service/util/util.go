@@ -17,8 +17,8 @@ type MetricFields struct {
 const updatePartLength = 8 // len("/update/")
 //const metricParts = 3      // <ТИП_МЕТРИКИ>, <ИМЯ_МЕТРИКИ>, <ЗНАЧЕНИЕ_МЕТРИКИ>
 
-// MakeMetricValuesFromUrl На вход ожидается /update/<ТИП_МЕТРИКИ>/<ИМЯ_МЕТРИКИ>/<ЗНАЧЕНИЕ_МЕТРИКИ>
-func MakeMetricValuesFromUrl(url string) (*MetricFields, error) {
+// MakeMetricValuesFromURL На вход ожидается /update/<ТИП_МЕТРИКИ>/<ИМЯ_МЕТРИКИ>/<ЗНАЧЕНИЕ_МЕТРИКИ>
+func MakeMetricValuesFromURL(url string) (*MetricFields, error) {
 	if len(url) < 8 {
 		return nil, service.ErrNotCorrectURL
 	}

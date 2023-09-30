@@ -21,7 +21,7 @@ func WithMetricGuarding(next http.Handler, logger *logrus.Entry) http.Handler {
 			return
 		}
 
-		_, err := util.MakeMetricValuesFromUrl(req.RequestURI)
+		_, err := util.MakeMetricValuesFromURL(req.RequestURI)
 
 		if err == service.ErrNotCorrectName {
 			logger.Info(service.ErrNotCorrectName)

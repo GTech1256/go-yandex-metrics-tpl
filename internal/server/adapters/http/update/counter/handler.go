@@ -29,7 +29,7 @@ func (h handler) Register(router *http.ServeMux) {
 
 // UpdateCounter /update/counter/<ИМЯ_МЕТРИКИ>/<ЗНАЧЕНИЕ_МЕТРИКИ>
 func (h handler) UpdateCounter(writer http.ResponseWriter, request *http.Request) {
-	metricFields, err := util.MakeMetricValuesFromUrl(request.RequestURI)
+	metricFields, err := util.MakeMetricValuesFromURL(request.RequestURI)
 	if err != nil {
 		writer.WriteHeader(http.StatusBadRequest)
 		return
