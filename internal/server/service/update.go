@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	// ErrNotCorrectUrl возвращает ошибку, если формат url не подошел
-	ErrNotCorrectUrl   = errors.New("Not Correct Url")
+	// ErrNotCorrectURL возвращает ошибку, если формат url не подошел
+	ErrNotCorrectURL   = errors.New("Not Correct Url")
 	ErrNotCorrectType  = errors.New("Not Correct metricType")
 	ErrNotCorrectValue = errors.New("Not Correct metricValue")
 )
@@ -38,7 +38,7 @@ func (u updateService) GetMetric(ctx context.Context, url string) (*entity.Metri
 		u.logger.Info("len(splitted) != count", len(splitted), splitted)
 		fmt.Printf("%+v", splitted)
 
-		return nil, ErrNotCorrectUrl
+		return nil, ErrNotCorrectURL
 	}
 
 	metricTypUnsafe, metricName, metricValueUnsafe := splitted[2], splitted[3], splitted[4]

@@ -2,7 +2,6 @@ package metric
 
 import (
 	"context"
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 )
@@ -33,7 +32,6 @@ func NewStorage() metric.Storage {
 func (s storage) SaveGauge(ctx context.Context, gauge *entity.MetricGauge) error {
 	MemStorageContainer.gauge[gauge.Name] = float64(gauge.Value)
 
-	fmt.Println(gauge)
 	return nil
 }
 
@@ -44,8 +42,6 @@ func (s storage) SaveCounter(ctx context.Context, counter *entity.MetricCounter)
 	} else {
 		MemStorageContainer.counter[counter.Name] += int64(counter.Value)
 	}
-
-	fmt.Println(counter)
 
 	return nil
 }
