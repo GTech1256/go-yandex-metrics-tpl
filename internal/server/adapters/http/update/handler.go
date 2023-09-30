@@ -41,6 +41,11 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
+	if err == service.ErrNotCorrectType {
+		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
 	if err != nil {
 		writer.WriteHeader(http.StatusNotFound)
 		return
