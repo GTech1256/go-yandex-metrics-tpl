@@ -1,4 +1,4 @@
-package update_interface
+package updateInterface
 
 import (
 	"context"
