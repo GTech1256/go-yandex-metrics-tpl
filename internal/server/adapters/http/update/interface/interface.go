@@ -6,7 +6,6 @@ import (
 )
 
 type Service interface {
-	GetMetric(ctx context.Context, url string) (*entity.Metric, error)
 	SaveGaugeMetric(ctx context.Context, metric *entity.MetricGauge) error
 	SaveCounterMetric(ctx context.Context, metric *entity.MetricCounter) error
 }

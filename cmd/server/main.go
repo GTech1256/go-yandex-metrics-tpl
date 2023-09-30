@@ -13,7 +13,6 @@ func main() {
 	logging.Init()
 	logger := logging.GetLogger().WithField("prefix", "SERVER")
 
-	//logger.SetOutput(ioutil.Discard)
 	logger.Info()
 	logger.Info("Starting app")
 	_, err := internal.New(PORT, logger)
