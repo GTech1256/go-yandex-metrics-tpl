@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
-	update_interface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
+	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	"github.com/sirupsen/logrus"
 	"strconv"
@@ -24,7 +24,7 @@ type updateService struct {
 	storage metric2.Storage
 }
 
-func NewUpdateService(logger *logrus.Entry, storage metric2.Storage) update_interface.Service {
+func NewUpdateService(logger *logrus.Entry, storage metric2.Storage) updateInterface.Service {
 	return &updateService{logger: logger, storage: storage}
 }
 

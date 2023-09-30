@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http"
-	update_interface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
+	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"github.com/sirupsen/logrus"
 	"net/http"
@@ -12,10 +12,10 @@ import (
 
 type handler struct {
 	logger        *logrus.Entry
-	updateService update_interface.Service
+	updateService updateInterface.Service
 }
 
-func NewHandler(logger *logrus.Entry, updateService update_interface.Service) http2.Handler {
+func NewHandler(logger *logrus.Entry, updateService updateInterface.Service) http2.Handler {
 	return &handler{
 		logger:        logger,
 		updateService: updateService,
