@@ -176,7 +176,7 @@ func (r repository) GetMetric(ctx context.Context) (*agentEntity.Metric, error) 
 }
 
 func getRandomValue() uint64 {
-	rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	RandomValue := rand.Uint64()
 
 	return RandomValue
