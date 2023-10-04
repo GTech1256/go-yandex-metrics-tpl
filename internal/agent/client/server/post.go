@@ -21,6 +21,7 @@ func (s client) Post(ctx context.Context, updateDto dto.Update) error {
 		fmt.Printf("client: error making service request: %s\n", err)
 		return err
 	}
+	defer res.Body.Close()
 
 	fmt.Printf("%d %v \n", res.StatusCode, requestURL)
 
