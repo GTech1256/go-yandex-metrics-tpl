@@ -1,12 +1,12 @@
-package internal
+package server
 
 import (
 	"fmt"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/db/metric"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/middlware/logging"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/counter"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/gauge"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/logging"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/counter"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/gauge"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"github.com/sirupsen/logrus"
 	"log"

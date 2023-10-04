@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
-	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
+	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
 	"github.com/sirupsen/logrus"
 )
 

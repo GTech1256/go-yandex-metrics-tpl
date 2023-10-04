@@ -13,12 +13,11 @@ func main() {
 	logging.Init()
 	logger := logging.GetLogger().WithField("prefix", "SERVER")
 
-	logger.Info()
-	logger.Info("Starting app")
-	_, err := internal.New(PORT, logger)
-	logger.Info("Started app on ")
+	logger.Info("Starting server app")
+	_, err := server.New(PORT, logger)
+	logger.Info("Started server app on ")
 	if err != nil {
-		logger.Info("Starting app Failed", err)
+		logger.Error("Starting server app Failed", err)
 		return
 	}
 }

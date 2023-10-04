@@ -3,9 +3,9 @@ package counter
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
-	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http"
-	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/interface"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/adapters/http/update/middlware/guard"
+	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
+	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/middlware/guard"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/util"
 	"github.com/sirupsen/logrus"
 	"net/http"
@@ -18,7 +18,7 @@ type handler struct {
 
 func NewHandler(logger *logrus.Entry, updateService updateInterface.Service) http2.Handler {
 	return &handler{
-		logger:        logger,
+		logger:        logger.WithField("TYPE", "HANDLER").WithField("METRIC", "COUNTER"),
 		updateService: updateService,
 	}
 }
@@ -31,14 +31,16 @@ func (h handler) Register(router *http.ServeMux) {
 func (h handler) UpdateCounter(writer http.ResponseWriter, request *http.Request) {
 	metricFields, err := util.MakeMetricValuesFromURL(request.RequestURI)
 	if err != nil {
+		h.logger.Error("При получении полей метрик из URL произошла ошибка ", err)
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
 	metricCounterValue, err := util.GetTypeCounterValue(metricFields.MetricValue)
 	// При попытке передать запрос с некорректным типом метрики
-	// или значением возвращать http.StatusBadRequest.
+	// или значением возвращать service.StatusBadRequest.
 	if err != nil {
+		h.logger.Error("При получении значения метрики произошла ошибка ", err)
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -50,10 +52,12 @@ func (h handler) UpdateCounter(writer http.ResponseWriter, request *http.Request
 	}
 
 	if err := h.updateService.SaveCounterMetric(context.Background(), metricsCounter); err != nil {
+		h.logger.Error("При сохранении метрики произошла ошибка ", err)
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
+	h.logger.Error("Метрика сохранена", metricsCounter)
 	writer.Header().Add("Content-Type", "text/plain")
 	writer.WriteHeader(http.StatusOK)
 }

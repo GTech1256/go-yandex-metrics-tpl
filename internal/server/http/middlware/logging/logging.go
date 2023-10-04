@@ -29,10 +29,10 @@ func WithLogging(h http.Handler, logger *logrus.Entry) http.Handler {
 			size:   0,
 		}
 		lrw := loggingResponseWriter{
-			ResponseWriter: rw, // compose original http.ResponseWriter
+			ResponseWriter: rw, // compose original service.ResponseWriter
 			responseData:   responseData,
 		}
-		h.ServeHTTP(&lrw, req) // inject our implementation of http.ResponseWriter
+		h.ServeHTTP(&lrw, req) // inject our implementation of service.ResponseWriter
 
 		duration := time.Since(start)
 

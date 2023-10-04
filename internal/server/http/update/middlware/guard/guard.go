@@ -35,11 +35,6 @@ func WithMetricGuarding(next http.Handler, logger *logrus.Entry) http.Handler {
 			return
 		}
 
-		//if err == service.ErrNotCorrectType {
-		//	rw.WriteHeader(http.StatusBadRequest)
-		//	return
-		//}
-
 		next.ServeHTTP(rw, req)
 	}
 	return http.HandlerFunc(guardFn)

@@ -17,23 +17,26 @@ type MemStorage = struct {
 	counter map[string]int64
 }
 
-var MemStorageContainer MemStorage = MemStorage{
-	gauge:   gauge,
-	counter: counter,
-}
-
 type storage struct {
+	memStorage MemStorage
 }
 
 func NewStorage() metric.Storage {
-	return &storage{}
+	memStorage := MemStorage{
+		gauge:   gauge,
+		counter: counter,
+	}
+
+	return &storage{
+		memStorage: memStorage,
+	}
 }
 
 // SaveGauge новое значение должно замещать предыдущее.
 func (s storage) SaveGauge(ctx context.Context, gauge *entity.MetricGauge) error {
-	MemStorageContainer.gauge[gauge.Name] = float64(gauge.Value)
+	s.memStorage.gauge[gauge.Name] = float64(gauge.Value)
 
-	fmt.Println(MemStorageContainer)
+	fmt.Printf("%v %+v \n", len(s.memStorage.gauge), s.memStorage)
 
 	return nil
 }
@@ -41,12 +44,12 @@ func (s storage) SaveGauge(ctx context.Context, gauge *entity.MetricGauge) error
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
 func (s storage) SaveCounter(ctx context.Context, counter *entity.MetricCounter) error {
 	if _, isOk := gauge[counter.Name]; !isOk {
-		MemStorageContainer.counter[counter.Name] = int64(counter.Value)
+		s.memStorage.counter[counter.Name] = int64(counter.Value)
 	} else {
-		MemStorageContainer.counter[counter.Name] += int64(counter.Value)
+		s.memStorage.counter[counter.Name] += int64(counter.Value)
 	}
 
-	fmt.Println(MemStorageContainer)
+	fmt.Printf("%v %+v \n", len(s.memStorage.counter), s.memStorage)
 
 	return nil
 }

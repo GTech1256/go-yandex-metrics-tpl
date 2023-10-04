@@ -1,31 +1,23 @@
 package util
 
 import (
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"strconv"
 	"strings"
 )
 
-type MetricFields struct {
-	MetricType  string
-	MetricName  string
-	MetricValue string
-}
-
 const updatePartLength = 8 // len("/update/")
-//const metricParts = 3      // <ТИП_МЕТРИКИ>, <ИМЯ_МЕТРИКИ>, <ЗНАЧЕНИЕ_МЕТРИКИ>
 
 // MakeMetricValuesFromURL На вход ожидается /update/<ТИП_МЕТРИКИ>/<ИМЯ_МЕТРИКИ>/<ЗНАЧЕНИЕ_МЕТРИКИ>
-func MakeMetricValuesFromURL(url string) (*MetricFields, error) {
+func MakeMetricValuesFromURL(url string) (*entity.MetricFields, error) {
 	if len(url) < 8 {
 		return nil, service.ErrNotCorrectURL
 	}
 
 	urlWithoutUpdate := url[updatePartLength:]
 	splitted := strings.Split(urlWithoutUpdate, "/")
-	fmt.Println(len(splitted), splitted)
+
 	switch len(splitted) {
 	case 0: // ничего нет
 	case 2: // <ТИП_МЕТРИКИ> <ИМЯ_МЕТРИКИ>
@@ -51,7 +43,7 @@ func MakeMetricValuesFromURL(url string) (*MetricFields, error) {
 		return nil, service.ErrNotCorrectType
 	}
 
-	return &MetricFields{
+	return &entity.MetricFields{
 		MetricType:  metricType,
 		MetricName:  metricName,
 		MetricValue: metricValue,
