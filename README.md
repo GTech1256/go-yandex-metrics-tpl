@@ -70,6 +70,9 @@ metricstest -test.v -test.run=^TestIteration1$ -agent-binary-path=cmd/agent/agen
 ```shell
 ./metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$ -binary-path=/Users/ribakakin/Desktop/web/go-practicum/go-yandex-metrics-tpl/cmd/server/server
 ```
+```shell
+./autotests/metricstest-darwin-arm64 -test.v -test.run=^TestIteration2$ -binary-path=/Users/ribakakin/Desktop/web/go-practicum/go-yandex-metrics-tpl/cmd/agent/agent
+```
 
 ### Убить процесс, слушающий определенный порт
 
@@ -78,4 +81,15 @@ metricstest -test.v -test.run=^TestIteration1$ -agent-binary-path=cmd/agent/agen
 
 ```shell
 kill -9 $(lsof -t -i:8080)
+```
+
+### Сборка
+```shell
+go build -o cmd/agent cmd/agent/main.go
+mv cmd/agent/main cmd/agent/agent
+```
+
+```shell
+go build -o cmd/server cmd/server/main.go
+mv cmd/server/main cmd/server/server
 ```

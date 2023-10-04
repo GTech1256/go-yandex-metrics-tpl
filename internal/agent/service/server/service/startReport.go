@@ -11,8 +11,10 @@ func (s *service) StartReport(ctx context.Context, metricSendCh <-chan *agentEnt
 	var metric *agentEntity.Metric
 
 	go func() {
-		metric = <-metricSendCh
-		s.logger.Info("Метрика получена")
+		for {
+			metric = <-metricSendCh
+			s.logger.Info("Метрика получена")
+		}
 	}()
 
 	for {
