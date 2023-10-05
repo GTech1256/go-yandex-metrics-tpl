@@ -12,18 +12,18 @@ func (s client) Post(ctx context.Context, updateDto dto.Update) error {
 
 	req, err := s.httpClient.NewRequest(http.MethodPost, requestURL, nil)
 	if err != nil {
-		fmt.Printf("client: could not create request: %s\n", err)
+		s.logger.Infof("client: could not create request: %s\n", err)
 		return err
 	}
 
 	res, err := s.httpClient.DefaultClient.Do(req)
 	if err != nil {
-		fmt.Printf("client: error making service request: %s\n", err)
+		s.logger.Infof("client: error making service request: %s\n", err)
 		return err
 	}
 	defer res.Body.Close()
 
-	fmt.Printf("%d %v \n", res.StatusCode, requestURL)
+	s.logger.Infof("%d %v \n", res.StatusCode, requestURL)
 
 	return nil
 }

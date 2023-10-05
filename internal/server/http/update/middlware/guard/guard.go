@@ -3,7 +3,7 @@ package guard
 import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/util"
-	"github.com/sirupsen/logrus"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"net/http"
 )
 
@@ -12,7 +12,7 @@ const (
 	ExpectMethod      = http.MethodPost
 )
 
-func WithMetricGuarding(next http.Handler, logger *logrus.Entry) http.Handler {
+func WithMetricGuarding(next http.Handler, logger logging2.Logger) http.Handler {
 	guardFn := func(rw http.ResponseWriter, req *http.Request) {
 		isCorrectMethod := req.Method == ExpectMethod
 		if !isCorrectMethod {

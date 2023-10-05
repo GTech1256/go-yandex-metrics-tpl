@@ -8,7 +8,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/gauge"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
-	"github.com/sirupsen/logrus"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"log"
 	"net/http"
 )
@@ -19,7 +19,7 @@ type App interface {
 type app struct {
 }
 
-func New(port string, logger *logrus.Entry) (App, error) {
+func New(port string, logger logging2.Logger) (App, error) {
 	router := http.NewServeMux()
 
 	metricStorage := metric.NewStorage()

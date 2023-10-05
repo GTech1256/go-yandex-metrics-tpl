@@ -7,16 +7,16 @@ import (
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/middlware/guard"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/util"
-	"github.com/sirupsen/logrus"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"net/http"
 )
 
 type handler struct {
-	logger        *logrus.Entry
+	logger        logging2.Logger
 	updateService updateInterface.Service
 }
 
-func NewHandler(logger *logrus.Entry, updateService updateInterface.Service) http2.Handler {
+func NewHandler(logger logging2.Logger, updateService updateInterface.Service) http2.Handler {
 	return &handler{
 		logger:        logger.WithField("TYPE", "HANDLER").WithField("METRIC", "GAUGE"),
 		updateService: updateService,

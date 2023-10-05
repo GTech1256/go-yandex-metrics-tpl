@@ -8,6 +8,8 @@ import (
 
 func (s *service) StartReport(ctx context.Context, metricSendCh <-chan *agentEntity.Metric, reportInterval time.Duration) error {
 	s.logger.Info("Запуск Report")
+
+	ticker := time.NewTicker(reportInterval)
 	var metric *agentEntity.Metric
 
 	go func() {
@@ -18,19 +20,26 @@ func (s *service) StartReport(ctx context.Context, metricSendCh <-chan *agentEnt
 	}()
 
 	for {
-		<-time.After(reportInterval)
-		s.logger.Info("Тик Report")
+		select {
+		case <-ctx.Done():
+			s.logger.Info("Остановка Pool")
+			ticker.Stop()
+			return nil
+		case <-ticker.C:
+			s.logger.Info("Тик Report")
 
-		if metric != nil {
-			for _, m := range *metric {
-				s.logger.Info("Отправка метрики")
-				err := s.SendMetric(ctx, &m)
-				if err != nil {
-					return err
+			if metric != nil {
+				for _, m := range *metric {
+					s.logger.Info("Отправка метрики")
+					err := s.sendMetric(ctx, &m)
+					if err != nil {
+						return err
+					}
 				}
+			} else {
+				s.logger.Info("Нет метрики для отправки")
 			}
-		} else {
-			s.logger.Info("Нет метрики для отправки")
+
 		}
 	}
 }

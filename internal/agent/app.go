@@ -8,7 +8,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server/repository"
 	serverService "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server/service"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/logging"
-	"github.com/sirupsen/logrus"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"log"
 	"net/http"
 	"time"
@@ -25,7 +25,7 @@ const (
 	reportInterval time.Duration = time.Duration(10) * time.Second
 )
 
-func New(port string, logger *logrus.Entry) (App, error) {
+func New(port string, logger logging2.Logger) (App, error) {
 	router := http.NewServeMux()
 
 	ctx := context.Background()
@@ -33,7 +33,7 @@ func New(port string, logger *logrus.Entry) (App, error) {
 	metricSendCh := make(chan *agentEntity.Metric)
 
 	serverHost := "http://localhost:8080"
-	serverClient := server.New(serverHost)
+	serverClient := server.New(serverHost, logger)
 	serverRepository := repository.New()
 	service := serverService.New(serverClient, logger, serverRepository)
 

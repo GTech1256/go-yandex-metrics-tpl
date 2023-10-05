@@ -1,6 +1,7 @@
 package logging
 
 import (
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/sirupsen/logrus"
 	"net/http"
 	"time"
@@ -20,7 +21,7 @@ type (
 	}
 )
 
-func WithLogging(h http.Handler, logger *logrus.Entry) http.Handler {
+func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 	loggingFn := func(rw http.ResponseWriter, req *http.Request) {
 		start := time.Now()
 

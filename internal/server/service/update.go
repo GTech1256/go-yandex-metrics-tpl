@@ -5,15 +5,15 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
-	"github.com/sirupsen/logrus"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 )
 
 type updateService struct {
-	logger  *logrus.Entry
+	logger  logging2.Logger
 	storage metric2.Storage
 }
 
-func NewUpdateService(logger *logrus.Entry, storage metric2.Storage) updateInterface.Service {
+func NewUpdateService(logger logging2.Logger, storage metric2.Storage) updateInterface.Service {
 	return &updateService{logger: logger, storage: storage}
 }
 

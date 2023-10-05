@@ -15,21 +15,30 @@ var (
 
 func (s *service) StartPoll(ctx context.Context, metricSendCh chan<- *agentEntity.Metric, pollInterval time.Duration) error {
 	s.logger.Info("Запуск Pool")
+
+	ticker := time.NewTicker(pollInterval)
+
 	for {
-		<-time.After(pollInterval)
-		s.logger.Info("Тик Pool")
-		metric, err := s.repository.GetMetric(ctx)
+		select {
+		case <-ctx.Done():
+			s.logger.Info("Остановка Pool")
+			ticker.Stop()
+			return nil
 
-		if err != nil {
-			return err
+		case <-ticker.C:
+			s.logger.Info("Тик Pool")
+			metric, err := s.repository.GetMetric(ctx)
+
+			if err != nil {
+				return err
+			}
+			s.logger.Info("Отправка agent.Metric")
+			metricSendCh <- metric
 		}
-		s.logger.Info("Отправка agent.Metric")
-		metricSendCh <- metric
-
 	}
 }
 
-func (s *service) SendMetric(ctx context.Context, metric *entity.MetricFields) error {
+func (s *service) sendMetric(ctx context.Context, metric *entity.MetricFields) error {
 	s.logger.Info("Отправка ", metric.MetricName)
 
 	if err := s.server.Post(ctx, dto.Update{

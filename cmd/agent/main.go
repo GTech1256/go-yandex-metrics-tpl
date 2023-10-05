@@ -11,7 +11,7 @@ const (
 
 func main() {
 	logging.Init()
-	logger := logging.GetLogger().WithField("prefix", "AGENT")
+	logger := logging.NewMyLogger().WithField("prefix", "AGENT")
 
 	logger.Info("Starting agent app")
 	_, err := agent.New(PORT, logger)
