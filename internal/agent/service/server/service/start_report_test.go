@@ -52,7 +52,7 @@ func Test_service_StartReport(t *testing.T) {
 	go func() {
 		fmt.Println("TEST SEND METRIC", mockMetric)
 		metricSendCh <- server2.MetricSendCh{
-			Id:   "Test_service_StartReport fn",
+			ID:   "Test_service_StartReport fn",
 			Data: mockMetric,
 		}
 	}()

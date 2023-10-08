@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-type HttpClient interface {
+type HTTPClient interface {
 	NewRequest(method, url string, body io.Reader) (*http.Request, error)
 	Do(req *http.Request) (*http.Response, error)
 	//defaultClient

@@ -8,7 +8,7 @@ import (
 
 type client struct {
 	host       string
-	httpClient HttpClient
+	httpClient HTTPClient
 	logger     logging.Logger
 }
 

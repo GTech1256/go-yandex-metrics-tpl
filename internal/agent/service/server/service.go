@@ -7,7 +7,7 @@ import (
 )
 
 type MetricSendCh struct {
-	Id   string
+	ID   string
 	Data *agentEntity.Metric
 }
 

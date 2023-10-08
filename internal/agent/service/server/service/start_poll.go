@@ -34,7 +34,7 @@ func (s *service) StartPoll(ctx context.Context, metricSendCh chan<- server2.Met
 			}
 			s.logger.Info("Отправка agent.Metric")
 			metricSendCh <- server2.MetricSendCh{
-				Id:   "StartPoll fn",
+				ID:   "StartPoll fn",
 				Data: metric,
 			}
 		}
