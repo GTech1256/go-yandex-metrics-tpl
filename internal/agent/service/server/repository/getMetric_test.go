@@ -81,9 +81,9 @@ func Test_repository_GetMetric(t *testing.T) {
 			t.Errorf("Unexpected MetricName for the index %v. Expected: '%v', Got: '%v'", i, name, m.MetricName)
 		}
 
-		expectType := entity.Gauge
+		expectType := string(entity.Gauge)
 		if m.MetricName == "PollCount" {
-			expectType = entity.Counter
+			expectType = string(entity.Counter)
 		}
 
 		if m.MetricType != expectType {

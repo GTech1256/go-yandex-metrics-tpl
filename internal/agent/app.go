@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server"
-	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
+	server2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server/repository"
 	serverService "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server/service"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/logging"
@@ -30,7 +30,7 @@ func New(port string, logger logging2.Logger) (App, error) {
 
 	ctx := context.Background()
 
-	metricSendCh := make(chan *agentEntity.Metric)
+	metricSendCh := make(chan server2.MetricSendCh)
 
 	serverHost := "http://localhost:8080"
 	serverClient := server.New(serverHost, logger)

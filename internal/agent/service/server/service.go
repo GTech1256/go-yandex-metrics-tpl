@@ -6,9 +6,14 @@ import (
 	"time"
 )
 
+type MetricSendCh struct {
+	Id   string
+	Data *agentEntity.Metric
+}
+
 type (
 	Service interface {
-		StartPoll(ctx context.Context, metricSendCh chan<- *agentEntity.Metric, reportInterval time.Duration) error
-		StartReport(ctx context.Context, metricSendCh <-chan *agentEntity.Metric, pollInterval time.Duration) error
+		StartPoll(ctx context.Context, metricSendCh chan<- MetricSendCh, reportInterval time.Duration) error
+		StartReport(ctx context.Context, metricSendCh <-chan MetricSendCh, pollInterval time.Duration) error
 	}
 )

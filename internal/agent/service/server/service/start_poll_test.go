@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
 	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/stretchr/testify/assert"
@@ -30,7 +31,7 @@ func Test_service_StartPoll(t *testing.T) {
 
 	service := New(client, mockLogger, repo)
 
-	metricSendCh := make(chan *agentEntity.Metric)
+	metricSendCh := make(chan server.MetricSendCh)
 
 	// Act
 	go func() {
@@ -41,14 +42,14 @@ func Test_service_StartPoll(t *testing.T) {
 	// Assert
 	select {
 	case receivedMetric := <-metricSendCh:
-		assert.Equal(t, mockMetric, receivedMetric)
+		assert.Equal(t, mockMetric, receivedMetric.Data)
 	case <-time.After(updateInterval * 2): // Give it some time to run
 		t.Error("Timed out waiting for metric to be sent")
 	}
 
 	// Clean up
 	ctx.Done()
-	close(metricSendCh)
+	//close(metricSendCh)
 	repo.AssertExpectations(t)
 	mockLogger.AssertExpectations(t)
 }

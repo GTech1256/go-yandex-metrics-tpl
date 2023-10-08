@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
-	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
+	server2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	"time"
 )
@@ -13,7 +13,7 @@ var (
 	ErrSend = errors.New("метрика не отправлена")
 )
 
-func (s *service) StartPoll(ctx context.Context, metricSendCh chan<- *agentEntity.Metric, pollInterval time.Duration) error {
+func (s *service) StartPoll(ctx context.Context, metricSendCh chan<- server2.MetricSendCh, pollInterval time.Duration) error {
 	s.logger.Info("Запуск Pool")
 
 	ticker := time.NewTicker(pollInterval)
@@ -33,7 +33,10 @@ func (s *service) StartPoll(ctx context.Context, metricSendCh chan<- *agentEntit
 				return err
 			}
 			s.logger.Info("Отправка agent.Metric")
-			metricSendCh <- metric
+			metricSendCh <- server2.MetricSendCh{
+				Id:   "StartPoll fn",
+				Data: metric,
+			}
 		}
 	}
 }

@@ -161,7 +161,7 @@ func (r repository) GetMetric(ctx context.Context) (*agentEntity.Metric, error) 
 			MetricValue: strconv.Itoa(int(rtm.TotalAlloc)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(commonEntity.Counter),
 			MetricName:  "PollCount",
 			MetricValue: strconv.Itoa(int(pollCounter)),
 		},

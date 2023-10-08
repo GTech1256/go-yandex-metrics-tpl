@@ -11,7 +11,7 @@ const (
 
 func main() {
 	logging.Init()
-	logger := logging.GetLogger().WithField("prefix", "SERVER")
+	logger := logging.NewMyLogger().WithField("prefix", "SERVER")
 
 	logger.Info("Starting server app")
 	_, err := server.New(PORT, logger)
