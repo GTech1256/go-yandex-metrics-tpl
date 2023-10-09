@@ -1,9 +1,9 @@
-package update
+package value
 
 import (
+	"context"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/middlware/guard"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/go-chi/chi/v5"
@@ -25,12 +25,28 @@ func NewHandler(logger logging2.Logger, updateService updateInterface.Service, m
 }
 
 func (h handler) Register(router *chi.Mux) {
-	router.Handle("/update/", guard.WithMetricGuarding(http.HandlerFunc(h.Update), h.logger, h.metricValidator))
+	router.Get("/value/{type}/{name}", h.Value)
 }
 
-// Update /update/
-// /update/counter/ и /update/gauge обрабатываются во внутренних хендлерах
-// Из-за этого остается только StatusBadRequest отдавать в остальных случаях
-func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
-	writer.WriteHeader(http.StatusBadRequest)
+// Value /value/{type}/{name}
+func (h handler) Value(writer http.ResponseWriter, request *http.Request) {
+	metric := &updateInterface.GetMetricValueDto{
+		Type: chi.URLParam(request, "type"),
+		Name: chi.URLParam(request, "name"),
+	}
+
+	value, err := h.updateService.GetMetricValue(context.Background(), metric)
+	if err != nil {
+		h.logger.Error(err)
+	}
+	if value == nil {
+		writer.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	_, err = writer.Write([]byte(*value))
+	if err != nil {
+		h.logger.Error(err)
+	}
+	writer.WriteHeader(http.StatusOK)
 }

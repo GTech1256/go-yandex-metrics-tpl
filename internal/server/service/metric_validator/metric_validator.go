@@ -1,18 +1,31 @@
-package util
+package metric_validator
 
 import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"strconv"
 	"strings"
 )
 
 const updatePartLength = 8 // len("/update/")
 
+type MetricValidator interface {
+	MakeMetricValuesFromURL(url string) (*entity.MetricFields, error)
+	GetValidType(metricType string) entity.Type
+	GetTypeGaugeValue(metricValueUnsafe string) (*float64, error)
+	GetTypeCounterValue(metricValueUnsafe string) (*int64, error)
+}
+
+type metricValidator struct {
+}
+
+func New() MetricValidator {
+	return &metricValidator{}
+}
+
 // MakeMetricValuesFromURL На вход ожидается /update/<ТИП_МЕТРИКИ>/<ИМЯ_МЕТРИКИ>/<ЗНАЧЕНИЕ_МЕТРИКИ>
-func MakeMetricValuesFromURL(url string) (*entity.MetricFields, error) {
+func (m metricValidator) MakeMetricValuesFromURL(url string) (*entity.MetricFields, error) {
 	if len(url) < 8 {
-		return nil, service.ErrNotCorrectURL
+		return nil, ErrNotCorrectURL
 	}
 
 	urlWithoutUpdate := url[updatePartLength:]
@@ -23,24 +36,24 @@ func MakeMetricValuesFromURL(url string) (*entity.MetricFields, error) {
 	case 2: // <ТИП_МЕТРИКИ> <ИМЯ_МЕТРИКИ>
 		isNameEmpty := len(splitted[1]) == 0
 		if isNameEmpty {
-			return nil, service.ErrNotCorrectName
+			return nil, ErrNotCorrectName
 		}
 
-		return nil, service.ErrNotCorrectURL
+		return nil, ErrNotCorrectURL
 	case 1: // <ТИП_МЕТРИКИ> : Нет имени
-		return nil, service.ErrNotCorrectName
+		return nil, ErrNotCorrectName
 
 	}
 
 	metricType, metricName, metricValue := splitted[0], splitted[1], splitted[2]
 
 	if len(metricName) == 0 {
-		return nil, service.ErrNotCorrectName
+		return nil, ErrNotCorrectName
 	}
 
-	validType := GetValidType(metricType)
+	validType := m.GetValidType(metricType)
 	if validType == entity.NoType {
-		return nil, service.ErrNotCorrectType
+		return nil, ErrNotCorrectType
 	}
 
 	return &entity.MetricFields{
@@ -51,7 +64,7 @@ func MakeMetricValuesFromURL(url string) (*entity.MetricFields, error) {
 
 }
 
-func GetValidType(metricType string) entity.Type {
+func (m metricValidator) GetValidType(metricType string) entity.Type {
 	switch entity.Type(metricType) {
 	case entity.Gauge:
 		return entity.Gauge
@@ -62,19 +75,19 @@ func GetValidType(metricType string) entity.Type {
 	}
 }
 
-func GetTypeGaugeValue(metricValueUnsafe string) (*float64, error) {
+func (m metricValidator) GetTypeGaugeValue(metricValueUnsafe string) (*float64, error) {
 	metricValue, err := strconv.ParseFloat(metricValueUnsafe, 64)
 	if err != nil {
-		return nil, service.ErrNotCorrectValue
+		return nil, ErrNotCorrectValue
 	}
 
 	return &metricValue, nil
 }
 
-func GetTypeCounterValue(metricValueUnsafe string) (*int64, error) {
+func (m metricValidator) GetTypeCounterValue(metricValueUnsafe string) (*int64, error) {
 	metricValue, err := strconv.ParseInt(metricValueUnsafe, 10, 64)
 	if err != nil {
-		return nil, service.ErrNotCorrectValue
+		return nil, ErrNotCorrectValue
 	}
 
 	return &metricValue, nil
