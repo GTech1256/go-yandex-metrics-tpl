@@ -30,7 +30,7 @@ func New(cfg *config.Config, logger logging2.Logger) (App, error) {
 
 	metricSendCh := make(chan server2.MetricSendCh)
 
-	serverHost := fmt.Sprintf("http://+%v", *cfg.ServerPort)
+	serverHost := fmt.Sprintf("http://%v", *cfg.ServerPort)
 	serverClient := server.New(serverHost, logger)
 	serverRepository := repository.New()
 	service := serverService.New(serverClient, logger, serverRepository)
