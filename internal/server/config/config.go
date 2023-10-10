@@ -1,6 +1,9 @@
 package config
 
-import "flag"
+import (
+	"flag"
+	"os"
+)
 
 type Configurable interface {
 	Load()
@@ -17,6 +20,9 @@ func NewConfig() Configurable {
 
 func (c *Config) Load() {
 	c.Port = flag.String("a", ":8080", "address and port to run server")
+	if envRunAddr := os.Getenv("ADDRESS"); envRunAddr != "" {
+		c.Port = &envRunAddr
+	}
 
 	flag.Parse()
 }

@@ -1,6 +1,10 @@
 package config
 
-import "flag"
+import (
+	"flag"
+	"os"
+	"strconv"
+)
 
 type Configurable interface {
 	Load()
@@ -26,9 +30,30 @@ func NewConfig() Configurable {
 
 func (c *Config) Load() {
 	c.AgentPort = flag.String("port", ":8081", "address and port to run agent")
+	if envRunAddr := os.Getenv("AGENT_ADDRESS"); envRunAddr != "" {
+		c.AgentPort = &envRunAddr
+	}
+
 	c.ServerPort = flag.String("a", ":8080", "address and port to run server")
+	if envRunAddr := os.Getenv("ADDRESS"); envRunAddr != "" {
+		c.ServerPort = &envRunAddr
+	}
+
 	c.ReportInterval = flag.Int("r", 10, "frequency of sending metrics to the server")
+	if envRunAddr := os.Getenv("REPORT_INTERVAL"); envRunAddr != "" {
+		atoi, err := strconv.Atoi(envRunAddr)
+		if err == nil {
+			c.ReportInterval = &atoi
+		}
+	}
+
 	c.PollInterval = flag.Int("p", 2, "the frequency of polling metrics")
+	if envRunAddr := os.Getenv("POLL_INTERVAL"); envRunAddr != "" {
+		atoi, err := strconv.Atoi(envRunAddr)
+		if err == nil {
+			c.PollInterval = &atoi
+		}
+	}
 
 	flag.Parse()
 }
