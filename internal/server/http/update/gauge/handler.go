@@ -5,7 +5,6 @@ import (
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/middlware/guard"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/go-chi/chi/v5"
 	"net/http"
@@ -14,10 +13,10 @@ import (
 type handler struct {
 	logger          logging2.Logger
 	updateService   updateInterface.Service
-	metricValidator metricValidator.MetricValidator
+	metricValidator metricvalidator.MetricValidator
 }
 
-func NewHandler(logger logging2.Logger, updateService updateInterface.Service, metricValidator metricValidator.MetricValidator) http2.Handler {
+func NewHandler(logger logging2.Logger, updateService updateInterface.Service, metricValidator metricvalidator.MetricValidator) http2.Handler {
 	return &handler{
 		logger:          logger.WithField("TYPE", "HANDLER").WithField("METRIC", "GAUGE"),
 		updateService:   updateService,

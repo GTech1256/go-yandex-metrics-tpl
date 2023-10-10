@@ -10,7 +10,6 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/value"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/go-chi/chi/v5"
 	"log"
@@ -27,7 +26,7 @@ func New(port string, logger logging2.Logger) (App, error) {
 	router := chi.NewRouter()
 
 	metricStorage := metric.NewStorage()
-	metricValidator := metricValidator.New()
+	metricValidator := metricvalidator.New()
 	updateService := service.NewUpdateService(logger, metricStorage, metricValidator)
 
 	logger.Info("Register /update/counter/ Router")

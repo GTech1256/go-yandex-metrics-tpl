@@ -1,4 +1,4 @@
-package metricValidator
+package metricvalidator
 
 import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"

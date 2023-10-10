@@ -1,7 +1,6 @@
 package guard
 
 import (
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"net/http"
 )
@@ -10,7 +9,7 @@ const (
 	ExpectMethod = http.MethodPost
 )
 
-func WithMetricGuarding(next http.Handler, logger logging2.Logger, validator metricValidator.MetricValidator) http.HandlerFunc {
+func WithMetricGuarding(next http.Handler, logger logging2.Logger, validator metricvalidator.MetricValidator) http.HandlerFunc {
 	guardFn := func(rw http.ResponseWriter, req *http.Request) {
 		isCorrectMethod := req.Method == ExpectMethod
 		if !isCorrectMethod {
@@ -21,8 +20,8 @@ func WithMetricGuarding(next http.Handler, logger logging2.Logger, validator met
 
 		_, err := validator.MakeMetricValuesFromURL(req.RequestURI)
 
-		if err == metricValidator.ErrNotCorrectName {
-			logger.Error(metricValidator.ErrNotCorrectName)
+		if err == metricvalidator.ErrNotCorrectName {
+			logger.Error(metricvalidator.ErrNotCorrectName)
 			rw.WriteHeader(http.StatusNotFound)
 			return
 		}

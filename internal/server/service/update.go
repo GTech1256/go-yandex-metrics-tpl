@@ -6,7 +6,6 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"strconv"
 	"strings"
@@ -15,10 +14,10 @@ import (
 type updateService struct {
 	logger          logging2.Logger
 	storage         metric2.Storage
-	metricValidator metricValidator.MetricValidator
+	metricValidator metricvalidator.MetricValidator
 }
 
-func NewUpdateService(logger logging2.Logger, storage metric2.Storage, metricValidator metricValidator.MetricValidator) updateInterface.Service {
+func NewUpdateService(logger logging2.Logger, storage metric2.Storage, metricValidator metricvalidator.MetricValidator) updateInterface.Service {
 
 	return &updateService{
 		logger:          logger,
@@ -80,7 +79,7 @@ func (u updateService) GetMetricValue(ctx context.Context, metric *updateInterfa
 	validType := u.metricValidator.GetValidType(metric.Type)
 
 	if validType == entity.NoType {
-		return nil, metricValidator.ErrNotCorrectType
+		return nil, metricvalidator.ErrNotCorrectType
 	}
 
 	var result *string
@@ -102,7 +101,7 @@ func (u updateService) GetMetricValue(ctx context.Context, metric *updateInterfa
 		}
 
 	default:
-		return nil, metricValidator.ErrNotCorrectType
+		return nil, metricvalidator.ErrNotCorrectType
 	}
 
 	return result, nil
