@@ -13,10 +13,10 @@ import (
 type handler struct {
 	logger          logging2.Logger
 	updateService   updateInterface.Service
-	metricValidator metric_validator.MetricValidator
+	metricValidator metricValidator.MetricValidator
 }
 
-func NewHandler(logger logging2.Logger, updateService updateInterface.Service, metricValidator metric_validator.MetricValidator) Handler {
+func NewHandler(logger logging2.Logger, updateService updateInterface.Service, metricValidator metricValidator.MetricValidator) Handler {
 	return &handler{
 		logger:          logger,
 		updateService:   updateService,

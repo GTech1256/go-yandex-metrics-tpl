@@ -15,10 +15,10 @@ import (
 type updateService struct {
 	logger          logging2.Logger
 	storage         metric2.Storage
-	metricValidator metric_validator.MetricValidator
+	metricValidator metricValidator.MetricValidator
 }
 
-func NewUpdateService(logger logging2.Logger, storage metric2.Storage, metricValidator metric_validator.MetricValidator) updateInterface.Service {
+func NewUpdateService(logger logging2.Logger, storage metric2.Storage, metricValidator metricValidator.MetricValidator) updateInterface.Service {
 
 	return &updateService{
 		logger:          logger,
@@ -80,7 +80,7 @@ func (u updateService) GetMetricValue(ctx context.Context, metric *updateInterfa
 	validType := u.metricValidator.GetValidType(metric.Type)
 
 	if validType == entity.NoType {
-		return nil, metric_validator.ErrNotCorrectType
+		return nil, metricValidator.ErrNotCorrectType
 	}
 
 	var result *string
@@ -102,7 +102,7 @@ func (u updateService) GetMetricValue(ctx context.Context, metric *updateInterfa
 		}
 
 	default:
-		return nil, metric_validator.ErrNotCorrectType
+		return nil, metricValidator.ErrNotCorrectType
 	}
 
 	return result, nil

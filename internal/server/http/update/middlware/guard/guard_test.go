@@ -20,18 +20,18 @@ func TestWithMetricGuarding(t *testing.T) {
 		want                   want
 		urlPath                string
 		method                 string
-		getMockMetricValidator func() *metric_validator.MockMetricValidator
+		getMockMetricValidator func() *metricValidator.MockMetricValidator
 		getMockLogger          func() *logging.LoggerMock
 	}{
 		{
 			name:    "Gauge/Title/10.10 Success",
 			urlPath: "/update/gauge/title/10.10",
 			method:  http.MethodPost,
-			getMockMetricValidator: func() *metric_validator.MockMetricValidator {
+			getMockMetricValidator: func() *metricValidator.MockMetricValidator {
 				// TODO: Поправить путь на "/update/counter/title/10"
-				expUrl := ""
-				mockMetricValidator := new(metric_validator.MockMetricValidator)
-				mockMetricValidator.On("MakeMetricValuesFromURL", expUrl).Return(&entity.MetricFields{
+				expURL := ""
+				mockMetricValidator := new(metricValidator.MockMetricValidator)
+				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity.MetricFields{
 					MetricType:  string(entity.Gauge),
 					MetricName:  "title",
 					MetricValue: "10.10",
@@ -53,11 +53,11 @@ func TestWithMetricGuarding(t *testing.T) {
 			name:    "Counter/Title/10 Success",
 			urlPath: "/update/counter/title/10",
 			method:  http.MethodPost,
-			getMockMetricValidator: func() *metric_validator.MockMetricValidator {
+			getMockMetricValidator: func() *metricValidator.MockMetricValidator {
 				// TODO: Поправить путь на "/update/counter/title/10"
-				expUrl := ""
-				mockMetricValidator := new(metric_validator.MockMetricValidator)
-				mockMetricValidator.On("MakeMetricValuesFromURL", expUrl).Return(&entity.MetricFields{
+				expURL := ""
+				mockMetricValidator := new(metricValidator.MockMetricValidator)
+				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity.MetricFields{
 					MetricType:  string(entity.Counter),
 					MetricName:  "title",
 					MetricValue: "10",
@@ -79,17 +79,17 @@ func TestWithMetricGuarding(t *testing.T) {
 			name:    "Fail Not valid path",
 			urlPath: "/update/gauge",
 			method:  http.MethodPost,
-			getMockMetricValidator: func() *metric_validator.MockMetricValidator {
+			getMockMetricValidator: func() *metricValidator.MockMetricValidator {
 				// TODO: Поправить путь
-				expUrl := ""
-				mockMetricValidator := new(metric_validator.MockMetricValidator)
-				mockMetricValidator.On("MakeMetricValuesFromURL", expUrl).Return(&entity.MetricFields{}, metric_validator.ErrNotCorrectURL)
+				expURL := ""
+				mockMetricValidator := new(metricValidator.MockMetricValidator)
+				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity.MetricFields{}, metricValidator.ErrNotCorrectURL)
 
 				return mockMetricValidator
 			},
 			getMockLogger: func() *logging.LoggerMock {
 				mockLogger := new(logging.LoggerMock)
-				mockLogger.On("Error", metric_validator.ErrNotCorrectURL)
+				mockLogger.On("Error", metricValidator.ErrNotCorrectURL)
 
 				return mockLogger
 			},
@@ -102,17 +102,17 @@ func TestWithMetricGuarding(t *testing.T) {
 			name:    "Fail Not valid name",
 			urlPath: "/update/",
 			method:  http.MethodPost,
-			getMockMetricValidator: func() *metric_validator.MockMetricValidator {
+			getMockMetricValidator: func() *metricValidator.MockMetricValidator {
 				// TODO: Поправить путь
-				expUrl := ""
-				mockMetricValidator := new(metric_validator.MockMetricValidator)
-				mockMetricValidator.On("MakeMetricValuesFromURL", expUrl).Return(&entity.MetricFields{}, metric_validator.ErrNotCorrectName)
+				expURL := ""
+				mockMetricValidator := new(metricValidator.MockMetricValidator)
+				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity.MetricFields{}, metricValidator.ErrNotCorrectName)
 
 				return mockMetricValidator
 			},
 			getMockLogger: func() *logging.LoggerMock {
 				mockLogger := new(logging.LoggerMock)
-				mockLogger.On("Error", metric_validator.ErrNotCorrectName)
+				mockLogger.On("Error", metricValidator.ErrNotCorrectName)
 
 				return mockLogger
 			},
@@ -125,8 +125,8 @@ func TestWithMetricGuarding(t *testing.T) {
 			name:    "Fail Not HTTP.Method",
 			urlPath: "/update/gauge/title/10.10",
 			method:  http.MethodGet,
-			getMockMetricValidator: func() *metric_validator.MockMetricValidator {
-				mockMetricValidator := new(metric_validator.MockMetricValidator)
+			getMockMetricValidator: func() *metricValidator.MockMetricValidator {
+				mockMetricValidator := new(metricValidator.MockMetricValidator)
 
 				return mockMetricValidator
 			},

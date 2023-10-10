@@ -27,7 +27,7 @@ func New(port string, logger logging2.Logger) (App, error) {
 	router := chi.NewRouter()
 
 	metricStorage := metric.NewStorage()
-	metricValidator := metric_validator.New()
+	metricValidator := metricValidator.New()
 	updateService := service.NewUpdateService(logger, metricStorage, metricValidator)
 
 	logger.Info("Register /update/counter/ Router")

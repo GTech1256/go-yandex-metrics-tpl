@@ -1,4 +1,4 @@
-package metric_validator
+package metricValidator
 
 import "errors"
 

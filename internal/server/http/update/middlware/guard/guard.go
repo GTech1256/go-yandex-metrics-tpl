@@ -10,7 +10,7 @@ const (
 	ExpectMethod = http.MethodPost
 )
 
-func WithMetricGuarding(next http.Handler, logger logging2.Logger, validator metric_validator.MetricValidator) http.HandlerFunc {
+func WithMetricGuarding(next http.Handler, logger logging2.Logger, validator metricValidator.MetricValidator) http.HandlerFunc {
 	guardFn := func(rw http.ResponseWriter, req *http.Request) {
 		isCorrectMethod := req.Method == ExpectMethod
 		if !isCorrectMethod {
@@ -21,8 +21,8 @@ func WithMetricGuarding(next http.Handler, logger logging2.Logger, validator met
 
 		_, err := validator.MakeMetricValuesFromURL(req.RequestURI)
 
-		if err == metric_validator.ErrNotCorrectName {
-			logger.Error(metric_validator.ErrNotCorrectName)
+		if err == metricValidator.ErrNotCorrectName {
+			logger.Error(metricValidator.ErrNotCorrectName)
 			rw.WriteHeader(http.StatusNotFound)
 			return
 		}
