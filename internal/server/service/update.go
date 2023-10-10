@@ -114,24 +114,24 @@ func (u updateService) GetMetrics(ctx context.Context) (string, error) {
 	counterMetrics := make([]string, len(storageMetrics.Counter))
 
 	for name, value := range storageMetrics.Gauge {
-		gaugeMetrics = append(gaugeMetrics, fmt.Sprintf("<li>"+
-			"<b>Name:</b> %v"+
-			"Value: %v"+
-			"</li>", name, value),
+		gaugeMetrics = append(gaugeMetrics, fmt.Sprintf("<tr>"+
+			"<td>%v</td>"+
+			"<td>%v</td>"+
+			"</tr>", name, value),
 		)
 	}
 	for name, value := range storageMetrics.Counter {
-		counterMetrics = append(counterMetrics, fmt.Sprintf("<li>"+
-			"<b>Name:</b> %v"+
-			"Value: %v"+
-			"</li>", name, value),
+		counterMetrics = append(counterMetrics, fmt.Sprintf("<tr>"+
+			"<td>%v</td>"+
+			"<td>%v</td>"+
+			"</tr>", name, value),
 		)
 	}
 
 	metricsList := fmt.Sprintf("<h1>Metrics</h1>"+
 		"<div style='display: flex;width: 800px;justify-content: space-between;'>"+
-		"<div><h2>Gauge</h2><ol>%v</ol></div>"+
-		"<div><h2>Counter</h2><ol>%v</ol></div>"+
+		"<div><h2>Gauge</h2><table><tr><th>Name</th><th>Value</th></tr>%v</table></div>"+
+		"<div><h2>Counter</h2><table><tr><th>Name</th><th>Value</th></tr>%v</table></div>"+
 		"</div>", strings.Join(gaugeMetrics, ""), strings.Join(counterMetrics, ""))
 
 	html := fmt.Sprintf("%v", metricsList)

@@ -7,6 +7,16 @@ build-agent:
 	mv cmd/agent/main cmd/agent/agent
 
 .PHONY: run
+build: build-server build-agent
+
+
+start-agent:
+	cmd/agent/agent
+
+start-server:
+	cmd/server/server
+
+.PHONY: run
 run:
 	air
 
