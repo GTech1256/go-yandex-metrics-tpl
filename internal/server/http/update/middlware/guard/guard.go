@@ -1,6 +1,7 @@
 package guard
 
 import (
+	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"net/http"
 )

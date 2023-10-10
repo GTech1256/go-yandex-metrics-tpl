@@ -2,6 +2,7 @@ package guard
 
 import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/stretchr/testify/assert"
 	"net/http"

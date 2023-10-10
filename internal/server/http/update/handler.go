@@ -4,6 +4,7 @@ import (
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/middlware/guard"
+	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/go-chi/chi/v5"
 	"net/http"

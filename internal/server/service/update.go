@@ -6,6 +6,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
+	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"strconv"
 	"strings"

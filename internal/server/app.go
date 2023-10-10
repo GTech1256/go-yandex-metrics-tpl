@@ -10,6 +10,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/value"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
+	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/go-chi/chi/v5"
 	"log"
