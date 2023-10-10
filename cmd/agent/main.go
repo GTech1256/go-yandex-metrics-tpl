@@ -16,6 +16,11 @@ func main() {
 
 	logger.Info("Starting agent app")
 	_, err := agent.New(cfg, logger)
+
+	shutdown := make(chan int)
+
+	<-shutdown
+
 	if err != nil {
 		logger.Error("Starting agent app Failed", err)
 		return
