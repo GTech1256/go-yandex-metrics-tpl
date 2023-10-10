@@ -7,10 +7,6 @@ import (
 	"time"
 )
 
-//var (
-//	ErrReceiveEmptyMetric = errors.New("получена пустая метрика")
-//)
-
 func (s *service) StartReport(ctx context.Context, metricSendCh <-chan server.MetricSendCh, reportInterval time.Duration) error {
 	s.logger.Info("Запуск Report")
 

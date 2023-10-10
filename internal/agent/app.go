@@ -27,14 +27,14 @@ func New(cfg *config.Config, logger logging2.Logger) (App, error) {
 
 	serverHost := fmt.Sprintf("http://%v", *cfg.ServerPort)
 	serverClient := server.New(serverHost, logger)
-	logger.Infof("Клиент-сервера запущен на %v", serverHost)
+
 	serverRepository := repository.New()
 	service := serverService.New(serverClient, logger, serverRepository)
 
 	go func() {
 		err := service.StartPoll(ctx, metricSendCh, pollIntervalDuration)
 		if err != nil {
-			logger.Error("Ошибка начала сборка метрик", err)
+			logger.Error("Ошибка начала сбора метрик", err)
 		}
 	}()
 

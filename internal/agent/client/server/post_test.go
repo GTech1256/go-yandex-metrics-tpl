@@ -15,7 +15,7 @@ func Test_client_Post(t *testing.T) {
 
 	mockLogger := new(logging2.LoggerMock)
 	mockLogger.On("Infof", mock.Anything, mock.Anything, mock.Anything)
-	//logger := logging2.LoggerMock{}
+
 	client2 := New(host, mockLogger)
 
 	// Создаем мок для HTTPClient
@@ -31,19 +31,11 @@ func Test_client_Post(t *testing.T) {
 
 	requestURL := getRequestURL(host, &update)
 
-	var a = new(BodyMock)
-
-	//a.Close = func() error {
-	//	return nil
-	//}
-	//
-	//a.Read = func (p []byte) (n int, err error) {
-	//	return 0, err
-	//}
+	bodyMock := new(BodyMock)
 
 	// Устанавливаем ожидаемые вызовы для мока HTTPClient
 	httpClientMock.On("NewRequest", http.MethodPost, requestURL, mock.Anything).Return(&http.Request{}, nil)
-	httpClientMock.On("Do", mock.Anything).Return(&http.Response{StatusCode: http.StatusOK, Body: a}, nil)
+	httpClientMock.On("Do", mock.Anything).Return(&http.Response{StatusCode: http.StatusOK, Body: bodyMock}, nil)
 
 	// Выполняем функцию
 	err := client2.Post(context.Background(), update)

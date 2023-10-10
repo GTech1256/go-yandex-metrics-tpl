@@ -7,7 +7,6 @@ import (
 
 var _ MetricValidator = (*MockMetricValidator)(nil)
 
-// Mocked MetricValidator
 type MockMetricValidator struct {
 	mock.Mock
 }

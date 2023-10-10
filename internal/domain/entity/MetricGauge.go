@@ -1,6 +1,6 @@
 package entity
 
-type GaugeValue = float64 // float64
+type GaugeValue = float64
 
 type MetricGauge struct {
 	Type  Type

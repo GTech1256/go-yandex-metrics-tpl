@@ -9,6 +9,7 @@ import (
 func main() {
 	cfg := config.NewConfig().(*config.Config)
 	cfg.Load()
+	
 	logging.Init()
 	logger := logging.NewMyLogger().WithField("prefix", "SERVER")
 

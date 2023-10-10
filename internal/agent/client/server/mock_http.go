@@ -45,8 +45,6 @@ func (m *MockResponse) Close() error {
 }
 
 type BodyMock struct {
-	//Close func() error
-	//Read func(p []byte) (n int, err error)
 }
 
 func (b BodyMock) Read(p []byte) (n int, err error) {

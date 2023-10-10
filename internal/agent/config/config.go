@@ -11,9 +11,6 @@ type Configurable interface {
 }
 
 type Config struct {
-	// AgentPort - Флаг -p=<ЗНАЧЕНИЕ> отвечает за адрес эндпоинта HTTP-agent (по умолчанию localhost:8081).
-	//AgentPort *string
-
 	// ServerPort - Флаг -a=<ЗНАЧЕНИЕ> отвечает за адрес эндпоинта HTTP-сервера (по умолчанию localhost:8080).
 	ServerPort *string
 
@@ -29,11 +26,6 @@ func NewConfig() Configurable {
 }
 
 func (c *Config) Load() {
-	//c.AgentPort = flag.String("port", ":8081", "address and port to run agent")
-	//if envRunAddr := os.Getenv("AGENT_ADDRESS"); envRunAddr != "" {
-	//	c.AgentPort = &envRunAddr
-	//}
-
 	c.ServerPort = flag.String("a", ":8080", "address and port to run server")
 	if envRunAddr := os.Getenv("ADDRESS"); envRunAddr != "" {
 		c.ServerPort = &envRunAddr

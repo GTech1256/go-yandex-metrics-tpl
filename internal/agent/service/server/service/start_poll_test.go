@@ -16,8 +16,14 @@ import (
 func Test_service_StartPoll(t *testing.T) {
 	// Arrange
 	ctx := context.Background()
-	updateInterval := time.Millisecond * 10
-	mockMetric := &agentEntity.Metric{} // Provide a sample metric for testing
+	updateInterval := time.Millisecond * 100
+	mockMetric := &agentEntity.Metric{
+		entity.MetricFields{
+			MetricType:  "type",
+			MetricName:  "name",
+			MetricValue: "value",
+		},
+	}
 
 	repo := new(MockRepository)
 	repo.On("GetMetric", ctx).Return(mockMetric, nil)
@@ -27,7 +33,7 @@ func Test_service_StartPoll(t *testing.T) {
 	mockLogger := new(logging.LoggerMock)
 	mockLogger.On("Info", "Запуск Pool")
 	mockLogger.On("Info", "Тик Pool")
-	mockLogger.On("Info", "Отправка agent.Metric")
+	mockLogger.On("Info", "Отправка Pool метрики в канал")
 
 	service := New(client, mockLogger, repo)
 
@@ -49,9 +55,10 @@ func Test_service_StartPoll(t *testing.T) {
 
 	// Clean up
 	ctx.Done()
-	//close(metricSendCh)
+	close(metricSendCh)
 	repo.AssertExpectations(t)
 	mockLogger.AssertExpectations(t)
+
 }
 
 func Test_service_sendMetric(t *testing.T) {
@@ -73,7 +80,7 @@ func Test_service_sendMetric(t *testing.T) {
 	})).Return(nil)
 
 	mockLogger := new(logging.LoggerMock)
-	mockLogger.On("Info", "Отправка ", testMetric.MetricName)
+	mockLogger.On("Infof", []interface{}{"Отправка %v", testMetric.MetricName})
 
 	s := &service{client, mockLogger, repo}
 

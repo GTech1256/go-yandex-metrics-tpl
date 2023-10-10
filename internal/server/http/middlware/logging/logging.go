@@ -8,8 +8,6 @@ import (
 	"time"
 )
 
-// responseWriter is a minimal wrapper for http.ResponseWriter that allows the
-// written HTTP status code to be captured for logging.
 type responseWriter struct {
 	http.ResponseWriter
 	status      int
@@ -34,7 +32,6 @@ func (rw *responseWriter) WriteHeader(code int) {
 	rw.wroteHeader = true
 }
 
-// LoggingMiddleware logs the incoming HTTP request & its duration.
 func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 
 	fn := func(w http.ResponseWriter, r *http.Request) {

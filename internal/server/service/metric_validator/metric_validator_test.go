@@ -28,8 +28,6 @@ func TestMetricValidator_MakeMetricValuesFromURL(t *testing.T) {
 		assert.Nil(t, result)
 		assert.Equal(t, ErrNotCorrectURL, err)
 	})
-
-	// Add more test cases as needed
 }
 
 func TestMetricValidator_GetValidType(t *testing.T) {

@@ -26,13 +26,14 @@ func (s *service) StartPoll(ctx context.Context, metricSendCh chan<- server2.Met
 			return nil
 
 		case <-ticker.C:
+
 			s.logger.Info("Тик Pool")
 			metric, err := s.repository.GetMetric(ctx)
 
 			if err != nil {
 				return err
 			}
-			s.logger.Info("Отправка agent.Metric")
+			s.logger.Info("Отправка Pool метрики в канал")
 			metricSendCh <- server2.MetricSendCh{
 				ID:   "StartPoll fn",
 				Data: metric,
@@ -42,13 +43,15 @@ func (s *service) StartPoll(ctx context.Context, metricSendCh chan<- server2.Met
 }
 
 func (s *service) sendMetric(ctx context.Context, metric *entity.MetricFields) error {
-	s.logger.Info("Отправка ", metric.MetricName)
+	s.logger.Infof("Отправка %v", metric.MetricName)
 
 	if err := s.server.Post(ctx, dto.Update{
 		Type:  metric.MetricType,
 		Name:  metric.MetricName,
 		Value: metric.MetricValue,
 	}); err != nil {
+		s.logger.Errorf("Ошибка отправки %v", metric.MetricName)
+
 		return ErrSend
 	}
 

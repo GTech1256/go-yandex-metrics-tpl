@@ -21,7 +21,7 @@ run:
 	air
 
 test:
-	go test ./...
+	go test -count=1 ./...
 
 test-coverage:
 	go test -coverprofile cover.out ./...
@@ -30,7 +30,7 @@ test-autotests-server: build-server
 	autotests/metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$$ -binary-path=cmd/server/server
 
 test-autotests-agent: build-server
-	./autotests/metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$$ -binary-path=/Users/ribakakin/Desktop/web/go-practicum/go-yandex-metrics-tpl/cmd/agent/agent
+	autotests/metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$$ -binary-path=cmd/agent/agent
 
 
 
