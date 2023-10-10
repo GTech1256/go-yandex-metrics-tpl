@@ -1,7 +1,6 @@
 package logging
 
 import (
-	"fmt"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/mock"
 )
@@ -21,21 +20,17 @@ func (m *LoggerMock) WithField(key string, value interface{}) Logger {
 }
 
 func (m *LoggerMock) Error(args ...interface{}) {
-	fmt.Println(args...)
 	m.Called(args...)
 }
 
 func (m *LoggerMock) Info(args ...interface{}) {
-	fmt.Println(args...)
 	m.Called(args...)
 }
 
 func (m *LoggerMock) Infof(format string, args ...interface{}) {
-	fmt.Println(fmt.Sprintf(format, args...))
 	m.Called(append([]interface{}{format}, args...))
 }
 
 func (m *LoggerMock) Errorf(format string, args ...interface{}) {
-	fmt.Println(fmt.Errorf(format, args...))
 	m.Called(append([]interface{}{format}, args...))
 }

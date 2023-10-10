@@ -26,6 +26,9 @@ test:
 test-coverage:
 	go test -coverprofile cover.out ./...
 
+test-coverage-html: test-coverage
+	go tool cover -html=cover.out
+
 test-autotests-server: build-server
 	autotests/metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$$ -binary-path=cmd/server/server
 
