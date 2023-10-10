@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	parseFlags()
 	logging.Init()
 	logger := logging.NewMyLogger().WithField("prefix", "AGENT")
 
