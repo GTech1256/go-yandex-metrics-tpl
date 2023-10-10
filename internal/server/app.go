@@ -38,7 +38,7 @@ func New(port string, logger logging2.Logger) (App, error) {
 	updateGaugeHandler := gauge.NewHandler(logger, updateService, metricValidator)
 	updateGaugeHandler.Register(router)
 
-	logger.Info("Register /update/ Router")
+	logger.Info("Register /update/* Router")
 	updateHandler := update.NewHandler(logger, updateService, metricValidator)
 	updateHandler.Register(router)
 

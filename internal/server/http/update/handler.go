@@ -25,7 +25,7 @@ func NewHandler(logger logging2.Logger, updateService updateInterface.Service, m
 }
 
 func (h handler) Register(router *chi.Mux) {
-	router.Handle("/update/", guard.WithMetricGuarding(http.HandlerFunc(h.Update), h.logger, h.metricValidator))
+	router.Handle("/update/*", guard.WithMetricGuarding(http.HandlerFunc(h.Update), h.logger, h.metricValidator))
 }
 
 // Update /update/

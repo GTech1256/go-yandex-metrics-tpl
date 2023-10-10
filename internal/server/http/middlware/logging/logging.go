@@ -4,46 +4,63 @@ import (
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/sirupsen/logrus"
 	"net/http"
+	"runtime/debug"
 	"time"
 )
 
-type (
-	// struct for holding response details
-	responseData struct {
-		status int
-		size   int
+// responseWriter is a minimal wrapper for http.ResponseWriter that allows the
+// written HTTP status code to be captured for logging.
+type responseWriter struct {
+	http.ResponseWriter
+	status      int
+	wroteHeader bool
+}
+
+func wrapResponseWriter(w http.ResponseWriter) *responseWriter {
+	return &responseWriter{ResponseWriter: w}
+}
+
+func (rw *responseWriter) Status() int {
+	return rw.status
+}
+
+func (rw *responseWriter) WriteHeader(code int) {
+	if rw.wroteHeader {
+		return
 	}
 
-	// our http.ResponseWriter implementation
-	loggingResponseWriter struct {
-		http.ResponseWriter // compose original http.ResponseWriter
-		responseData        *responseData
-	}
-)
+	rw.status = code
+	rw.ResponseWriter.WriteHeader(code)
+	rw.wroteHeader = true
 
+	return
+}
+
+// LoggingMiddleware logs the incoming HTTP request & its duration.
 func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
-	loggingFn := func(rw http.ResponseWriter, req *http.Request) {
+
+	fn := func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if err := recover(); err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				logger.Error(
+					"err", err,
+					"trace", debug.Stack(),
+				)
+			}
+		}()
+
 		start := time.Now()
-
-		responseData := &responseData{
-			status: 0,
-			size:   0,
-		}
-		lrw := loggingResponseWriter{
-			ResponseWriter: rw, // compose original service.ResponseWriter
-			responseData:   responseData,
-		}
-		h.ServeHTTP(&lrw, req) // inject our implementation of service.ResponseWriter
-
-		duration := time.Since(start)
-
+		wrapped := wrapResponseWriter(w)
+		h.ServeHTTP(wrapped, r)
 		logger.WithFields(logrus.Fields{
-			"uri":      req.RequestURI,
-			"method":   req.Method,
-			"status":   responseData.status,
-			"duration": duration,
-			"size":     responseData.size,
+			"status":   wrapped.status,
+			"method":   r.Method,
+			"path":     r.URL.EscapedPath(),
+			"duration": time.Since(start),
 		}).Info("request completed")
+
 	}
-	return http.HandlerFunc(loggingFn)
+
+	return http.HandlerFunc(fn)
 }
