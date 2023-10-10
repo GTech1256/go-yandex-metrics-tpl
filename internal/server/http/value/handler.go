@@ -2,6 +2,7 @@ package value
 
 import (
 	"context"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
 	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
@@ -45,7 +46,11 @@ func (h handler) Value(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	trimmed := strings.TrimRight(strings.TrimRight(*value, "0"), ".")
+	trimmed := *value
+
+	if metric.Type == string(entity.Gauge) {
+		trimmed = strings.TrimRight(strings.TrimRight(*value, "0"), ".")
+	}
 
 	_, err = writer.Write([]byte(trimmed))
 	if err != nil {
