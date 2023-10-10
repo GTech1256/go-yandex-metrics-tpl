@@ -5,17 +5,13 @@ import (
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 )
 
-const (
-	PORT = ":8081"
-)
-
 func main() {
 	logging.Init()
 	logger := logging.NewMyLogger().WithField("prefix", "AGENT")
 
 	logger.Info("Starting agent app")
-	_, err := agent.New(PORT, logger)
-	logger.Info("Started agent app on ")
+	_, err := agent.New(port, pollInterval, reportInterval, logger)
+	logger.Infof("Started agent app on %v", port)
 	if err != nil {
 		logger.Error("Starting agent app Failed", err)
 		return

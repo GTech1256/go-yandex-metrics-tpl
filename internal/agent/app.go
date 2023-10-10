@@ -20,14 +20,11 @@ type App interface {
 type app struct {
 }
 
-const (
-	pollInterval   time.Duration = time.Duration(2) * time.Second
-	reportInterval time.Duration = time.Duration(10) * time.Second
-)
+func New(port string, pollInterval int, reportInterval int, logger logging2.Logger) (App, error) {
+	pollIntervalDuration := time.Duration(pollInterval) * time.Second
+	reportIntervalDuration := time.Duration(reportInterval) * time.Second
 
-func New(port string, logger logging2.Logger) (App, error) {
 	router := http.NewServeMux()
-
 	ctx := context.Background()
 
 	metricSendCh := make(chan server2.MetricSendCh)
@@ -38,14 +35,14 @@ func New(port string, logger logging2.Logger) (App, error) {
 	service := serverService.New(serverClient, logger, serverRepository)
 
 	go func() {
-		err := service.StartPoll(ctx, metricSendCh, pollInterval)
+		err := service.StartPoll(ctx, metricSendCh, pollIntervalDuration)
 		if err != nil {
 			logger.Error("Ошибка начала сборка метрик", err)
 		}
 	}()
 
 	go func() {
-		err := service.StartReport(ctx, metricSendCh, reportInterval)
+		err := service.StartReport(ctx, metricSendCh, reportIntervalDuration)
 		if err != nil {
 			logger.Error("Ошибка начала отправки метрик", err)
 		}
