@@ -47,7 +47,7 @@ func (s *service) StartReport(ctx context.Context, metricSendCh <-chan server.Me
 					s.logger.Info("Отправка метрики")
 					err := s.sendMetric(ctx, &m)
 					if err != nil {
-						return err
+						s.logger.Error("Нет метрики для отправки")
 					}
 				}
 			} else {
