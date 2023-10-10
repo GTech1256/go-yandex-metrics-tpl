@@ -13,7 +13,7 @@ func main() {
 	logger := logging.NewMyLogger().WithField("prefix", "AGENT")
 
 	logger.Info("Starting agent app")
-	_, err := agent.New(*cfg.Port, *cfg.PollInterval, *cfg.ReportInterval, logger)
+	_, err := agent.New(cfg, logger)
 	if err != nil {
 		logger.Error("Starting agent app Failed", err)
 		return

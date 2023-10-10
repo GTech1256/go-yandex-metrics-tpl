@@ -13,8 +13,7 @@ func main() {
 	logger := logging.NewMyLogger().WithField("prefix", "SERVER")
 
 	logger.Info("Starting server app")
-	_, err := server.New(*cfg.Port, logger)
-	logger.Infof("Started server app on %v", *cfg.Port)
+	_, err := server.New(cfg, logger)
 	if err != nil {
 		logger.Error("Starting server app Failed", err)
 		return
