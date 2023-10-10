@@ -25,7 +25,7 @@ func NewConfig() Configurable {
 }
 
 func (c *Config) Load() {
-	c.AgentPort = flag.String("p", ":8081", "address and port to run agent")
+	c.AgentPort = flag.String("port", ":8081", "address and port to run agent")
 	c.ServerPort = flag.String("a", ":8080", "address and port to run server")
 	c.ReportInterval = flag.Int("r", 10, "frequency of sending metrics to the server")
 	c.PollInterval = flag.Int("p", 2, "the frequency of polling metrics")
