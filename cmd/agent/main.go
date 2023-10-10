@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/config"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
@@ -9,6 +10,7 @@ import (
 func main() {
 	cfg := config.NewConfig().(*config.Config)
 	cfg.Load()
+	fmt.Println(*cfg.ServerPort)
 	logging.Init()
 	logger := logging.NewMyLogger().WithField("prefix", "AGENT")
 
