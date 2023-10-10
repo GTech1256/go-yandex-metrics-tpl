@@ -8,6 +8,7 @@ import (
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/go-chi/chi/v5"
 	"net/http"
+	"strings"
 )
 
 type handler struct {
@@ -44,7 +45,9 @@ func (h handler) Value(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	_, err = writer.Write([]byte(*value))
+	trimmed := strings.TrimRight(strings.TrimRight(*value, "0"), ".")
+
+	_, err = writer.Write([]byte(trimmed))
 	if err != nil {
 		h.logger.Error(err)
 	}
