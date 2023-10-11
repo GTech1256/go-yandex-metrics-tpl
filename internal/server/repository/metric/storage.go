@@ -55,15 +55,23 @@ func (s *storage) SaveCounter(ctx context.Context, counter *entity.MetricCounter
 }
 
 // GetGauge - возвращает значение Gauge из хранилища
-func (s *storage) GetGaugeValue(name string) (entity.GaugeValue, bool) {
+func (s *storage) GetGaugeValue(name string) (*entity.GaugeValue, error) {
 	value, ok := s.memStorage.gauge[name]
-	return value, ok
+	if ok {
+		return &value, nil
+	}
+
+	return nil, nil
 }
 
 // GetCounter - возвращает значение Counter из хранилища
-func (s *storage) GetCounterValue(name string) (entity.CounterValue, bool) {
+func (s *storage) GetCounterValue(name string) (*entity.CounterValue, error) {
 	value, ok := s.memStorage.counter[name]
-	return value, ok
+	if ok {
+		return &value, nil
+	}
+
+	return nil, nil
 }
 
 func (s *storage) GetAllMetrics() *metric.AllMetrics {

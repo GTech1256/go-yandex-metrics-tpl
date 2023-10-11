@@ -13,7 +13,7 @@ type AllMetrics struct {
 type Storage interface {
 	SaveGauge(ctx context.Context, gauge *entity.MetricGauge) error
 	SaveCounter(ctx context.Context, counter *entity.MetricCounter) error
-	GetGaugeValue(name string) (entity.GaugeValue, bool)
-	GetCounterValue(name string) (entity.CounterValue, bool)
+	GetGaugeValue(name string) (*entity.GaugeValue, error)
+	GetCounterValue(name string) (*entity.CounterValue, error)
 	GetAllMetrics() *AllMetrics
 }

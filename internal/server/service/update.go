@@ -87,16 +87,22 @@ func (u updateService) GetMetricValue(ctx context.Context, metric *updateInterfa
 
 	switch validType {
 	case entity.Counter:
-		counterMetricValue, ok := u.storage.GetCounterValue(metric.Name)
-		if ok {
-			r := strconv.Itoa(int(counterMetricValue))
+		counterMetricValue, err := u.storage.GetCounterValue(metric.Name)
+		if err != nil {
+			u.logger.Error(err)
+		}
+		if counterMetricValue != nil {
+			r := strconv.Itoa(int(*counterMetricValue))
 
 			result = &r
 		}
 	case entity.Gauge:
-		gaugeMetricValue, ok := u.storage.GetGaugeValue(metric.Name)
-		if ok {
-			r := fmt.Sprintf("%f", gaugeMetricValue)
+		gaugeMetricValue, err := u.storage.GetGaugeValue(metric.Name)
+		if err != nil {
+			u.logger.Error(err)
+		}
+		if gaugeMetricValue != nil {
+			r := fmt.Sprintf("%f", *gaugeMetricValue)
 
 			result = &r
 		}

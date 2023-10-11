@@ -21,7 +21,7 @@ func TestSaveGauge(t *testing.T) {
 	}
 
 	// Проверяем, что значение было сохранено
-	if storedValue, ok := storage.GetGaugeValue(gauge.Name); !ok || storedValue != float64(gauge.Value) {
+	if storedValue, err2 := storage.GetGaugeValue(gauge.Name); err2 != nil || *storedValue != float64(gauge.Value) {
 		t.Errorf("SaveGauge did not save the value correctly")
 	}
 }
@@ -42,7 +42,7 @@ func TestSaveCounter(t *testing.T) {
 	}
 
 	// Проверяем, что значение было сохранено и равно переданному
-	if storedValue, ok := storage.GetCounterValue(counter.Name); !ok || storedValue != int64(counter.Value) {
+	if storedValue, err2 := storage.GetCounterValue(counter.Name); err2 != nil || *storedValue != int64(counter.Value) {
 		t.Errorf("SaveCounter did not save the value correctly")
 	}
 
@@ -60,7 +60,7 @@ func TestSaveCounter(t *testing.T) {
 
 	// Проверяем, что значение увеличено на переданное
 	expectedValue := previousValue + 2*int64(counter.Value)
-	if storedValue, ok := storage.GetCounterValue(counter.Name); !ok || storedValue != expectedValue {
+	if storedValue, err2 := storage.GetCounterValue(counter.Name); err2 != nil || *storedValue != expectedValue {
 		t.Errorf("SaveCounter did not update the value correctly Expect: %v, Got: %v", expectedValue, storedValue)
 	}
 }

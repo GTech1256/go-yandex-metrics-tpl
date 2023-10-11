@@ -18,13 +18,10 @@ import (
 	"net/http"
 )
 
-type App interface {
+type App struct {
 }
 
-type app struct {
-}
-
-func New(cfg *config.Config, logger logging2.Logger) (App, error) {
+func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 	router := chi.NewRouter()
 
 	metricStorage := metric.NewStorage()
@@ -54,5 +51,5 @@ func New(cfg *config.Config, logger logging2.Logger) (App, error) {
 	logger.Info(fmt.Sprintf("Start Listen Port %v", *cfg.Port))
 	log.Fatal(http.ListenAndServe(*cfg.Port, logging.WithLogging(router, logger)))
 
-	return &app{}, nil
+	return &App{}, nil
 }

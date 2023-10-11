@@ -12,13 +12,10 @@ import (
 	"time"
 )
 
-type App interface {
+type App struct {
 }
 
-type app struct {
-}
-
-func New(cfg *config.Config, logger logging2.Logger) (App, error) {
+func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 	pollIntervalDuration := time.Duration(*cfg.PollInterval) * time.Second
 	reportIntervalDuration := time.Duration(*cfg.ReportInterval) * time.Second
 
@@ -45,5 +42,5 @@ func New(cfg *config.Config, logger logging2.Logger) (App, error) {
 		}
 	}()
 
-	return &app{}, nil
+	return &App{}, nil
 }
