@@ -6,5 +6,6 @@ import (
 )
 
 type Repository interface {
-	GetMetric(ctx context.Context) (*agentEntity.Metric, error)
+	LoadMetric(ctx context.Context) error
+	GetMetrics() (*agentEntity.Metric, error)
 }

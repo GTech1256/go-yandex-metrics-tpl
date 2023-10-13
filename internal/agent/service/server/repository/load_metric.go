@@ -15,16 +15,14 @@ var (
 	rtm         runtime.MemStats
 )
 
-func (r repository) GetMetric(ctx context.Context) (*agentEntity.Metric, error) {
-	m := make(agentEntity.Metric, 28)
-
+func (r *repository) LoadMetric(ctx context.Context) error {
 	RandomValue := getRandomValue()
 	pollCounter++
 
 	// Read full mem stats
 	runtime.ReadMemStats(&rtm)
 
-	m = agentEntity.Metric{
+	m := agentEntity.Metric{
 		{
 			MetricType:  string(commonEntity.Gauge),
 			MetricName:  "Alloc",
@@ -172,7 +170,7 @@ func (r repository) GetMetric(ctx context.Context) (*agentEntity.Metric, error) 
 		},
 	}
 
-	return &m, nil
+	return r.saveMetrics(&m)
 }
 
 func getRandomValue() uint64 {

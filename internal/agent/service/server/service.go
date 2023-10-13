@@ -13,7 +13,7 @@ type MetricSendCh struct {
 
 type (
 	Service interface {
-		StartPoll(ctx context.Context, metricSendCh chan<- MetricSendCh, reportInterval time.Duration) error
-		StartReport(ctx context.Context, metricSendCh <-chan MetricSendCh, pollInterval time.Duration) error
+		StartPoll(ctx context.Context, reportInterval time.Duration) error
+		StartReport(ctx context.Context, reportInterval time.Duration) error
 	}
 )

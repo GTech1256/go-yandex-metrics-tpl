@@ -2,32 +2,20 @@ package service
 
 import (
 	"context"
-	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server"
+	"errors"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	"time"
 )
 
-func (s *service) StartReport(ctx context.Context, metricSendCh <-chan server.MetricSendCh, reportInterval time.Duration) error {
+var (
+	ErrSend = errors.New("метрика не отправлена")
+)
+
+func (s *service) StartReport(ctx context.Context, reportInterval time.Duration) error {
 	s.logger.Info("Запуск Report")
 
 	ticker := time.NewTicker(reportInterval)
-	var metric *agentEntity.Metric
-
-	go func() {
-		for {
-			data, ok := <-metricSendCh
-			if !ok {
-				ctx.Done()
-				break
-			}
-
-			metric = data.Data
-
-			if metric == nil {
-				s.logger.Errorf("Получена пустая метрика")
-			}
-		}
-	}()
 
 	for {
 		select {
@@ -38,8 +26,13 @@ func (s *service) StartReport(ctx context.Context, metricSendCh <-chan server.Me
 		case <-ticker.C:
 			s.logger.Info("Тик Report")
 
-			if metric != nil {
-				for _, m := range *metric {
+			metrics, err := s.repository.GetMetrics()
+			if err != nil {
+				return err
+			}
+
+			if metrics != nil {
+				for _, m := range *metrics {
 					s.logger.Info("Отправка метрики")
 					err := s.sendMetric(ctx, &m)
 					if err != nil {
@@ -52,4 +45,20 @@ func (s *service) StartReport(ctx context.Context, metricSendCh <-chan server.Me
 
 		}
 	}
+}
+
+func (s *service) sendMetric(ctx context.Context, metric *entity.MetricFields) error {
+	s.logger.Infof("Отправка %v", metric.MetricName)
+
+	if err := s.server.Post(ctx, dto.Update{
+		Type:  metric.MetricType,
+		Name:  metric.MetricName,
+		Value: metric.MetricValue,
+	}); err != nil {
+		s.logger.Errorf("Ошибка отправки %v", metric.MetricName)
+
+		return ErrSend
+	}
+
+	return nil
 }

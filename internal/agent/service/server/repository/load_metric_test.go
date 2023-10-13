@@ -54,31 +54,35 @@ func Test_repository_GetMetric(t *testing.T) {
 	}
 
 	// Create an instance of the repository
-	repo := repository{}
+	repo := New()
 
-	// Call the GetMetric function
-	metric, err := repo.GetMetric(context.Background())
+	// Call the LoadMetric function
+	err := repo.LoadMetric(context.Background())
 
 	// Check for errors
 	if err != nil {
-		t.Fatalf("Error calling GetMetric: %v", err)
+		t.Fatalf("Ошибка при вызове LoadMetric: %v", err)
 	}
 
-	// Check if the returned metric is not nil
+	metric, err := repo.GetMetrics()
+	if err != nil {
+		t.Fatalf("Ошибка при вызове GetMetrics %v", err)
+	}
+
 	if metric == nil {
-		t.Fatal("Returned metric is nil")
+		t.Fatal("Метрики нет")
 	}
 
-	// Check the length of the returned metric
-	expectedLength := 29 // Adjust based on the actual number of metrics
+	// Проверка кол-ва значений в метрике
+	expectedLength := 29
 	if len(*metric) != expectedLength {
-		t.Fatalf("Unexpected number of metrics. Expected: %d, Got: %d", expectedLength, len(*metric))
+		t.Fatalf("Неожиданное количество метрики. Ожидаемый: %d, Получено: %d", expectedLength, len(*metric))
 	}
 
 	for i, name := range metricFields {
 		m := (*metric)[i]
 		if m.MetricName != name {
-			t.Errorf("Unexpected MetricName for the index %v. Expected: '%v', Got: '%v'", i, name, m.MetricName)
+			t.Errorf("Неожиданное MetricName для index %v. Ожидаемый: '%v', Получено: '%v'", i, name, m.MetricName)
 		}
 
 		expectType := string(entity.Gauge)
@@ -87,10 +91,7 @@ func Test_repository_GetMetric(t *testing.T) {
 		}
 
 		if m.MetricType != expectType {
-			t.Errorf("Unexpected MetricType for the metric %v. Expected: '%v', Got: '%s'", m.MetricName, expectType, m.MetricType)
+			t.Errorf("Неожиданное MetricType для метрики %v. Ожидаемый: '%v', Получено: '%s'", m.MetricName, expectType, m.MetricType)
 		}
 	}
-
-	// Print the returned metric for reference
-	t.Logf("Returned Metric: %+v", metric)
 }

@@ -2,10 +2,8 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
 	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
-	server2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/stretchr/testify/assert"
@@ -25,37 +23,34 @@ func Test_service_StartReport(t *testing.T) {
 			MetricValue: "testValue",
 		},
 	}
-	metricSendCh := make(chan server2.MetricSendCh)
 
 	repo := new(MockRepository)
-
 	client := new(MockClient)
+	mockLogger := new(logging.LoggerMock)
+
+	s := New(client, mockLogger, repo)
+
+	// Act
+	errCh := make(chan error)
+	go func() {
+		errCh <- s.StartReport(ctx, reportInterval)
+	}()
+
+	// Assert
+	repo.On("GetMetrics").Return(mockMetric, nil)
+
+	// TODO: Проверять s.On("sendMetric")
+	// сейчас в s.sendMetric вызывается s.client.Post из-за этого есть эта проверка
 	client.On("Post", ctx, mock.MatchedBy(func(update dto.Update) bool {
-		return update.Type == "testType" &&
-			update.Name == "testName" &&
-			update.Value == "testValue"
+		return update.Type == (*mockMetric)[0].MetricType &&
+			update.Name == (*mockMetric)[0].MetricName &&
+			update.Value == (*mockMetric)[0].MetricValue
 	})).Return(nil)
 
-	mockLogger := new(logging.LoggerMock)
 	mockLogger.On("Info", "Запуск Report")
 	mockLogger.On("Info", "Тик Report")
 	mockLogger.On("Info", "Отправка метрики")
 	mockLogger.On("Infof", []interface{}{"Отправка %v", (*mockMetric)[0].MetricName})
-
-	s := New(client, mockLogger, repo)
-
-	errCh := make(chan error)
-	go func() {
-		errCh <- s.StartReport(ctx, metricSendCh, reportInterval)
-	}()
-
-	go func() {
-		fmt.Println("TEST SEND METRIC", mockMetric)
-		metricSendCh <- server2.MetricSendCh{
-			ID:   "Test_service_StartReport fn",
-			Data: mockMetric,
-		}
-	}()
 
 	// ждем, чтобы метод StartReport выполнился
 	time.Sleep(reportInterval * 3)
@@ -69,7 +64,6 @@ func Test_service_StartReport(t *testing.T) {
 
 	// Clean up
 	ctx.Done()
-	close(metricSendCh)
 	repo.AssertExpectations(t)
 	mockLogger.AssertExpectations(t)
 }

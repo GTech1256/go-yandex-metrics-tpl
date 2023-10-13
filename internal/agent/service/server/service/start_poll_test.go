@@ -3,8 +3,6 @@ package service
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
-	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/server"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
 	"github.com/stretchr/testify/assert"
@@ -17,45 +15,31 @@ func Test_service_StartPoll(t *testing.T) {
 	// Arrange
 	ctx := context.Background()
 	updateInterval := time.Millisecond * 100
-	mockMetric := &agentEntity.Metric{
-		entity.MetricFields{
-			MetricType:  "type",
-			MetricName:  "name",
-			MetricValue: "value",
-		},
-	}
 
 	repo := new(MockRepository)
-	repo.On("GetMetric", ctx).Return(mockMetric, nil)
 
 	client := new(MockClient)
 
 	mockLogger := new(logging.LoggerMock)
-	mockLogger.On("Info", "Запуск Pool")
-	mockLogger.On("Info", "Тик Pool")
-	mockLogger.On("Info", "Отправка Pool метрики в канал")
 
 	service := New(client, mockLogger, repo)
 
-	metricSendCh := make(chan server.MetricSendCh)
-
 	// Act
 	go func() {
-		err := service.StartPoll(ctx, metricSendCh, updateInterval)
+		err := service.StartPoll(ctx, updateInterval)
 		assert.NoError(t, err)
 	}()
 
 	// Assert
-	select {
-	case receivedMetric := <-metricSendCh:
-		assert.Equal(t, mockMetric, receivedMetric.Data)
-	case <-time.After(updateInterval * 2): // Give it some time to run
-		t.Error("Timed out waiting for metric to be sent")
-	}
+	repo.On("LoadMetric", ctx).Return(nil)
+	mockLogger.On("Info", "Запуск Pool")
+	mockLogger.On("Info", "Тик Pool")
+
+	// Ожидание прогона service.StartPoll
+	<-time.After(updateInterval * 2)
 
 	// Clean up
 	ctx.Done()
-	close(metricSendCh)
 	repo.AssertExpectations(t)
 	mockLogger.AssertExpectations(t)
 
