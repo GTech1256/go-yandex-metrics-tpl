@@ -29,6 +29,9 @@ test-coverage:
 test-coverage-html: test-coverage
 	go tool cover -html=cover.out
 
+test-coverage-p: test-coverage
+	go tool cover -func cover.out | fgrep total | awk '{print $3}'
+
 test-autotests-server: build-server
 	autotests/metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$$ -binary-path=cmd/server/server
 

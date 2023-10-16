@@ -2,15 +2,15 @@ package metric
 
 import (
 	"context"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"testing"
 )
 
 func TestSaveGauge(t *testing.T) {
 	storage := NewStorage()
 
-	gauge := &entity.MetricGauge{
-		Type:  entity.Gauge,
+	gauge := &entity2.MetricGauge{
+		Type:  entity2.Gauge,
 		Name:  "test_gauge",
 		Value: 42.0,
 	}
@@ -29,8 +29,8 @@ func TestSaveGauge(t *testing.T) {
 func TestSaveCounter(t *testing.T) {
 	storage := NewStorage()
 
-	counter := &entity.MetricCounter{
-		Type:  entity.Gauge,
+	counter := &entity2.MetricCounter{
+		Type:  entity2.Gauge,
 		Name:  "test_counter",
 		Value: 10,
 	}

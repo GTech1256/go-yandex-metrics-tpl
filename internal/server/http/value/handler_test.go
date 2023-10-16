@@ -5,7 +5,7 @@ import (
 	updateinterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/lib/ptr"
-	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -22,7 +22,7 @@ func TestValueHandler(t *testing.T) {
 
 		// Тестовый маршрутизатор
 		router := chi.NewRouter()
-		h := NewHandler(mockLogger, mockService, nil) // Передаем мок сервиса
+		h := NewHandler(mockLogger, mockService) // Передаем мок сервиса
 		h.Register(router)
 
 		req := httptest.NewRequest("GET", "/value/testType/testName", nil)
@@ -45,7 +45,7 @@ func TestValueHandler(t *testing.T) {
 		mockService := new(service.MockService)
 		// Тестовый маршрутизатор
 		router := chi.NewRouter()
-		h := NewHandler(mockLogger, mockService, nil) // Передаем мок сервиса
+		h := NewHandler(mockLogger, mockService) // Передаем мок сервиса
 		h.Register(router)
 		mockLogger.On("Error", fmt.Errorf("Ошибка")).Return(nil)
 

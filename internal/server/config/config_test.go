@@ -26,7 +26,7 @@ func TestLoadConfig(t *testing.T) {
 	os.Setenv("ADDRESS", ":8081")
 
 	// Создание объекта Config и загрузка его значений.
-	config := NewConfig().(*Config)
+	config := NewConfig()
 	config.Load()
 
 	if *config.Port != ":8081" {
@@ -45,7 +45,7 @@ func TestLoadConfigWithNoEnvVars(t *testing.T) {
 	os.Args = []string{"test", "-a=:8080"}
 
 	// Создание объекта Config и загрузка его значений.
-	config := NewConfig().(*Config)
+	config := NewConfig()
 	config.Load()
 
 	if *config.Port != ":8080" {

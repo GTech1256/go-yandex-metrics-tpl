@@ -1,10 +1,11 @@
-package service
+package metric
 
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
-	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
+	mock2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/metric/mock"
+	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"testing"
@@ -16,11 +17,16 @@ func Test_service_StartPoll(t *testing.T) {
 	ctx := context.Background()
 	updateInterval := time.Millisecond * 100
 
-	repo := new(MockRepository)
+	repo := new(mock2.MockRepository)
 
-	client := new(MockClient)
+	client := new(mock2.MockClient)
 
 	mockLogger := new(logging.LoggerMock)
+
+	// Assert
+	repo.On("LoadMetric", ctx).Return(nil)
+	mockLogger.On("Info", "Запуск Pool")
+	mockLogger.On("Info", "Тик Pool")
 
 	service := New(client, mockLogger, repo)
 
@@ -29,11 +35,6 @@ func Test_service_StartPoll(t *testing.T) {
 		err := service.StartPoll(ctx, updateInterval)
 		assert.NoError(t, err)
 	}()
-
-	// Assert
-	repo.On("LoadMetric", ctx).Return(nil)
-	mockLogger.On("Info", "Запуск Pool")
-	mockLogger.On("Info", "Тик Pool")
 
 	// Ожидание прогона service.StartPoll
 	<-time.After(updateInterval * 2)
@@ -54,10 +55,10 @@ func Test_service_sendMetric(t *testing.T) {
 		MetricValue: "testValue",
 	}
 
-	repo := new(MockRepository)
+	repo := new(mock2.MockRepository)
 
-	client := new(MockClient)
-	client.On("Post", ctx, mock.MatchedBy(func(update dto.Update) bool {
+	client := new(mock2.MockClient)
+	client.On("SendUpdate", ctx, mock.MatchedBy(func(update dto.Update) bool {
 		return update.Type == "testType" &&
 			update.Name == "testName" &&
 			update.Value == "testValue"

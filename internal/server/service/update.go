@@ -3,23 +3,36 @@ package service
 import (
 	"context"
 	"fmt"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
 	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
-	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"strconv"
 	"strings"
 )
 
-type updateService struct {
-	logger          logging2.Logger
-	storage         metric2.Storage
-	metricValidator metricvalidator.MetricValidator
+type MetricValidator interface {
+	GetValidType(metricType string) entity2.Type
+	GetTypeGaugeValue(metricValueUnsafe string) (*float64, error)
+	GetTypeCounterValue(metricValueUnsafe string) (*int64, error)
 }
 
-func NewUpdateService(logger logging2.Logger, storage metric2.Storage, metricValidator metricvalidator.MetricValidator) updateInterface.Service {
+type Storage interface {
+	SaveGauge(ctx context.Context, gauge *entity2.MetricGauge) error
+	SaveCounter(ctx context.Context, counter *entity2.MetricCounter) error
+	GetGaugeValue(name string) (*entity2.GaugeValue, error)
+	GetCounterValue(name string) (*entity2.CounterValue, error)
+	GetAllMetrics() *metric2.AllMetrics
+}
 
+type updateService struct {
+	logger          logging2.Logger
+	storage         Storage
+	metricValidator MetricValidator
+}
+
+func NewUpdateService(logger logging2.Logger, storage Storage, metricValidator MetricValidator) *updateService {
 	return &updateService{
 		logger:          logger,
 		storage:         storage,
@@ -27,7 +40,7 @@ func NewUpdateService(logger logging2.Logger, storage metric2.Storage, metricVal
 	}
 }
 
-func (u updateService) SaveGaugeMetric(ctx context.Context, metric *entity.MetricFields) error {
+func (u updateService) SaveGaugeMetric(ctx context.Context, metric *entity2.MetricFields) error {
 	metricGaugeValue, err := u.metricValidator.GetTypeGaugeValue(metric.MetricValue)
 	if err != nil {
 		u.logger.Error("При получении значения метрики произошла ошибка ", err)
@@ -35,10 +48,10 @@ func (u updateService) SaveGaugeMetric(ctx context.Context, metric *entity.Metri
 		return err
 	}
 
-	metricsGauge := &entity.MetricGauge{
-		Type:  entity.Gauge,
+	metricsGauge := &entity2.MetricGauge{
+		Type:  entity2.Gauge,
 		Name:  metric.MetricName,
-		Value: entity.GaugeValue(*metricGaugeValue),
+		Value: entity2.GaugeValue(*metricGaugeValue),
 	}
 
 	err = u.storage.SaveGauge(ctx, metricsGauge)
@@ -51,7 +64,7 @@ func (u updateService) SaveGaugeMetric(ctx context.Context, metric *entity.Metri
 
 	return nil
 }
-func (u updateService) SaveCounterMetric(ctx context.Context, metric *entity.MetricFields) error {
+func (u updateService) SaveCounterMetric(ctx context.Context, metric *entity2.MetricFields) error {
 	metricCounterValue, err := u.metricValidator.GetTypeCounterValue(metric.MetricValue)
 
 	if err != nil {
@@ -59,10 +72,10 @@ func (u updateService) SaveCounterMetric(ctx context.Context, metric *entity.Met
 		return err
 	}
 
-	metricsCounter := &entity.MetricCounter{
-		Type:  entity.Counter,
+	metricsCounter := &entity2.MetricCounter{
+		Type:  entity2.Counter,
 		Name:  metric.MetricName,
-		Value: entity.CounterValue(*metricCounterValue),
+		Value: entity2.CounterValue(*metricCounterValue),
 	}
 
 	err = u.storage.SaveCounter(ctx, metricsCounter)
@@ -79,14 +92,14 @@ func (u updateService) SaveCounterMetric(ctx context.Context, metric *entity.Met
 func (u updateService) GetMetricValue(ctx context.Context, metric *updateInterface.GetMetricValueDto) (*string, error) {
 	validType := u.metricValidator.GetValidType(metric.Type)
 
-	if validType == entity.NoType {
+	if validType == entity2.NoType {
 		return nil, metricvalidator.ErrNotCorrectType
 	}
 
 	var result *string
 
 	switch validType {
-	case entity.Counter:
+	case entity2.Counter:
 		counterMetricValue, err := u.storage.GetCounterValue(metric.Name)
 		if err != nil {
 			u.logger.Error(err)
@@ -96,7 +109,7 @@ func (u updateService) GetMetricValue(ctx context.Context, metric *updateInterfa
 
 			result = &r
 		}
-	case entity.Gauge:
+	case entity2.Gauge:
 		gaugeMetricValue, err := u.storage.GetGaugeValue(metric.Name)
 		if err != nil {
 			u.logger.Error(err)

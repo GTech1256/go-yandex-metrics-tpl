@@ -2,25 +2,24 @@ package http
 
 import (
 	"context"
-	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
-
-	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
-	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"net/http"
 )
 
-type handler struct {
-	logger          logging2.Logger
-	updateService   updateInterface.Service
-	metricValidator metricvalidator.MetricValidator
+type Service interface {
+	GetMetrics(ctx context.Context) (string, error)
 }
 
-func NewHandler(logger logging2.Logger, updateService updateInterface.Service, metricValidator metricvalidator.MetricValidator) Handler {
+type handler struct {
+	logger        logging2.Logger
+	updateService Service
+}
+
+func NewHandler(logger logging2.Logger, updateService Service) Handler {
 	return &handler{
-		logger:          logger,
-		updateService:   updateService,
-		metricValidator: metricValidator,
+		logger:        logger,
+		updateService: updateService,
 	}
 }
 

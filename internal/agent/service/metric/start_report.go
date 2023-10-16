@@ -1,10 +1,10 @@
-package service
+package metric
 
 import (
 	"context"
 	"errors"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
+	dto2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/metric/dto"
 	"time"
 )
 
@@ -50,11 +50,7 @@ func (s *service) StartReport(ctx context.Context, reportInterval time.Duration)
 func (s *service) sendMetric(ctx context.Context, metric *entity.MetricFields) error {
 	s.logger.Infof("Отправка %v", metric.MetricName)
 
-	if err := s.server.Post(ctx, dto.Update{
-		Type:  metric.MetricType,
-		Name:  metric.MetricName,
-		Value: metric.MetricValue,
-	}); err != nil {
+	if err := s.server.SendUpdate(ctx, dto2.MetricFromService(metric)); err != nil {
 		s.logger.Errorf("Ошибка отправки %v", metric.MetricName)
 
 		return ErrSend

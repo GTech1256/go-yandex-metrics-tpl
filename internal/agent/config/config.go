@@ -6,10 +6,6 @@ import (
 	"strconv"
 )
 
-type Configurable interface {
-	Load()
-}
-
 type Config struct {
 	// ServerPort - Флаг -a=<ЗНАЧЕНИЕ> отвечает за адрес эндпоинта HTTP-сервера (по умолчанию localhost:8080).
 	ServerPort *string
@@ -21,7 +17,7 @@ type Config struct {
 	PollInterval *int
 }
 
-func NewConfig() Configurable {
+func NewConfig() *Config {
 	return &Config{}
 }
 
@@ -30,9 +26,9 @@ func (c *Config) Load() {
 	var (
 		// Hack для тестирования
 		command           = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
-		serverPort        = command.String("a", ":8080", "address and port to run server")
+		serverPort        = command.String("a", ":8080", "address and port to run metric")
 		serverPortEnv     = os.Getenv("ADDRESS")
-		reportInterval    = command.Int("r", 10, "frequency of sending metrics to the server")
+		reportInterval    = command.Int("r", 10, "frequency of sending metrics to the metric")
 		reportIntervalEnv = os.Getenv("REPORT_INTERVAL")
 		pollInterval      = command.Int("p", 2, "the frequency of polling metrics")
 		pollIntervalEnv   = os.Getenv("POLL_INTERVAL")

@@ -1,4 +1,4 @@
-package server
+package http
 
 import (
 	"github.com/stretchr/testify/mock"
@@ -11,13 +11,13 @@ type MockHTTPClient struct {
 	mock.Mock
 }
 
-// NewRequest is a method on MockHTTPClient that satisfies HTTPClient interface
+// NewRequest is a method on MockHTTPClient that satisfies ClientHTTP interface
 func (m *MockHTTPClient) NewRequest(method, url string, body io.Reader) (*http.Request, error) {
 	args := m.Called(method, url, body)
 	return args.Get(0).(*http.Request), args.Error(1)
 }
 
-// Do is a method on MockHTTPClient that satisfies HTTPClient interface
+// Do is a method on MockHTTPClient that satisfies ClientHTTP interface
 func (m *MockHTTPClient) Do(req *http.Request) (*http.Response, error) {
 	args := m.Called(req)
 	return args.Get(0).(*http.Response), args.Error(1)

@@ -1,26 +1,24 @@
 package metricvalidator
 
 import (
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/stretchr/testify/mock"
 )
-
-var _ MetricValidator = (*MockMetricValidator)(nil)
 
 type MockMetricValidator struct {
 	mock.Mock
 }
 
-func (m *MockMetricValidator) MakeMetricValuesFromURL(url string) (*entity.MetricFields, error) {
+func (m *MockMetricValidator) MakeMetricValuesFromURL(url string) (*entity2.MetricFields, error) {
 	args := m.Called(url)
 
-	return args.Get(0).(*entity.MetricFields), args.Error(1)
+	return args.Get(0).(*entity2.MetricFields), args.Error(1)
 }
 
-func (m *MockMetricValidator) GetValidType(metricType string) entity.Type {
+func (m *MockMetricValidator) GetValidType(metricType string) entity2.Type {
 	args := m.Called(metricType)
 
-	return args.Get(0).(entity.Type)
+	return args.Get(0).(entity2.Type)
 }
 
 func (m *MockMetricValidator) GetTypeGaugeValue(metricValueUnsafe string) (*float64, error) {

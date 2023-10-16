@@ -1,9 +1,9 @@
 package guard
 
 import (
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
-	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
@@ -31,8 +31,8 @@ func TestWithMetricGuarding(t *testing.T) {
 				// TODO: Поправить путь на "/update/counter/title/10"
 				expURL := ""
 				mockMetricValidator := new(metricvalidator.MockMetricValidator)
-				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity.MetricFields{
-					MetricType:  string(entity.Gauge),
+				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity2.MetricFields{
+					MetricType:  string(entity2.Gauge),
 					MetricName:  "title",
 					MetricValue: "10.10",
 				}, nil)
@@ -57,8 +57,8 @@ func TestWithMetricGuarding(t *testing.T) {
 				// TODO: Поправить путь на "/update/counter/title/10"
 				expURL := ""
 				mockMetricValidator := new(metricvalidator.MockMetricValidator)
-				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity.MetricFields{
-					MetricType:  string(entity.Counter),
+				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity2.MetricFields{
+					MetricType:  string(entity2.Counter),
 					MetricName:  "title",
 					MetricValue: "10",
 				}, nil)
@@ -83,7 +83,7 @@ func TestWithMetricGuarding(t *testing.T) {
 				// TODO: Поправить путь
 				expURL := ""
 				mockMetricValidator := new(metricvalidator.MockMetricValidator)
-				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity.MetricFields{}, metricvalidator.ErrNotCorrectURL)
+				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity2.MetricFields{}, metricvalidator.ErrNotCorrectURL)
 
 				return mockMetricValidator
 			},
@@ -106,7 +106,7 @@ func TestWithMetricGuarding(t *testing.T) {
 				// TODO: Поправить путь
 				expURL := ""
 				mockMetricValidator := new(metricvalidator.MockMetricValidator)
-				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity.MetricFields{}, metricvalidator.ErrNotCorrectName)
+				mockMetricValidator.On("MakeMetricValuesFromURL", expURL).Return(&entity2.MetricFields{}, metricvalidator.ErrNotCorrectName)
 
 				return mockMetricValidator
 			},

@@ -1,4 +1,4 @@
-package service
+package metric
 
 import (
 	"context"
@@ -18,10 +18,9 @@ func (s *service) StartPoll(ctx context.Context, pollInterval time.Duration) err
 			return nil
 
 		case <-ticker.C:
-
 			s.logger.Info("Тик Pool")
-			err := s.repository.LoadMetric(ctx)
 
+			err := s.repository.LoadMetric(ctx)
 			if err != nil {
 				return err
 			}

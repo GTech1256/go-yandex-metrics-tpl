@@ -1,11 +1,11 @@
-package service
+package metric
 
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
 	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
-	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	mock2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/metric/mock"
+	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"testing"
@@ -17,31 +17,25 @@ func Test_service_StartReport(t *testing.T) {
 	ctx := context.Background()
 	reportInterval := time.Duration(5) * time.Millisecond
 	mockMetric := &agentEntity.Metric{
-		entity.MetricFields{
+		agentEntity.MetricFields{
 			MetricType:  "testType",
 			MetricName:  "testName",
 			MetricValue: "testValue",
 		},
 	}
 
-	repo := new(MockRepository)
-	client := new(MockClient)
+	repo := new(mock2.MockRepository)
+	client := new(mock2.MockClient)
 	mockLogger := new(logging.LoggerMock)
 
 	s := New(client, mockLogger, repo)
-
-	// Act
-	errCh := make(chan error)
-	go func() {
-		errCh <- s.StartReport(ctx, reportInterval)
-	}()
 
 	// Assert
 	repo.On("GetMetrics").Return(mockMetric, nil)
 
 	// TODO: Проверять s.On("sendMetric")
 	// сейчас в s.sendMetric вызывается s.client.Post из-за этого есть эта проверка
-	client.On("Post", ctx, mock.MatchedBy(func(update dto.Update) bool {
+	client.On("SendUpdate", ctx, mock.MatchedBy(func(update dto.Update) bool {
 		return update.Type == (*mockMetric)[0].MetricType &&
 			update.Name == (*mockMetric)[0].MetricName &&
 			update.Value == (*mockMetric)[0].MetricValue
@@ -51,6 +45,12 @@ func Test_service_StartReport(t *testing.T) {
 	mockLogger.On("Info", "Тик Report")
 	mockLogger.On("Info", "Отправка метрики")
 	mockLogger.On("Infof", []interface{}{"Отправка %v", (*mockMetric)[0].MetricName})
+
+	// Act
+	errCh := make(chan error)
+	go func() {
+		errCh <- s.StartReport(ctx, reportInterval)
+	}()
 
 	// ждем, чтобы метод StartReport выполнился
 	time.Sleep(reportInterval * 3)

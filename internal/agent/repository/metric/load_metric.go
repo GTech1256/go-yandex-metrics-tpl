@@ -1,9 +1,8 @@
-package repository
+package metric
 
 import (
 	"context"
-	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
-	commonEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
 	"math/rand"
 	"runtime"
 	"strconv"
@@ -22,149 +21,149 @@ func (r *repository) LoadMetric(ctx context.Context) error {
 	// Read full mem stats
 	runtime.ReadMemStats(&rtm)
 
-	m := agentEntity.Metric{
+	m := entity.Metric{
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "Alloc",
 			MetricValue: strconv.Itoa(int(rtm.Alloc)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "BuckHashSys",
 			MetricValue: strconv.Itoa(int(rtm.BuckHashSys)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "Frees",
 			MetricValue: strconv.Itoa(int(rtm.Frees)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "GCCPUFraction",
 			MetricValue: strconv.Itoa(int(rtm.GCCPUFraction)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "GCSys",
 			MetricValue: strconv.Itoa(int(rtm.GCSys)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "HeapAlloc",
 			MetricValue: strconv.Itoa(int(rtm.HeapAlloc)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "HeapIdle",
 			MetricValue: strconv.Itoa(int(rtm.HeapIdle)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "HeapInuse",
 			MetricValue: strconv.Itoa(int(rtm.HeapInuse)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "HeapObjects",
 			MetricValue: strconv.Itoa(int(rtm.HeapObjects)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "HeapReleased",
 			MetricValue: strconv.Itoa(int(rtm.HeapReleased)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "HeapSys",
 			MetricValue: strconv.Itoa(int(rtm.HeapSys)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "LastGC",
 			MetricValue: strconv.Itoa(int(rtm.LastGC)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "Lookups",
 			MetricValue: strconv.Itoa(int(rtm.Lookups)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "MCacheInuse",
 			MetricValue: strconv.Itoa(int(rtm.MCacheInuse)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "MCacheSys",
 			MetricValue: strconv.Itoa(int(rtm.MCacheSys)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "MSpanInuse",
 			MetricValue: strconv.Itoa(int(rtm.MSpanInuse)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "MSpanSys",
 			MetricValue: strconv.Itoa(int(rtm.MSpanSys)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "Mallocs",
 			MetricValue: strconv.Itoa(int(rtm.Mallocs)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "NextGC",
 			MetricValue: strconv.Itoa(int(rtm.NextGC)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "NumForcedGC",
 			MetricValue: strconv.Itoa(int(rtm.NumForcedGC)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "NumGC",
 			MetricValue: strconv.Itoa(int(rtm.NumGC)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "OtherSys",
 			MetricValue: strconv.Itoa(int(rtm.OtherSys)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "PauseTotalNs",
 			MetricValue: strconv.Itoa(int(rtm.PauseTotalNs)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "StackInuse",
 			MetricValue: strconv.Itoa(int(rtm.StackInuse)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "StackSys",
 			MetricValue: strconv.Itoa(int(rtm.StackSys)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "Sys",
 			MetricValue: strconv.Itoa(int(rtm.Sys)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "TotalAlloc",
 			MetricValue: strconv.Itoa(int(rtm.TotalAlloc)),
 		},
 		{
-			MetricType:  string(commonEntity.Counter),
+			MetricType:  string(entity.Counter),
 			MetricName:  "PollCount",
 			MetricValue: strconv.Itoa(int(pollCounter)),
 		},
 		{
-			MetricType:  string(commonEntity.Gauge),
+			MetricType:  string(entity.Gauge),
 			MetricName:  "RandomValue",
 			MetricValue: strconv.Itoa(int(RandomValue)),
 		},

@@ -1,9 +1,10 @@
-package server
+package update
 
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
-	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	serverHttp "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"net/http"
@@ -12,16 +13,9 @@ import (
 
 func Test_client_Post(t *testing.T) {
 	host := "http://example.com"
-
 	mockLogger := new(logging2.LoggerMock)
-	mockLogger.On("Infof", mock.Anything, mock.Anything, mock.Anything)
-
-	client2 := New(host, mockLogger)
-
-	// Создаем мок для HTTPClient
-	httpClientMock := &MockHTTPClient{}
-	client2.(*client).httpClient = httpClientMock
-
+	mockHTTPClient := new(serverHttp.MockHTTPClient)
+	client2 := New(mockHTTPClient, host, mockLogger)
 	// Подготовка данных для теста
 	update := dto.Update{
 		Type:  "type",
@@ -30,21 +24,22 @@ func Test_client_Post(t *testing.T) {
 	}
 
 	requestURL := getRequestURL(host, &update)
+	
+	// Устанавливаем ожидаемые вызовы для мока ClientHTTP
+	mockHTTPClient.On("NewRequest", http.MethodPost, requestURL, mock.Anything).Return(&http.Request{}, nil)
+	bodyMock := new(serverHttp.BodyMock)
+	mockHTTPClient.On("Do", mock.Anything).Return(&http.Response{StatusCode: http.StatusOK, Body: bodyMock}, nil)
 
-	bodyMock := new(BodyMock)
-
-	// Устанавливаем ожидаемые вызовы для мока HTTPClient
-	httpClientMock.On("NewRequest", http.MethodPost, requestURL, mock.Anything).Return(&http.Request{}, nil)
-	httpClientMock.On("Do", mock.Anything).Return(&http.Response{StatusCode: http.StatusOK, Body: bodyMock}, nil)
+	mockLogger.On("Infof", mock.Anything, mock.Anything, mock.Anything)
 
 	// Выполняем функцию
-	err := client2.Post(context.Background(), update)
+	err := client2.SendUpdate(context.Background(), update)
 
 	// Проверяем, что ошибки нет
 	assert.NoError(t, err)
 
 	// Проверяем ожидаемые вызовы
-	httpClientMock.AssertExpectations(t)
+	mockHTTPClient.AssertExpectations(t)
 	mockLogger.AssertExpectations(t)
 }
 

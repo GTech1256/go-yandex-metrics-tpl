@@ -3,7 +3,7 @@ package metric
 import (
 	"context"
 	"fmt"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 )
 
@@ -21,7 +21,7 @@ type storage struct {
 	memStorage MemStorage
 }
 
-func NewStorage() metric.Storage {
+func NewStorage() *storage {
 	memStorage := MemStorage{
 		gauge:   gauge,
 		counter: counter,
@@ -33,7 +33,7 @@ func NewStorage() metric.Storage {
 }
 
 // SaveGauge новое значение должно замещать предыдущее.
-func (s *storage) SaveGauge(ctx context.Context, gauge *entity.MetricGauge) error {
+func (s *storage) SaveGauge(ctx context.Context, gauge *entity2.MetricGauge) error {
 	s.memStorage.gauge[gauge.Name] = float64(gauge.Value)
 
 	fmt.Printf("%v %+v \n", len(s.memStorage.gauge), s.memStorage)
@@ -42,7 +42,7 @@ func (s *storage) SaveGauge(ctx context.Context, gauge *entity.MetricGauge) erro
 }
 
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
-func (s *storage) SaveCounter(ctx context.Context, counter *entity.MetricCounter) error {
+func (s *storage) SaveCounter(ctx context.Context, counter *entity2.MetricCounter) error {
 	if _, isOk := s.memStorage.counter[counter.Name]; !isOk {
 		s.memStorage.counter[counter.Name] = int64(counter.Value)
 	} else {
@@ -55,7 +55,7 @@ func (s *storage) SaveCounter(ctx context.Context, counter *entity.MetricCounter
 }
 
 // GetGauge - возвращает значение Gauge из хранилища
-func (s *storage) GetGaugeValue(name string) (*entity.GaugeValue, error) {
+func (s *storage) GetGaugeValue(name string) (*entity2.GaugeValue, error) {
 	value, ok := s.memStorage.gauge[name]
 	if ok {
 		return &value, nil
@@ -65,7 +65,7 @@ func (s *storage) GetGaugeValue(name string) (*entity.GaugeValue, error) {
 }
 
 // GetCounter - возвращает значение Counter из хранилища
-func (s *storage) GetCounterValue(name string) (*entity.CounterValue, error) {
+func (s *storage) GetCounterValue(name string) (*entity2.CounterValue, error) {
 	value, ok := s.memStorage.counter[name]
 	if ok {
 		return &value, nil

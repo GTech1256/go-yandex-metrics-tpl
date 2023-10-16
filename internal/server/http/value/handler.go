@@ -2,27 +2,28 @@ package value
 
 import (
 	"context"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
-	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
-	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"strings"
 )
 
-type handler struct {
-	logger          logging2.Logger
-	updateService   updateInterface.Service
-	metricValidator metricvalidator.MetricValidator
+type Service interface {
+	GetMetricValue(ctx context.Context, metric *updateInterface.GetMetricValueDto) (*string, error)
 }
 
-func NewHandler(logger logging2.Logger, updateService updateInterface.Service, metricValidator metricvalidator.MetricValidator) http2.Handler {
+type handler struct {
+	logger        logging2.Logger
+	updateService Service
+}
+
+func NewHandler(logger logging2.Logger, updateService Service) http2.Handler {
 	return &handler{
-		logger:          logger,
-		updateService:   updateService,
-		metricValidator: metricValidator,
+		logger:        logger,
+		updateService: updateService,
 	}
 }
 

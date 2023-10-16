@@ -68,7 +68,7 @@ metricstest -test.v -test.run=^TestIteration1$ -agent-binary-path=cmd/agent/agen
 #### Запуск
 
 ```shell
-./metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$ -binary-path=/Users/ribakakin/Desktop/web/go-practicum/go-yandex-metrics-tpl/cmd/server/server
+./metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$ -binary-path=/Users/ribakakin/Desktop/web/go-practicum/go-yandex-metrics-tpl/cmd/metric/metric
 ```
 ```shell
 ./autotests/metricstest-darwin-arm64 -test.v -test.run=^TestIteration2[AB]*$ \
@@ -92,6 +92,6 @@ mv cmd/agent/main cmd/agent/agent
 ```
 
 ```shell
-go build -o cmd/server cmd/server/main.go
-mv cmd/server/main cmd/server/server
+go build -o cmd/metric cmd/metric/main.go
+mv cmd/metric/main cmd/metric/metric
 ```

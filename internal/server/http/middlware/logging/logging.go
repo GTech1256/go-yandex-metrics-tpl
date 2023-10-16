@@ -1,7 +1,7 @@
 package logging
 
 import (
-	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/sirupsen/logrus"
 	"net/http"
 	"runtime/debug"

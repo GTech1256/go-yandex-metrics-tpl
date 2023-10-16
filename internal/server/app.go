@@ -11,8 +11,8 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/value"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
-	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
-	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	metricValidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"log"
 	"net/http"
@@ -25,27 +25,27 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 	router := chi.NewRouter()
 
 	metricStorage := metric.NewStorage()
-	metricValidator := metricvalidator.New()
-	updateService := service.NewUpdateService(logger, metricStorage, metricValidator)
+	validator := metricValidator.New()
+	updateService := service.NewUpdateService(logger, metricStorage, validator)
 
 	logger.Info("Register /update/counter/ Router")
-	updateCounterHandler := counter.NewHandler(logger, updateService, metricValidator)
+	updateCounterHandler := counter.NewHandler(logger, updateService, validator)
 	updateCounterHandler.Register(router)
 
 	logger.Info("Register /update/gauge/ Router")
-	updateGaugeHandler := gauge.NewHandler(logger, updateService, metricValidator)
+	updateGaugeHandler := gauge.NewHandler(logger, updateService, validator)
 	updateGaugeHandler.Register(router)
 
 	logger.Info("Register /update/* Router")
-	updateHandler := update.NewHandler(logger, updateService, metricValidator)
+	updateHandler := update.NewHandler(logger, validator)
 	updateHandler.Register(router)
 
 	logger.Info("Register /value/ Router")
-	valueHandler := value.NewHandler(logger, updateService, metricValidator)
+	valueHandler := value.NewHandler(logger, updateService)
 	valueHandler.Register(router)
 
 	logger.Info("Register / Router")
-	homeHandler := home.NewHandler(logger, updateService, metricValidator)
+	homeHandler := home.NewHandler(logger, updateService)
 	homeHandler.Register(router)
 
 	logger.Info(fmt.Sprintf("Start Listen Port %v", *cfg.Port))

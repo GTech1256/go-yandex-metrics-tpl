@@ -5,16 +5,12 @@ import (
 	"os"
 )
 
-type Configurable interface {
-	Load()
-}
-
 type Config struct {
 	// Port - Флаг -a=<ЗНАЧЕНИЕ> отвечает за адрес эндпоинта HTTP-сервера (по умолчанию localhost:8080).
 	Port *string
 }
 
-func NewConfig() Configurable {
+func NewConfig() *Config {
 	return &Config{}
 }
 
@@ -23,7 +19,7 @@ func (c *Config) Load() {
 	var (
 		// Hack для тестирования
 		command = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
-		port    = command.String("a", ":8080", "address and port to run server")
+		port    = command.String("a", ":8080", "address and port to run metric")
 		portEnv = os.Getenv("ADDRESS")
 	)
 

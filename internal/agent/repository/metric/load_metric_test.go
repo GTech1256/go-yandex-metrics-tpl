@@ -1,8 +1,8 @@
-package repository
+package metric
 
 import (
 	"context"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
 	"testing"
 )
 

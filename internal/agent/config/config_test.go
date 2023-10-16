@@ -28,7 +28,7 @@ func TestLoadConfig(t *testing.T) {
 	os.Setenv("POLL_INTERVAL", "5")
 
 	// Создание объекта Config и загрузка его значений.
-	config := NewConfig().(*Config)
+	config := NewConfig()
 	config.Load()
 
 	if *config.ServerPort != ":8082" {
@@ -56,7 +56,7 @@ func TestLoadConfigWithNoEnvVars(t *testing.T) {
 	os.Args = []string{"test", "-a=:8081", "-r=20", "-p=3"}
 
 	// Создание объекта Config и загрузка его значений.
-	config := NewConfig().(*Config)
+	config := NewConfig()
 	config.Load()
 
 	if *config.ServerPort != ":8081" {

@@ -1,7 +1,7 @@
 package metricvalidator
 
 import (
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

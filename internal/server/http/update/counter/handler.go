@@ -2,22 +2,30 @@ package counter
 
 import (
 	"context"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
+	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
-	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/middlware/guard"
-	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
-	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logger"
+	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"net/http"
 )
 
-type handler struct {
-	logger          logging2.Logger
-	updateService   updateInterface.Service
-	metricValidator metricvalidator.MetricValidator
+type MetricValidator interface {
+	MakeMetricValuesFromURL(url string) (*entity2.MetricFields, error)
 }
 
-func NewHandler(logger logging2.Logger, updateService updateInterface.Service, metricValidator metricvalidator.MetricValidator) http2.Handler {
+type Service interface {
+	SaveCounterMetric(ctx context.Context, metric *entity.MetricFields) error
+}
+
+type handler struct {
+	logger          logging2.Logger
+	updateService   Service
+	metricValidator MetricValidator
+}
+
+func NewHandler(logger logging2.Logger, updateService Service, metricValidator MetricValidator) http2.Handler {
 	return &handler{
 		logger:          logger.WithField("TYPE", "HANDLER").WithField("METRIC", "COUNTER"),
 		updateService:   updateService,

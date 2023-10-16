@@ -1,29 +1,22 @@
 package metricvalidator
 
 import (
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/domain/entity"
+	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"strconv"
 	"strings"
 )
 
 const updatePartLength = 8 // len("/update/")
 
-type MetricValidator interface {
-	MakeMetricValuesFromURL(url string) (*entity.MetricFields, error)
-	GetValidType(metricType string) entity.Type
-	GetTypeGaugeValue(metricValueUnsafe string) (*float64, error)
-	GetTypeCounterValue(metricValueUnsafe string) (*int64, error)
-}
-
 type metricValidator struct {
 }
 
-func New() MetricValidator {
+func New() *metricValidator {
 	return &metricValidator{}
 }
 
 // MakeMetricValuesFromURL На вход ожидается /update/<ТИП_МЕТРИКИ>/<ИМЯ_МЕТРИКИ>/<ЗНАЧЕНИЕ_МЕТРИКИ>
-func (m metricValidator) MakeMetricValuesFromURL(url string) (*entity.MetricFields, error) {
+func (m metricValidator) MakeMetricValuesFromURL(url string) (*entity2.MetricFields, error) {
 	if len(url) < 8 {
 		return nil, ErrNotCorrectURL
 	}
@@ -52,11 +45,11 @@ func (m metricValidator) MakeMetricValuesFromURL(url string) (*entity.MetricFiel
 	}
 
 	validType := m.GetValidType(metricType)
-	if validType == entity.NoType {
+	if validType == entity2.NoType {
 		return nil, ErrNotCorrectType
 	}
 
-	return &entity.MetricFields{
+	return &entity2.MetricFields{
 		MetricType:  metricType,
 		MetricName:  metricName,
 		MetricValue: metricValue,
@@ -64,14 +57,14 @@ func (m metricValidator) MakeMetricValuesFromURL(url string) (*entity.MetricFiel
 
 }
 
-func (m metricValidator) GetValidType(metricType string) entity.Type {
-	switch entity.Type(metricType) {
-	case entity.Gauge:
-		return entity.Gauge
-	case entity.Counter:
-		return entity.Counter
+func (m metricValidator) GetValidType(metricType string) entity2.Type {
+	switch entity2.Type(metricType) {
+	case entity2.Gauge:
+		return entity2.Gauge
+	case entity2.Counter:
+		return entity2.Counter
 	default:
-		return entity.NoType
+		return entity2.NoType
 	}
 }
 

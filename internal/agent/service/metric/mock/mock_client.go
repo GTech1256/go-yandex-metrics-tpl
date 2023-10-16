@@ -1,4 +1,4 @@
-package service
+package mock
 
 import (
 	"context"
@@ -12,7 +12,7 @@ type MockClient struct {
 	PostParam dto.Update
 }
 
-func (m *MockClient) Post(ctx context.Context, updateDto dto.Update) error {
+func (m *MockClient) SendUpdate(ctx context.Context, updateDto dto.Update) error {
 	m.PostParam = updateDto
 
 	args := m.Called(ctx, updateDto)
