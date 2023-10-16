@@ -7,7 +7,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 )
 
-type UpdateApi interface {
+type UpdateAPI interface {
 	SendUpdate(ctx context.Context, updateDto dto.Update) error
 }
 
@@ -17,13 +17,13 @@ type Repository interface {
 }
 
 type service struct {
-	server     UpdateApi
+	server     UpdateAPI
 	logger     logging.Logger
 	repository Repository
 }
 
 func New(
-	server UpdateApi,
+	server UpdateAPI,
 	logger logging.Logger,
 	repository Repository,
 ) *service {

@@ -3,7 +3,6 @@ package gauge
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
-	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/middlware/guard"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
@@ -12,7 +11,7 @@ import (
 )
 
 type MetricValidator interface {
-	MakeMetricValuesFromURL(url string) (*entity2.MetricFields, error)
+	MakeMetricValuesFromURL(url string) (*entity.MetricFields, error)
 }
 
 type Service interface {
