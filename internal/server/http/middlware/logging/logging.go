@@ -48,11 +48,13 @@ func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 		start := time.Now()
 		wrapped := wrapResponseWriter(w)
 		h.ServeHTTP(wrapped, r)
+
 		logger.WithFields(logrus.Fields{
 			"status":   wrapped.status,
-			"method":   r.Method,
 			"path":     r.URL.EscapedPath(),
+			"method":   r.Method,
 			"duration": time.Since(start),
+			"length":   r.ContentLength,
 		}).Info("request completed")
 
 	}
