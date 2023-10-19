@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
-	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/converter"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
@@ -17,8 +16,8 @@ import (
 )
 
 type MetricValidator interface {
-	GetValidType(metricType string) entity2.Type
-	MakeMetricValuesFromURL(url string) (*entity2.MetricFields, error)
+	GetValidType(metricType string) entity.Type
+	MakeMetricValuesFromURL(url string) (*entity.MetricFields, error)
 }
 
 type Service interface {
@@ -42,7 +41,7 @@ func NewHandler(logger logging2.Logger, service Service, metricValidator MetricV
 }
 
 func (h handler) Register(router *chi.Mux) {
-	router.Post("/update", h.Update)
+	router.Post("/update/", h.Update)
 	router.Handle("/update/*", guard.WithMetricGuarding(http.HandlerFunc(h.UpdateRest), h.logger, h.metricValidator))
 }
 
@@ -69,7 +68,7 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 	mType := h.metricValidator.GetValidType(m.MType)
 
 	switch mType {
-	case entity2.Gauge:
+	case entity.Gauge:
 		mg := converter.MetricsGaugeToMetricFields(*m)
 		err := h.service.SaveGaugeMetric(ctx, &mg)
 		if err != nil {
@@ -94,9 +93,7 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 		}
 
 		m.Value = &valueFloat
-
-		break
-	case entity2.Counter:
+	case entity.Counter:
 		mc := converter.MetricsCounterToMetricFields(*m)
 		err := h.service.SaveCounterMetric(ctx, &mc)
 		if err != nil {
@@ -121,7 +118,6 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 		}
 
 		m.Delta = &valueInt
-		break
 	default:
 		h.logger.Error("Неизвестный тип метрики ", m)
 		writer.WriteHeader(http.StatusBadRequest)

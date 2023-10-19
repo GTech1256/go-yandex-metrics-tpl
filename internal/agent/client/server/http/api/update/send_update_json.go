@@ -45,5 +45,5 @@ func (s update) SendUpdateJSON(ctx context.Context, updateDto dto.Update) error 
 }
 
 func getRequestURLJSON(baseURL string) string {
-	return fmt.Sprintf("%v/update", baseURL)
+	return fmt.Sprintf("%v/update/", baseURL)
 }

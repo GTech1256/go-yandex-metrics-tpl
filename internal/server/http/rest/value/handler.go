@@ -40,7 +40,7 @@ func NewHandler(logger logging2.Logger, updateService Service, metricValidator M
 
 func (h handler) Register(router *chi.Mux) {
 	router.Get("/value/{type}/{name}", h.Value)
-	router.Post("/value", h.ValueJSON)
+	router.Post("/value/", h.ValueJSON)
 }
 
 // Value /value/{type}/{name}
@@ -106,8 +106,6 @@ func (h handler) ValueJSON(writer http.ResponseWriter, request *http.Request) {
 		}
 
 		m.Value = &valueFloat
-
-		break
 	case entity.Counter:
 		valueInt, err := strconv.ParseInt(*value, 10, 64)
 		if err != nil {
@@ -117,7 +115,6 @@ func (h handler) ValueJSON(writer http.ResponseWriter, request *http.Request) {
 		}
 
 		m.Delta = &valueInt
-		break
 	default:
 		writer.WriteHeader(http.StatusBadRequest)
 		return
