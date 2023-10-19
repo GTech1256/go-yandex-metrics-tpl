@@ -11,6 +11,9 @@ import (
 func (s update) SendUpdate(ctx context.Context, updateDto dto.Update) error {
 	requestURL := getRequestURL(s.BaseURL, &updateDto)
 
+	fmt.Println("REST REST REST")
+	fmt.Println("REST REST REST")
+	fmt.Println("REST REST REST")
 	req, err := s.HTTPClient.NewRequest(netHTTP.MethodPost, requestURL, nil)
 	if err != nil {
 		s.logger.Infof("client: could not create request: %s\n", err)

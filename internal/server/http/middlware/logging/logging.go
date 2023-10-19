@@ -12,6 +12,7 @@ type responseWriter struct {
 	http.ResponseWriter
 	status      int
 	wroteHeader bool
+	body        []byte
 }
 
 func wrapResponseWriter(w http.ResponseWriter) *responseWriter {
@@ -32,6 +33,12 @@ func (rw *responseWriter) WriteHeader(code int) {
 	rw.wroteHeader = true
 }
 
+func (rw *responseWriter) Write(b []byte) (int, error) {
+	rw.body = b
+
+	return rw.ResponseWriter.Write(b)
+}
+
 func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 
 	fn := func(w http.ResponseWriter, r *http.Request) {
@@ -49,12 +56,25 @@ func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 		wrapped := wrapResponseWriter(w)
 		h.ServeHTTP(wrapped, r)
 
+		//var v interface{}
+		//
+		//body, err := io.ReadAll(r.Body)
+		//if err != nil {
+		//	logger.Error(err)
+		//}
+		//err = json.Unmarshal(body, &v)
+		//if err != nil {
+		//	logger.Error(err)
+		//}
+
 		logger.WithFields(logrus.Fields{
 			"status":   wrapped.status,
 			"path":     r.URL.EscapedPath(),
 			"method":   r.Method,
 			"duration": time.Since(start),
 			"length":   r.ContentLength,
+			//"inputBody": v,
+			//"outBody":   string(wrapped.body),
 		}).Info("request completed")
 
 	}

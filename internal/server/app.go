@@ -5,10 +5,10 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/config"
 	home "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/logging"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/counter"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/gauge"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/value"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/counter"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/gauge"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/value"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
 	metricValidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
@@ -37,11 +37,11 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 	updateGaugeHandler.Register(router)
 
 	logger.Info("Register /update/* Router")
-	updateHandler := update.NewHandler(logger, validator)
+	updateHandler := update.NewHandler(logger, updateService, validator)
 	updateHandler.Register(router)
 
 	logger.Info("Register /value/ Router")
-	valueHandler := value.NewHandler(logger, updateService)
+	valueHandler := value.NewHandler(logger, updateService, validator)
 	valueHandler.Register(router)
 
 	logger.Info("Register / Router")

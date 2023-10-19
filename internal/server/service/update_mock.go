@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
-	updateinterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
 	"github.com/stretchr/testify/mock"
 )
 

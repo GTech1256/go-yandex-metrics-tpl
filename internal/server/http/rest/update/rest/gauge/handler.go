@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/middlware/guard"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/middlware/guard"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"net/http"

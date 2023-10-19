@@ -20,6 +20,12 @@ start-server:
 run:
 	air
 
+run-server:
+	air
+
+run-agent:
+	go run cmd/agent/main.go
+
 test:
 	go test -count=1 ./...
 

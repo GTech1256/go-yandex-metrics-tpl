@@ -10,6 +10,7 @@ import (
 
 type UpdateAPI interface {
 	SendUpdate(ctx context.Context, updateDto dto.Update) error
+	SendUpdateJSON(ctx context.Context, updateDto dto.Update) error
 }
 
 type client struct {
@@ -33,4 +34,8 @@ func New(host string, logger logging.Logger) *client {
 
 func (c *client) SendUpdate(ctx context.Context, updateDto dto.Update) error {
 	return c.api.SendUpdate(ctx, updateDto)
+}
+
+func (c *client) SendUpdateJSON(ctx context.Context, updateDto dto.Update) error {
+	return c.api.SendUpdateJSON(ctx, updateDto)
 }
