@@ -115,7 +115,7 @@ func (u updateService) GetMetricValue(ctx context.Context, metric *updateInterfa
 			u.logger.Error(err)
 		}
 		if gaugeMetricValue != nil {
-			r := fmt.Sprintf("%f", *gaugeMetricValue)
+			r := strconv.FormatFloat(*gaugeMetricValue, 'f', -1, 64)
 
 			result = &r
 		}
