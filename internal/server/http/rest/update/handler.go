@@ -3,7 +3,6 @@ package update
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/converter"
@@ -67,7 +66,7 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	mType := h.metricValidator.GetValidType(m.MType)
-	fmt.Printf("%+v, %v", m, *m.Value)
+
 	switch mType {
 	case entity.Gauge:
 		mg := converter.MetricsGaugeToMetricFields(*m)
