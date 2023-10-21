@@ -35,6 +35,7 @@ func (h handler) Home(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
+	writer.Header().Add("Content-Type", "text/html")
 	writer.WriteHeader(http.StatusOK)
 	_, err = writer.Write([]byte(metrics))
 	if err != nil {
