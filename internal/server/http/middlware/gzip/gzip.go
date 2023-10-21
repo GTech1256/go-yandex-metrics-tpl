@@ -50,6 +50,7 @@ func WithGzip(h http.Handler) http.Handler {
 			return
 		}
 
+		// TODO: Функция сжатия должна работать для контента с типами application/json и text/html.
 		// создаём gzip.Writer поверх текущего w
 		gz, err := gzip.NewWriterLevel(w, gzip.BestCompression)
 		if err != nil {
