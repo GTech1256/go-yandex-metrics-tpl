@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/api/update/converter"
+	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/gzip"
 
 	netHTTP "net/http"
 )
@@ -26,11 +27,18 @@ func (s update) SendUpdateJSON(ctx context.Context, updateDto dto.Update) error 
 		return err
 	}
 
-	req, err := s.HTTPClient.NewRequest(netHTTP.MethodPost, requestURL, &buf)
+	bufCompress, err := gzip.Compress(buf.Bytes())
+	if err != nil {
+		return err
+	}
+
+	req, err := s.HTTPClient.NewRequest(netHTTP.MethodPost, requestURL, bytes.NewReader(bufCompress))
 	if err != nil {
 		s.logger.Infof("client: could not create request: %s\n", err)
 		return err
 	}
+
+	req.Header.Add("Content-Encoding", "gzip")
 
 	res, err := s.HTTPClient.Do(req)
 	if err != nil {
@@ -39,7 +47,7 @@ func (s update) SendUpdateJSON(ctx context.Context, updateDto dto.Update) error 
 	}
 	defer res.Body.Close()
 
-	s.logger.Infof("%d %v \n", res.StatusCode, requestURL)
+	s.logger.Infof("%d %v %+v \n", res.StatusCode, requestURL, updateDto)
 
 	return nil
 }

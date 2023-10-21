@@ -40,7 +40,6 @@ func (rw *responseWriter) Write(b []byte) (int, error) {
 }
 
 func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
-
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
@@ -56,13 +55,19 @@ func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 		wrapped := wrapResponseWriter(w)
 		h.ServeHTTP(wrapped, r)
 
-		//var v interface{}
+		//var buf bytes.Buffer
 		//
-		//body, err := io.ReadAll(r.Body)
+		//_, err := buf.ReadFrom(r.Body)
 		//if err != nil {
 		//	logger.Error(err)
+		//	return
 		//}
-		//err = json.Unmarshal(body, &v)
+		//
+		//r.Body.Close()
+
+		//fmt.Println("JIHJO", buf.String(), buf.Bytes(), r.Body)
+		//fmt.Println("JIHJO", json.NewEncoder(NewReade(wrapped.body)), string(wrapped.body))
+		//body, err := io.ReadAll(r.Body)
 		//if err != nil {
 		//	logger.Error(err)
 		//}
@@ -73,7 +78,7 @@ func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 			"method":   r.Method,
 			"duration": time.Since(start),
 			"length":   r.ContentLength,
-			//"inputBody": v,
+			//"inputBody": buf.String(),
 			//"outBody":   string(wrapped.body),
 		}).Info("request completed")
 

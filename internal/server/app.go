@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/config"
 	home "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/gzip"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/logging"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/counter"
@@ -23,6 +24,8 @@ type App struct {
 
 func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 	router := chi.NewRouter()
+
+	router.Use(gzip.WithGzip)
 
 	metricStorage := metric.NewStorage()
 	validator := metricValidator.New()

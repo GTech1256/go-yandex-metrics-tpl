@@ -50,7 +50,7 @@ func (s *service) StartReport(ctx context.Context, reportInterval time.Duration)
 func (s *service) sendMetric(ctx context.Context, metric *entity.MetricFields) error {
 	s.logger.Infof("Отправка %v", metric.MetricName)
 
-	if err := s.server.SendUpdate(ctx, dto2.MetricFromService(metric)); err != nil {
+	if err := s.server.SendUpdateJSON(ctx, dto2.MetricFromService(metric)); err != nil {
 		s.logger.Errorf("Ошибка отправки %v", metric.MetricName)
 
 		return ErrSend

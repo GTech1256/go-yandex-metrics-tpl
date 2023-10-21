@@ -60,7 +60,7 @@ func (u updateService) SaveGaugeMetric(ctx context.Context, metric *entity2.Metr
 		return err
 	}
 
-	u.logger.Info("Метрика сохранена", metricsGauge)
+	u.logger.Infof("Метрика сохранена %+v", metricsGauge)
 
 	return nil
 }
@@ -84,7 +84,7 @@ func (u updateService) SaveCounterMetric(ctx context.Context, metric *entity2.Me
 		return err
 	}
 
-	u.logger.Info("Метрика сохранена", metricsCounter)
+	u.logger.Info("Метрика сохранена %+v", metricsCounter)
 
 	return nil
 }

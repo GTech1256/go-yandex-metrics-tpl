@@ -35,11 +35,10 @@ func (h handler) Home(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
+	writer.WriteHeader(http.StatusOK)
 	_, err = writer.Write([]byte(metrics))
 	if err != nil {
 		h.logger.Error(err)
 		return
 	}
-
-	writer.WriteHeader(http.StatusOK)
 }

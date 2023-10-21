@@ -131,7 +131,6 @@ func (h handler) ValueJSON(writer http.ResponseWriter, request *http.Request) {
 	writer.WriteHeader(http.StatusOK)
 	_, err = writer.Write(res)
 	if err != nil {
-		h.logger.Error(err, 4)
-		writer.WriteHeader(http.StatusInternalServerError)
+		h.logger.Error(err)
 	}
 }
