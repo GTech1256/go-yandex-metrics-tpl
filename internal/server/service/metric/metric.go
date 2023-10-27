@@ -91,13 +91,13 @@ func (u metricService) GetMetricsFromDisk() error {
 
 		switch t {
 		case entity2.Gauge:
-			err := u.storage.SaveGauge(context.Background(), converter.MetricJsonToMetricGauge(k))
+			err := u.storage.SaveGauge(context.Background(), converter.MetricJSONToMetricGauge(k))
 			if err != nil {
 				u.logger.Error(err)
 				return err
 			}
 		case entity2.Counter:
-			err := u.storage.SaveCounter(context.Background(), converter.MetricJsonToMetricCounter(k))
+			err := u.storage.SaveCounter(context.Background(), converter.MetricJSONToMetricCounter(k))
 			if err != nil {
 				u.logger.Error(err)
 				return err
@@ -135,7 +135,7 @@ func (u metricService) SaveGaugeMetric(ctx context.Context, metric *entity2.Metr
 
 	isSyncMetricWrite := u.getIsSyncMetricWrite()
 	if isSyncMetricWrite {
-		err := u.metricLoaderService.SaveMetricToDisk(ctx, converter.MetricGaugeToMetricJson(metricsGauge))
+		err := u.metricLoaderService.SaveMetricToDisk(ctx, converter.MetricGaugeToMetricJSON(metricsGauge))
 		if err != nil {
 			u.logger.Error(err)
 			return err
@@ -169,7 +169,7 @@ func (u metricService) SaveCounterMetric(ctx context.Context, metric *entity2.Me
 
 	isSyncMetricWrite := u.getIsSyncMetricWrite()
 	if isSyncMetricWrite {
-		err := u.metricLoaderService.SaveMetricToDisk(ctx, converter.MetricCounterToMetricJson(metricsCounter))
+		err := u.metricLoaderService.SaveMetricToDisk(ctx, converter.MetricCounterToMetricJSON(metricsCounter))
 		if err != nil {
 			u.logger.Error(err)
 			return err

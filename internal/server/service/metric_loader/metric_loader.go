@@ -72,13 +72,13 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 
 	for k, v := range metrics.Counter {
 		Delta := v
-		metricJson := &metric.MetricsJSON{
+		metricJSON := &metric.MetricsJSON{
 			ID:    k,
 			MType: string(entity.Counter),
 			Delta: &Delta,
 		}
 
-		err := u.storage.Write(metricJson)
+		err := u.storage.Write(metricJSON)
 		if err != nil {
 			u.logger.Error(err)
 			return err
@@ -87,13 +87,13 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 
 	for k, v := range metrics.Gauge {
 		Value := v
-		metricJson := &metric.MetricsJSON{
+		metricJSON := &metric.MetricsJSON{
 			ID:    k,
 			MType: string(entity.Gauge),
 			Value: &Value,
 		}
 
-		err := u.storage.Write(metricJson)
+		err := u.storage.Write(metricJSON)
 		if err != nil {
 			u.logger.Error(err)
 			return err

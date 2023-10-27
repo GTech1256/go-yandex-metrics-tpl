@@ -6,7 +6,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
 )
 
-func MetricCounterToMetricJson(mg *entity2.MetricCounter) *metric.MetricsJSON {
+func MetricCounterToMetricJSON(mg *entity2.MetricCounter) *metric.MetricsJSON {
 	return &metric.MetricsJSON{
 		ID:    mg.Name,
 		MType: string(entity.Counter),
@@ -14,7 +14,7 @@ func MetricCounterToMetricJson(mg *entity2.MetricCounter) *metric.MetricsJSON {
 	}
 }
 
-func MetricGaugeToMetricJson(mg *entity2.MetricGauge) *metric.MetricsJSON {
+func MetricGaugeToMetricJSON(mg *entity2.MetricGauge) *metric.MetricsJSON {
 	return &metric.MetricsJSON{
 		ID:    mg.Name,
 		MType: string(entity.Gauge),
@@ -22,7 +22,7 @@ func MetricGaugeToMetricJson(mg *entity2.MetricGauge) *metric.MetricsJSON {
 	}
 }
 
-func MetricJsonToMetricCounter(mj *metric.MetricsJSON) *entity2.MetricCounter {
+func MetricJSONToMetricCounter(mj *metric.MetricsJSON) *entity2.MetricCounter {
 	return &entity2.MetricCounter{
 		Type:  entity.Counter,
 		Name:  mj.ID,
@@ -30,7 +30,7 @@ func MetricJsonToMetricCounter(mj *metric.MetricsJSON) *entity2.MetricCounter {
 	}
 }
 
-func MetricJsonToMetricGauge(mj *metric.MetricsJSON) *entity2.MetricGauge {
+func MetricJSONToMetricGauge(mj *metric.MetricsJSON) *entity2.MetricGauge {
 	return &entity2.MetricGauge{
 		Type:  entity.Gauge,
 		Name:  mj.ID,
