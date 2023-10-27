@@ -11,7 +11,8 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/gauge"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/value"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
+	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_loader"
 	metricValidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
@@ -27,27 +28,36 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	router.Use(gzip.WithGzip)
 
-	metricStorage := metric.NewStorage()
-	validator := metricValidator.New()
-	updateService := service.NewUpdateService(logger, metricStorage, validator)
+	fileStorage, err := metric.NewFileStorage(*cfg.FileStoragePath)
+	if err != nil {
+		logger.Error("Ошибка инцилизации fileStorage ", err)
+		panic(err)
+	}
 
-	logger.Info("Register /update/counter/ Router")
+	metricStorage := metric.NewStorage()
+
+	metricLoaderService := metric_loader.NewMetricLoaderService(logger, fileStorage, metricStorage)
+
+	validator := metricValidator.New()
+	updateService := metric2.NewMetricService(logger, metricStorage, validator, metricLoaderService, cfg)
+
+	logger.Info("Регистрация /update/counter/ Router")
 	updateCounterHandler := counter.NewHandler(logger, updateService, validator)
 	updateCounterHandler.Register(router)
 
-	logger.Info("Register /update/gauge/ Router")
+	logger.Info("Регистрация /update/gauge/ Router")
 	updateGaugeHandler := gauge.NewHandler(logger, updateService, validator)
 	updateGaugeHandler.Register(router)
 
-	logger.Info("Register /update/* Router")
+	logger.Info("Регистрация /update/* Router")
 	updateHandler := update.NewHandler(logger, updateService, validator)
 	updateHandler.Register(router)
 
-	logger.Info("Register /value/ Router")
+	logger.Info("Регистрация /value/ Router")
 	valueHandler := value.NewHandler(logger, updateService, validator)
 	valueHandler.Register(router)
 
-	logger.Info("Register / Router")
+	logger.Info("Регистрация / Router")
 	homeHandler := home.NewHandler(logger, updateService)
 	homeHandler.Register(router)
 

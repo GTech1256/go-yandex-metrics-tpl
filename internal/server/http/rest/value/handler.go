@@ -7,7 +7,6 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/models"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/value/converter"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
@@ -73,7 +72,7 @@ func (h handler) Value(writer http.ResponseWriter, request *http.Request) {
 }
 
 func (h handler) ValueJSON(writer http.ResponseWriter, request *http.Request) {
-	var m *models.Metrics
+	var m *entity.MetricsJSON
 	ctx := context.Background()
 
 	decoder := json.NewDecoder(request.Body)

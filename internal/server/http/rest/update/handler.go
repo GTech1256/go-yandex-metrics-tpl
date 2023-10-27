@@ -8,7 +8,6 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/converter"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/middlware/guard"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/models"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"net/http"
@@ -54,7 +53,7 @@ func (h handler) UpdateRest(writer http.ResponseWriter, request *http.Request) {
 
 // Update POST /update
 func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
-	var m *models.Metrics
+	var m *entity.MetricsJSON
 	ctx := context.Background()
 
 	decoder := json.NewDecoder(request.Body)

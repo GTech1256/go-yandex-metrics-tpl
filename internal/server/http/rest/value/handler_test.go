@@ -3,7 +3,7 @@ package value
 import (
 	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric"
 	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/ptr"
@@ -18,7 +18,7 @@ import (
 func TestValueHandler(t *testing.T) {
 	t.Run("Успешный GetMetricValue", func(t *testing.T) {
 		mockLogger := new(logging.LoggerMock)
-		mockService := new(service.MockService)
+		mockService := new(metric.MockService)
 		mockLogger.On("Error").Return(nil)
 
 		mockMetricValidator := new(metricvalidator.MockMetricValidator)
@@ -44,7 +44,7 @@ func TestValueHandler(t *testing.T) {
 
 	t.Run("Неуспешный GetMetricValue", func(t *testing.T) {
 		mockLogger := new(logging.LoggerMock)
-		mockService := new(service.MockService)
+		mockService := new(metric.MockService)
 		mockMetricValidator := new(metricvalidator.MockMetricValidator)
 		// Тестовый маршрутизатор
 		router := chi.NewRouter()
