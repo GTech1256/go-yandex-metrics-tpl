@@ -36,7 +36,7 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	metricStorage := metric.NewStorage()
 
-	metricLoaderService := metric_loader.NewMetricLoaderService(logger, fileStorage, metricStorage)
+	metricLoaderService := metricloader.NewMetricLoaderService(logger, fileStorage, metricStorage)
 
 	validator := metricValidator.New()
 	updateService := metric2.NewMetricService(logger, metricStorage, validator, metricLoaderService, cfg)

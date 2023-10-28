@@ -1,4 +1,4 @@
-package metric_loader
+package metricloader
 
 import (
 	"context"
