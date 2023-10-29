@@ -39,9 +39,8 @@ var e *logrus.Entry
 
 func Init() {
 	l := logrus.New()
-	//l.SetReportCaller(true)
+
 	l.Formatter = &logrus.TextFormatter{
-		//ForceColors: true,
 		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
 			filename := path.Base(f.File)
 			return fmt.Sprintf("%s:%d", filename, f.Line), fmt.Sprintf("%s()", f.Function)

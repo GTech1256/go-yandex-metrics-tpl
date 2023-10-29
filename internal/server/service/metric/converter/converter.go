@@ -5,23 +5,23 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
 )
 
-func MetricCounterToMetricJSON(mg *entity.MetricCounter) *file.MetricsJSON {
-	return &file.MetricsJSON{
+func MetricCounterToMetricJSON(mg *entity.MetricCounter) *file.MetricJSON {
+	return &file.MetricJSON{
 		ID:    mg.Name,
 		MType: string(entity.Counter),
 		Delta: &mg.Value,
 	}
 }
 
-func MetricGaugeToMetricJSON(mg *entity.MetricGauge) *file.MetricsJSON {
-	return &file.MetricsJSON{
+func MetricGaugeToMetricJSON(mg *entity.MetricGauge) *file.MetricJSON {
+	return &file.MetricJSON{
 		ID:    mg.Name,
 		MType: string(entity.Gauge),
 		Value: &mg.Value,
 	}
 }
 
-func MetricJSONToMetricCounter(mj *file.MetricsJSON) *entity.MetricCounter {
+func MetricJSONToMetricCounter(mj *file.MetricJSON) *entity.MetricCounter {
 	return &entity.MetricCounter{
 		Type:  entity.Counter,
 		Name:  mj.ID,
@@ -29,7 +29,7 @@ func MetricJSONToMetricCounter(mj *file.MetricsJSON) *entity.MetricCounter {
 	}
 }
 
-func MetricJSONToMetricGauge(mj *file.MetricsJSON) *entity.MetricGauge {
+func MetricJSONToMetricGauge(mj *file.MetricJSON) *entity.MetricGauge {
 	return &entity.MetricGauge{
 		Type:  entity.Gauge,
 		Name:  mj.ID,

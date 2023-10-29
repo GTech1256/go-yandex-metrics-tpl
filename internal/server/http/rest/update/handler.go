@@ -53,7 +53,7 @@ func (h handler) UpdateRest(writer http.ResponseWriter, request *http.Request) {
 
 // Update POST /update
 func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
-	var m *entity.MetricsJSON
+	var m *entity.MetricJSON
 	ctx := context.Background()
 
 	decoder := json.NewDecoder(request.Body)

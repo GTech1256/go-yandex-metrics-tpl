@@ -2,7 +2,6 @@ package config
 
 import (
 	"flag"
-	"fmt"
 	"os"
 	"strconv"
 	"time"
@@ -24,7 +23,6 @@ func NewConfig() *Config {
 }
 
 func (c *Config) Load() {
-
 	var (
 		// Hack для тестирования
 		command            = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
@@ -37,9 +35,6 @@ func (c *Config) Load() {
 		restore            = command.Bool("r", true, "the path to the file for saving metrics")
 		restoreEnv         = os.Getenv("RESTORE")
 	)
-
-	fmt.Println("storeIntervalEnv:", storeIntervalEnv)
-	fmt.Println(os.Environ())
 
 	c.Port = port
 	if portEnv != "" {

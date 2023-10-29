@@ -3,7 +3,6 @@ package value
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
@@ -72,7 +71,7 @@ func (h handler) Value(writer http.ResponseWriter, request *http.Request) {
 }
 
 func (h handler) ValueJSON(writer http.ResponseWriter, request *http.Request) {
-	var m *entity.MetricsJSON
+	var m *entity.MetricJSON
 	ctx := context.Background()
 
 	decoder := json.NewDecoder(request.Body)
@@ -118,8 +117,6 @@ func (h handler) ValueJSON(writer http.ResponseWriter, request *http.Request) {
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
-	fmt.Println("HELLO", m)
 
 	res, err := json.Marshal(m)
 	if err != nil {

@@ -6,14 +6,14 @@ import (
 	"strconv"
 )
 
-func MetricsGaugeToMetricFields(metrics entity.MetricsJSON) entity.MetricFields {
+func MetricsGaugeToMetricFields(metrics entity.MetricJSON) entity.MetricFields {
 	return entity.MetricFields{
 		MetricType:  metrics.MType,
 		MetricName:  metrics.ID,
 		MetricValue: strconv.FormatFloat(*metrics.Value, 'f', -1, 64),
 	}
 }
-func MetricsCounterToMetricFields(metrics entity.MetricsJSON) entity.MetricFields {
+func MetricsCounterToMetricFields(metrics entity.MetricJSON) entity.MetricFields {
 	return entity.MetricFields{
 		MetricType:  metrics.MType,
 		MetricName:  metrics.ID,
@@ -21,7 +21,7 @@ func MetricsCounterToMetricFields(metrics entity.MetricsJSON) entity.MetricField
 	}
 }
 
-func MetricsToMetricValueDTO(metrics entity.MetricsJSON) updateInterface.GetMetricValueDto {
+func MetricsToMetricValueDTO(metrics entity.MetricJSON) updateInterface.GetMetricValueDto {
 	return updateInterface.GetMetricValueDto{
 		Type: metrics.MType,
 		Name: metrics.ID,

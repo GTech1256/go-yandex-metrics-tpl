@@ -7,12 +7,12 @@ type MockFileStorage struct {
 	mock.Mock
 }
 
-func (m *MockFileStorage) ReadAll() ([]*MetricsJSON, error) {
+func (m *MockFileStorage) ReadAll() ([]*MetricJSON, error) {
 	args := m.Called()
-	return args.Get(0).([]*MetricsJSON), args.Error(1)
+	return args.Get(0).([]*MetricJSON), args.Error(1)
 }
 
-func (m *MockFileStorage) Write(metric *MetricsJSON) error {
+func (m *MockFileStorage) Write(metric *MetricJSON) error {
 	args := m.Called(metric)
 	return args.Error(0)
 }

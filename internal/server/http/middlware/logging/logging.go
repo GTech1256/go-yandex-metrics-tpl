@@ -55,31 +55,12 @@ func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 		wrapped := wrapResponseWriter(w)
 		h.ServeHTTP(wrapped, r)
 
-		//var buf bytes.Buffer
-		//
-		//_, err := buf.ReadFrom(r.Body)
-		//if err != nil {
-		//	logger.Error(err)
-		//	return
-		//}
-		//
-		//r.Body.Close()
-
-		//fmt.Println("JIHJO", buf.String(), buf.Bytes(), r.Body)
-		//fmt.Println("JIHJO", json.NewEncoder(NewReade(wrapped.body)), string(wrapped.body))
-		//body, err := io.ReadAll(r.Body)
-		//if err != nil {
-		//	logger.Error(err)
-		//}
-
 		logger.WithFields(logrus.Fields{
 			"status":   wrapped.status,
 			"path":     r.URL.EscapedPath(),
 			"method":   r.Method,
 			"duration": time.Since(start),
 			"length":   r.ContentLength,
-			//"inputBody": buf.String(),
-			//"outBody":   string(wrapped.body),
 		}).Info("request completed")
 
 	}

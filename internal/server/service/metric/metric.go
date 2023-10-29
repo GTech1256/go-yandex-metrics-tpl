@@ -2,7 +2,6 @@ package metric
 
 import (
 	"context"
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/config"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
@@ -31,8 +30,8 @@ type Storage interface {
 
 type MetricLoaderService interface {
 	StartMetricsToDiskInterval(ctx context.Context, interval time.Duration)
-	LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricsJSON, error)
-	SaveMetricToDisk(ctx context.Context, mj *file.MetricsJSON) error
+	LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricJSON, error)
+	SaveMetricToDisk(ctx context.Context, mj *file.MetricJSON) error
 }
 
 type metricService struct {
@@ -55,12 +54,11 @@ func NewMetricService(logger logging2.Logger, storage Storage, metricValidator M
 	isSyncMetricWrite := ms.getIsSyncMetricWrite()
 	if !isSyncMetricWrite {
 		go func() {
-			fmt.Println("Запись на диск запущена асинхронная")
+			logger.Info("Запись на диск запущена асинхронная")
 			metricLoaderService.StartMetricsToDiskInterval(context.Background(), cfg.StoreInterval)
 		}()
 	} else {
-
-		fmt.Println("Запись на диск будет синхронной")
+		logger.Info("Запись на диск будет синхронной")
 	}
 
 	err := ms.GetMetricsFromDisk()
@@ -78,32 +76,32 @@ func (u metricService) getIsSyncMetricWrite() bool {
 
 func (u metricService) GetMetricsFromDisk() error {
 	u.logger.Info("GetMetricsFromDisk")
-	disk, err := u.metricLoaderService.LoadMetricsFromDisk(context.Background())
+	metricsFromDisk, err := u.metricLoaderService.LoadMetricsFromDisk(context.Background())
 	if err != nil {
 		u.logger.Error(err)
 		return nil
 	}
 
-	u.logger.Info("GetMetricsFromDisk: Загружены данные ", disk)
-	for _, k := range disk {
-		u.logger.Info("GetMetricsFromDisk: Обработка элемента ", k)
-		t := u.metricValidator.GetValidType(k.MType)
+	u.logger.Info("GetMetricsFromDisk: Загружены данные ", metricsFromDisk)
+	for _, metricJSON := range metricsFromDisk {
+		u.logger.Info("GetMetricsFromDisk: Обработка элемента ", metricJSON)
+		metricType := u.metricValidator.GetValidType(metricJSON.MType)
 
-		switch t {
+		switch metricType {
 		case entity2.Gauge:
-			err := u.storage.SaveGauge(context.Background(), converter.MetricJSONToMetricGauge(k))
+			err := u.storage.SaveGauge(context.Background(), converter.MetricJSONToMetricGauge(metricJSON))
 			if err != nil {
 				u.logger.Error(err)
 				return err
 			}
 		case entity2.Counter:
-			err := u.storage.SaveCounter(context.Background(), converter.MetricJSONToMetricCounter(k))
+			err := u.storage.SaveCounter(context.Background(), converter.MetricJSONToMetricCounter(metricJSON))
 			if err != nil {
 				u.logger.Error(err)
 				return err
 			}
 		default:
-			u.logger.Error("Неизвестный тип", k)
+			u.logger.Error("Неизвестный тип", metricJSON)
 		}
 
 	}
@@ -139,7 +137,6 @@ func (u metricService) SaveGaugeMetric(ctx context.Context, metric *entity2.Metr
 		if err != nil {
 			u.logger.Error(err)
 			return err
-
 		}
 	}
 

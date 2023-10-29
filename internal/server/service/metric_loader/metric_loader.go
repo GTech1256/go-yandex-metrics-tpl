@@ -10,8 +10,8 @@ import (
 )
 
 type FileStorage interface {
-	ReadAll() ([]*file.MetricsJSON, error)
-	Write(metric *file.MetricsJSON) error
+	ReadAll() ([]*file.MetricJSON, error)
+	Write(metric *file.MetricJSON) error
 	Truncate() error
 }
 
@@ -32,7 +32,7 @@ func NewMetricLoaderService(logger logging2.Logger, storage FileStorage, metricP
 	}
 }
 
-func (u metricLoaderService) LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricsJSON, error) {
+func (u metricLoaderService) LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricJSON, error) {
 	all, err := u.storage.ReadAll()
 	if err != nil {
 		u.logger.Error(err)
@@ -70,10 +70,10 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 		return err
 	}
 
-	for k, v := range metrics.Counter {
-		Delta := v
-		metricJSON := &file.MetricsJSON{
-			ID:    k,
+	for name, value := range metrics.Counter {
+		Delta := value
+		metricJSON := &file.MetricJSON{
+			ID:    name,
 			MType: string(entity.Counter),
 			Delta: &Delta,
 		}
@@ -85,10 +85,10 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 		}
 	}
 
-	for k, v := range metrics.Gauge {
-		Value := v
-		metricJSON := &file.MetricsJSON{
-			ID:    k,
+	for name, value := range metrics.Gauge {
+		Value := value
+		metricJSON := &file.MetricJSON{
+			ID:    name,
 			MType: string(entity.Gauge),
 			Value: &Value,
 		}
@@ -105,7 +105,7 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 	return nil
 }
 
-func (u metricLoaderService) SaveMetricToDisk(ctx context.Context, mj *file.MetricsJSON) error {
+func (u metricLoaderService) SaveMetricToDisk(ctx context.Context, mj *file.MetricJSON) error {
 	u.logger.Info("Сохранение Метрики на диск ", mj)
 	err := u.storage.Write(mj)
 	if err != nil {

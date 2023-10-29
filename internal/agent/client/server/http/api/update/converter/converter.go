@@ -22,8 +22,6 @@ func UpdateDTOToMetrics(update *dto.Update) (*Metrics, error) {
 	m := &Metrics{
 		ID:    update.Name,
 		MType: update.Type,
-		//Delta: nil,
-		//Value: nil,
 	}
 
 	switch update.Type {
@@ -32,7 +30,9 @@ func UpdateDTOToMetrics(update *dto.Update) (*Metrics, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		m.Value = &floatValue
+
 		return m, nil
 
 	case string(entity.Counter):
@@ -40,7 +40,9 @@ func UpdateDTOToMetrics(update *dto.Update) (*Metrics, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		m.Delta = &intValue
+
 		return m, nil
 	}
 
