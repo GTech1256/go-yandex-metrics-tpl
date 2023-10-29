@@ -7,7 +7,7 @@ import (
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric/converter"
 	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
@@ -31,8 +31,8 @@ type Storage interface {
 
 type MetricLoaderService interface {
 	StartMetricsToDiskInterval(ctx context.Context, interval time.Duration)
-	LoadMetricsFromDisk(ctx context.Context) ([]*metric.MetricsJSON, error)
-	SaveMetricToDisk(ctx context.Context, mj *metric.MetricsJSON) error
+	LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricsJSON, error)
+	SaveMetricToDisk(ctx context.Context, mj *file.MetricsJSON) error
 }
 
 type metricService struct {

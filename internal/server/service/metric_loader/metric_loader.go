@@ -4,14 +4,14 @@ import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"time"
 )
 
 type FileStorage interface {
-	ReadAll() ([]*metric.MetricsJSON, error)
-	Write(metric *metric.MetricsJSON) error
+	ReadAll() ([]*file.MetricsJSON, error)
+	Write(metric *file.MetricsJSON) error
 	Truncate() error
 }
 
@@ -32,7 +32,7 @@ func NewMetricLoaderService(logger logging2.Logger, storage FileStorage, metricP
 	}
 }
 
-func (u metricLoaderService) LoadMetricsFromDisk(ctx context.Context) ([]*metric.MetricsJSON, error) {
+func (u metricLoaderService) LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricsJSON, error) {
 	all, err := u.storage.ReadAll()
 	if err != nil {
 		u.logger.Error(err)
@@ -72,7 +72,7 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 
 	for k, v := range metrics.Counter {
 		Delta := v
-		metricJSON := &metric.MetricsJSON{
+		metricJSON := &file.MetricsJSON{
 			ID:    k,
 			MType: string(entity.Counter),
 			Delta: &Delta,
@@ -87,7 +87,7 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 
 	for k, v := range metrics.Gauge {
 		Value := v
-		metricJSON := &metric.MetricsJSON{
+		metricJSON := &file.MetricsJSON{
 			ID:    k,
 			MType: string(entity.Gauge),
 			Value: &Value,
@@ -105,7 +105,7 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 	return nil
 }
 
-func (u metricLoaderService) SaveMetricToDisk(ctx context.Context, mj *metric.MetricsJSON) error {
+func (u metricLoaderService) SaveMetricToDisk(ctx context.Context, mj *file.MetricsJSON) error {
 	u.logger.Info("Сохранение Метрики на диск ", mj)
 	err := u.storage.Write(mj)
 	if err != nil {

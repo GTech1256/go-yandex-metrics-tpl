@@ -10,6 +10,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/counter"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/gauge"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/value"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_loader"
@@ -28,7 +29,7 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	router.Use(gzip.WithGzip)
 
-	fileStorage, err := metric.NewFileStorage(*cfg.FileStoragePath)
+	fileStorage, err := file.NewFileStorage(*cfg.FileStoragePath)
 	if err != nil {
 		logger.Error("Ошибка инцилизации fileStorage ", err)
 		panic(err)
