@@ -19,3 +19,11 @@ func (m *MockClient) SendUpdate(ctx context.Context, updateDto dto.Update) error
 
 	return args.Error(0)
 }
+
+func (m *MockClient) SendUpdateJSON(ctx context.Context, updateDto dto.Update) error {
+	m.PostParam = updateDto
+
+	args := m.Called(ctx, updateDto)
+
+	return args.Error(0)
+}

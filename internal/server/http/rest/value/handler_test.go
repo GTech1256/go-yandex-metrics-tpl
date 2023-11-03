@@ -2,10 +2,11 @@ package value
 
 import (
 	"fmt"
-	updateinterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/update/interface"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service"
-	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/lib/ptr"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric"
+	metricvalidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
+	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/ptr"
 	"github.com/go-chi/chi/v5"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -17,12 +18,13 @@ import (
 func TestValueHandler(t *testing.T) {
 	t.Run("Успешный GetMetricValue", func(t *testing.T) {
 		mockLogger := new(logging.LoggerMock)
-		mockService := new(service.MockService)
+		mockService := new(metric.MockService)
 		mockLogger.On("Error").Return(nil)
 
+		mockMetricValidator := new(metricvalidator.MockMetricValidator)
 		// Тестовый маршрутизатор
 		router := chi.NewRouter()
-		h := NewHandler(mockLogger, mockService) // Передаем мок сервиса
+		h := NewHandler(mockLogger, mockService, mockMetricValidator)
 		h.Register(router)
 
 		req := httptest.NewRequest("GET", "/value/testType/testName", nil)
@@ -42,10 +44,11 @@ func TestValueHandler(t *testing.T) {
 
 	t.Run("Неуспешный GetMetricValue", func(t *testing.T) {
 		mockLogger := new(logging.LoggerMock)
-		mockService := new(service.MockService)
+		mockService := new(metric.MockService)
+		mockMetricValidator := new(metricvalidator.MockMetricValidator)
 		// Тестовый маршрутизатор
 		router := chi.NewRouter()
-		h := NewHandler(mockLogger, mockService) // Передаем мок сервиса
+		h := NewHandler(mockLogger, mockService, mockMetricValidator)
 		h.Register(router)
 		mockLogger.On("Error", fmt.Errorf("Ошибка")).Return(nil)
 
