@@ -25,22 +25,22 @@ func (c *Config) Load() {
 
 	var (
 		// Hack для тестирования
-		command           = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
-		serverPort        = command.String("a", ":8080", "address and port to run metric")
-		serverPortEnv     = os.Getenv("ADDRESS")
-		reportInterval    = command.Int("r", 10, "frequency of sending metrics to the metric")
-		reportIntervalEnv = os.Getenv("REPORT_INTERVAL")
-		pollInterval      = command.Int("p", 2, "the frequency of polling metrics")
-		pollIntervalEnv   = os.Getenv("POLL_INTERVAL")
+		command                                     = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
+		serverPort                                  = command.String("a", ":8080", "address and port to run metric")
+		serverPortEnv, serverPortEnvPresent         = os.LookupEnv("ADDRESS")
+		reportInterval                              = command.Int("r", 10, "frequency of sending metrics to the metric")
+		reportIntervalEnv, reportIntervalEnvPresent = os.LookupEnv("REPORT_INTERVAL")
+		pollInterval                                = command.Int("p", 2, "the frequency of polling metrics")
+		pollIntervalEnv, pollIntervalEnvPresent     = os.LookupEnv("POLL_INTERVAL")
 	)
 
 	c.ServerPort = serverPort
-	if serverPortEnv != "" {
+	if serverPortEnvPresent {
 		c.ServerPort = &serverPortEnv
 	}
 
 	c.ReportInterval = reportInterval
-	if reportIntervalEnv != "" {
+	if reportIntervalEnvPresent {
 		atoi, err := strconv.Atoi(reportIntervalEnv)
 		if err == nil {
 			c.ReportInterval = &atoi
@@ -48,7 +48,7 @@ func (c *Config) Load() {
 	}
 
 	c.PollInterval = pollInterval
-	if pollIntervalEnv != "" {
+	if pollIntervalEnvPresent {
 		atoi, err := strconv.Atoi(pollIntervalEnv)
 		if err == nil {
 			c.PollInterval = &atoi

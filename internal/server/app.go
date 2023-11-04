@@ -39,9 +39,9 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	metricStorage := metric.NewStorage()
 
-	var metricLoaderService MetricLoaderService
+	var metricLoaderService MetricLoaderService = nil
 	// пустое значение отключает функцию записи на диск
-	if *cfg.FileStoragePath != "" {
+	if cfg.GetIsEnabledFileWrite() {
 		fileStorage, err := file.NewFileStorage(*cfg.FileStoragePath)
 		if err != nil {
 			logger.Error("Ошибка инцилизации fileStorage ", err)
@@ -49,9 +49,9 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 		}
 
 		metricLoaderService = metricloader.NewMetricLoaderService(logger, fileStorage, metricStorage)
-	} else {
-		metricLoaderService = metricloader.NewEmptyMetricLoaderService()
 	}
+
+	fmt.Println(fmt.Sprintf("LOADER: %+v", metricLoaderService))
 
 	validator := metricValidator.New()
 	updateService := metric2.NewMetricService(logger, metricStorage, validator, metricLoaderService, cfg)
