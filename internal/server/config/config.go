@@ -13,6 +13,7 @@ type Config struct {
 
 	StoreInterval time.Duration
 
+	// пустое значение отключает функцию записи на диск
 	FileStoragePath *string
 
 	Restore *bool
