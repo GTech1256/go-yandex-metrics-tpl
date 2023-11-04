@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-// MockHTTPClient is a mock implementation of httpClient
+// MockHTTPClient is a mocks implementation of httpClient
 type MockHTTPClient struct {
 	mock.Mock
 }
@@ -23,7 +23,7 @@ func (m *MockHTTPClient) Do(req *http.Request) (*http.Response, error) {
 	return args.Get(0).(*http.Response), args.Error(1)
 }
 
-// MockResponse is a mock implementation of http.Response
+// MockResponse is a mocks implementation of http.Response
 type MockResponse struct {
 	mock.Mock
 }

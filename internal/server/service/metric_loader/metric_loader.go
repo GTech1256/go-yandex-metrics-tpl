@@ -18,21 +18,21 @@ type FileStorage interface {
 type MetricProvider interface {
 	GetAllMetrics() *metric2.AllMetrics
 }
-type metricLoaderService struct {
+type MetricLoaderService struct {
 	logger         logging2.Logger
 	storage        FileStorage
 	metricProvider MetricProvider
 }
 
-func NewMetricLoaderService(logger logging2.Logger, storage FileStorage, metricProvider MetricProvider) *metricLoaderService {
-	return &metricLoaderService{
+func NewMetricLoaderService(logger logging2.Logger, storage FileStorage, metricProvider MetricProvider) *MetricLoaderService {
+	return &MetricLoaderService{
 		logger:         logger,
 		storage:        storage,
 		metricProvider: metricProvider,
 	}
 }
 
-func (u metricLoaderService) LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricJSON, error) {
+func (u MetricLoaderService) LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricJSON, error) {
 	all, err := u.storage.ReadAll()
 	if err != nil {
 		u.logger.Error(err)
@@ -42,7 +42,7 @@ func (u metricLoaderService) LoadMetricsFromDisk(ctx context.Context) ([]*file.M
 	return all, nil
 }
 
-func (u metricLoaderService) StartMetricsToDiskInterval(ctx context.Context, interval time.Duration) {
+func (u MetricLoaderService) StartMetricsToDiskInterval(ctx context.Context, interval time.Duration) {
 	ticker := time.NewTicker(interval)
 
 	for {
@@ -60,7 +60,7 @@ func (u metricLoaderService) StartMetricsToDiskInterval(ctx context.Context, int
 	}
 }
 
-func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
+func (u MetricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 	metrics := u.metricProvider.GetAllMetrics()
 	u.logger.Info("Сохранение всех Метрик на диск ", metrics)
 
@@ -105,7 +105,7 @@ func (u metricLoaderService) saveMetricsToDisk(ctx context.Context) error {
 	return nil
 }
 
-func (u metricLoaderService) SaveMetricToDisk(ctx context.Context, mj *file.MetricJSON) error {
+func (u MetricLoaderService) SaveMetricToDisk(ctx context.Context, mj *file.MetricJSON) error {
 	u.logger.Info("Сохранение Метрики на диск ", mj)
 	err := u.storage.Write(mj)
 	if err != nil {
@@ -117,7 +117,7 @@ func (u metricLoaderService) SaveMetricToDisk(ctx context.Context, mj *file.Metr
 	return nil
 }
 
-func (u metricLoaderService) clear() error {
+func (u MetricLoaderService) clear() error {
 	u.logger.Info("Отчистка fileStorage")
 	return u.storage.Truncate()
 }

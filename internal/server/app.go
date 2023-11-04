@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/config"
 	home "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
@@ -19,9 +20,16 @@ import (
 	"github.com/go-chi/chi/v5"
 	"log"
 	"net/http"
+	"time"
 )
 
 type App struct {
+}
+
+type MetricLoaderService interface {
+	StartMetricsToDiskInterval(ctx context.Context, interval time.Duration)
+	LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricJSON, error)
+	SaveMetricToDisk(ctx context.Context, mj *file.MetricJSON) error
 }
 
 func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
@@ -29,15 +37,19 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	router.Use(gzip.WithGzip)
 
-	fileStorage, err := file.NewFileStorage(*cfg.FileStoragePath)
-	if err != nil {
-		logger.Error("Ошибка инцилизации fileStorage ", err)
-		panic(err)
-	}
-
 	metricStorage := metric.NewStorage()
 
-	metricLoaderService := metricloader.NewMetricLoaderService(logger, fileStorage, metricStorage)
+	var metricLoaderService MetricLoaderService = nil
+	// пустое значение отключает функцию записи на диск
+	if cfg.GetIsEnabledFileWrite() {
+		fileStorage, err := file.NewFileStorage(*cfg.FileStoragePath)
+		if err != nil {
+			logger.Error("Ошибка инцилизации fileStorage ", err)
+			panic(err)
+		}
+
+		metricLoaderService = metricloader.NewMetricLoaderService(logger, fileStorage, metricStorage)
+	}
 
 	validator := metricValidator.New()
 	updateService := metric2.NewMetricService(logger, metricStorage, validator, metricLoaderService, cfg)

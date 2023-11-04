@@ -25,24 +25,24 @@ func NewConfig() *Config {
 func (c *Config) Load() {
 	var (
 		// Hack для тестирования
-		command            = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
-		port               = command.String("a", ":8080", "address and port to run metric")
-		portEnv            = os.Getenv("ADDRESS")
-		storeInterval      = command.Int("i", 300, "the number of seconds after which the metric is saved to disk")
-		storeIntervalEnv   = os.Getenv("STORE_INTERVAL")
-		fileStoragePath    = command.String("f", "/tmp/metrics-db.json", "the path to the file for saving metrics")
-		fileStoragePathEnv = os.Getenv("FILE_STORAGE_PATH")
-		restore            = command.Bool("r", true, "the path to the file for saving metrics")
-		restoreEnv         = os.Getenv("RESTORE")
+		command                                       = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
+		port                                          = command.String("a", ":8080", "address and port to run metric")
+		portEnv, portEnvPresent                       = os.LookupEnv("ADDRESS")
+		storeInterval                                 = command.Int("i", 300, "the number of seconds after which the metric is saved to disk")
+		storeIntervalEnv, storeIntervalEnvPresent     = os.LookupEnv("STORE_INTERVAL")
+		fileStoragePath                               = command.String("f", "/tmp/metrics-db.json", "the path to the file for saving metrics")
+		fileStoragePathEnv, fileStoragePathEnvPresent = os.LookupEnv("FILE_STORAGE_PATH")
+		restore                                       = command.Bool("r", true, "the path to the file for saving metrics")
+		restoreEnv, restoreEnvPresent                 = os.LookupEnv("RESTORE")
 	)
 
 	c.Port = port
-	if portEnv != "" {
+	if portEnvPresent {
 		c.Port = &portEnv
 	}
 
 	c.StoreInterval = time.Duration(*storeInterval) * time.Second
-	if storeIntervalEnv != "" {
+	if storeIntervalEnvPresent {
 		atoi, err := strconv.Atoi(storeIntervalEnv)
 		if err == nil {
 			c.StoreInterval = time.Duration(atoi) * time.Second
@@ -50,12 +50,12 @@ func (c *Config) Load() {
 	}
 
 	c.FileStoragePath = fileStoragePath
-	if fileStoragePathEnv != "" {
+	if fileStoragePathEnvPresent {
 		c.FileStoragePath = &fileStoragePathEnv
 	}
 
 	c.Restore = restore
-	if fileStoragePathEnv != "" {
+	if restoreEnvPresent {
 		restoreEnvBool, err := strconv.ParseBool(restoreEnv)
 		if err == nil {
 			c.Restore = &restoreEnvBool
@@ -66,4 +66,9 @@ func (c *Config) Load() {
 	// А несколько раз flag.Parse() нельзя вызывать
 	// Из-за этого хак с командными флагами
 	command.Parse(os.Args[1:])
+}
+
+// пустое значение отключает функцию записи на диск
+func (c Config) GetIsEnabledFileWrite() bool {
+	return *c.FileStoragePath != ""
 }
