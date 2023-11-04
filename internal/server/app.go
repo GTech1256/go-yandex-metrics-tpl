@@ -51,8 +51,6 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 		metricLoaderService = metricloader.NewMetricLoaderService(logger, fileStorage, metricStorage)
 	}
 
-	fmt.Println(fmt.Sprintf("LOADER: %+v", metricLoaderService))
-
 	validator := metricValidator.New()
 	updateService := metric2.NewMetricService(logger, metricStorage, validator, metricLoaderService, cfg)
 
