@@ -43,6 +43,7 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 	metricStorage := memory.NewStorage()
 
 	if cfg.GetIsEnabledSQLStore() {
+		logger.Info("SQL Enabled")
 		sql, err := sql2.NewSQL(*cfg.DatabaseDSN)
 		//defer sql.DB.Close()
 		if err != nil {
