@@ -7,16 +7,19 @@ import (
 	home "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/gzip"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/logging"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/ping"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/counter"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/gauge"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/value"
 	file2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/file"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/memory"
+	sql3 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_loader"
 	metricValidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
+	sql2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/sql"
 	"github.com/go-chi/chi/v5"
 	"log"
 	"net/http"
@@ -39,21 +42,21 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	metricStorage := memory.NewStorage()
 
-	//if cfg.GetIsEnabledSQLStore() {
-	//	sql, err := sql2.NewSQL(*cfg.DatabaseDSN)
-	//	//defer sql.DB.Close()
-	//	if err != nil {
-	//		logger.Error(err)
-	//		return nil, err
-	//	}
-	//
-	//	sqlStorage := sql3.NewStorage(sql.DB)
-	//
-	//	logger.Info("Регистрация /ping Router", sql)
-	//	pingHandler := ping.NewHandler(logger, sqlStorage)
-	//	pingHandler.Register(router)
-	//
-	//}
+	if cfg.GetIsEnabledSQLStore() {
+		sql, err := sql2.NewSQL(*cfg.DatabaseDSN)
+		//defer sql.DB.Close()
+		if err != nil {
+			logger.Error(err)
+			return nil, err
+		}
+
+		sqlStorage := sql3.NewStorage(sql.DB)
+
+		logger.Info("Регистрация /ping Router", sql)
+		pingHandler := ping.NewHandler(logger, sqlStorage)
+		pingHandler.Register(router)
+
+	}
 
 	var metricLoaderService MetricLoaderService = nil
 	// пустое значение отключает функцию записи на диск
