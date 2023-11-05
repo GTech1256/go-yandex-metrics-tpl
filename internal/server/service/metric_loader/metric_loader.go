@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/file"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"time"
 )

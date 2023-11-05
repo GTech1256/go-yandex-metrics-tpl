@@ -6,7 +6,6 @@ build-agent:
 	go build -o cmd/agent -v cmd/agent/main.go
 	mv cmd/agent/main cmd/agent/agent
 
-.PHONY: run
 build: build-server build-agent
 
 

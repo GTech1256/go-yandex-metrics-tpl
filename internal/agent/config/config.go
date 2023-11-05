@@ -26,9 +26,9 @@ func (c *Config) Load() {
 	var (
 		// Hack для тестирования
 		command                                     = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
-		serverPort                                  = command.String("a", ":8080", "address and port to run metric")
+		serverPort                                  = command.String("a", ":8080", "address and port to run memory")
 		serverPortEnv, serverPortEnvPresent         = os.LookupEnv("ADDRESS")
-		reportInterval                              = command.Int("r", 10, "frequency of sending metrics to the metric")
+		reportInterval                              = command.Int("r", 10, "frequency of sending metrics to the memory")
 		reportIntervalEnv, reportIntervalEnvPresent = os.LookupEnv("REPORT_INTERVAL")
 		pollInterval                                = command.Int("p", 2, "the frequency of polling metrics")
 		pollIntervalEnv, pollIntervalEnvPresent     = os.LookupEnv("POLL_INTERVAL")

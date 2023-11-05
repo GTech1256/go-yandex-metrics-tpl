@@ -3,7 +3,7 @@ package metric
 import (
 	"context"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/file"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric/converter"
 )
 

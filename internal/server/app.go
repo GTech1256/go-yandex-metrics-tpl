@@ -11,8 +11,8 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/counter"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/gauge"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/value"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric"
+	file2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/file"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/memory"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_loader"
 	metricValidator "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric_validator"
@@ -28,8 +28,8 @@ type App struct {
 
 type MetricLoaderService interface {
 	StartMetricsToDiskInterval(ctx context.Context, interval time.Duration)
-	LoadMetricsFromDisk(ctx context.Context) ([]*file.MetricJSON, error)
-	SaveMetricToDisk(ctx context.Context, mj *file.MetricJSON) error
+	LoadMetricsFromDisk(ctx context.Context) ([]*file2.MetricJSON, error)
+	SaveMetricToDisk(ctx context.Context, mj *file2.MetricJSON) error
 }
 
 func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
@@ -37,12 +37,28 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	router.Use(gzip.WithGzip)
 
-	metricStorage := metric.NewStorage()
+	metricStorage := memory.NewStorage()
+
+	//if cfg.GetIsEnabledSQLStore() {
+	//	sql, err := sql2.NewSQL(*cfg.DatabaseDSN)
+	//	//defer sql.DB.Close()
+	//	if err != nil {
+	//		logger.Error(err)
+	//		return nil, err
+	//	}
+	//
+	//	sqlStorage := sql3.NewStorage(sql.DB)
+	//
+	//	logger.Info("Регистрация /ping Router", sql)
+	//	pingHandler := ping.NewHandler(logger, sqlStorage)
+	//	pingHandler.Register(router)
+	//
+	//}
 
 	var metricLoaderService MetricLoaderService = nil
 	// пустое значение отключает функцию записи на диск
 	if cfg.GetIsEnabledFileWrite() {
-		fileStorage, err := file.NewFileStorage(*cfg.FileStoragePath)
+		fileStorage, err := file2.NewFileStorage(*cfg.FileStoragePath)
 		if err != nil {
 			logger.Error("Ошибка инцилизации fileStorage ", err)
 			panic(err)

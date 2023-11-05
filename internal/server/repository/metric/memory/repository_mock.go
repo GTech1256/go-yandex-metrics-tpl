@@ -1,4 +1,4 @@
-package metric
+package memory
 
 import (
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"

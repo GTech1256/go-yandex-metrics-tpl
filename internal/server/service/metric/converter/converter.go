@@ -2,7 +2,7 @@ package converter
 
 import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/file"
 )
 
 func MetricCounterToMetricJSON(mg *entity.MetricCounter) *file.MetricJSON {
