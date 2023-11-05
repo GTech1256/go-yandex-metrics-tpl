@@ -29,7 +29,7 @@ func (h handler) Register(router *chi.Mux) {
 }
 
 func (h handler) Ping(writer http.ResponseWriter, request *http.Request) {
-	err := h.storage.Ping(context.Background())
+	err := h.storage.Ping(request.Context())
 
 	if err != nil {
 		h.logger.Error(err)

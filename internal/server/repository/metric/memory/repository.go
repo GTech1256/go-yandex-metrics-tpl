@@ -80,3 +80,7 @@ func (s *storage) GetAllMetrics() *metric.AllMetrics {
 		Counter: s.memStorage.counter,
 	}
 }
+
+func (s *storage) Ping(ctx context.Context) error {
+	return nil
+}
