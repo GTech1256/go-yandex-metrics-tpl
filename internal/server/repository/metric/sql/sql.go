@@ -2,95 +2,226 @@ package sql
 
 import (
 	"context"
+	"database/sql"
+	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	"github.com/jackc/pgx/v5"
+
+	_ "github.com/golang-migrate/migrate/v4/source/file"
+	_ "github.com/lib/pq"
 )
-
-//var (
-//	gauge   = make(map[string]float64)
-//	counter = make(map[string]int64)
-//)
-
-//type MemStorage struct {
-//	gauge   map[string]float64
-//	counter map[string]int64
-//}
 
 type storage struct {
 	db *pgx.Conn
-	//memStorage MemStorage
 }
 
 func NewStorage(db *pgx.Conn) *storage {
-	//memStorage := MemStorage{
-	//	gauge:   gauge,
-	//	counter: counter,
-	//}
 
 	return &storage{
 		db: db,
-		//memStorage: memStorage,
 	}
 }
 
 // SaveGauge новое значение должно замещать предыдущее.
 func (s *storage) SaveGauge(ctx context.Context, gauge *entity2.MetricGauge) error {
-	//s.memStorage.gauge[gauge.Name] = float64(gauge.Value)
-	//
-	//fmt.Printf("%v %+v \n", len(s.memStorage.gauge), s.memStorage)
-	//
-	//return nil
+	_, err := s.GetGaugeValue(gauge.Name)
+	hasGauge := !(err == sql.ErrNoRows)
+	if err != nil && !hasGauge {
+		return err
+	}
+
+	if hasGauge {
+		err := s.updateGauge(ctx, gauge)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	}
+
+	err = s.insertGauge(ctx, gauge)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *storage) insertGauge(ctx context.Context, gauge *entity2.MetricGauge) error {
+	query := "INSERT INTO gauge(title, value) VALUES($1, $2)"
+	_, err := s.db.Exec(ctx, query, gauge.Name, gauge.Value)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *storage) updateGauge(ctx context.Context, gauge *entity2.MetricGauge) error {
+	query := "UPDATE gauge SET value = $2 where title = $1"
+	_, err := s.db.Exec(ctx, query, gauge.Name, gauge.Value)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
 
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
 func (s *storage) SaveCounter(ctx context.Context, counter *entity2.MetricCounter) error {
-	//if _, isOk := s.memStorage.counter[counter.Name]; !isOk {
-	//	s.memStorage.counter[counter.Name] = int64(counter.Value)
-	//} else {
-	//	s.memStorage.counter[counter.Name] += int64(counter.Value)
-	//}
-	//
-	//fmt.Printf("%v %+v \n", len(s.memStorage.counter), s.memStorage)
-	//
-	//return nil
+	oldValue, err := s.GetCounterValue(counter.Name)
+	hasCounter := !(err == sql.ErrNoRows)
+	if err != nil && !hasCounter {
+		return err
+	}
+
+	if hasCounter {
+		c := &entity2.MetricCounter{
+			Type:  counter.Type,
+			Name:  counter.Name,
+			Value: *oldValue + counter.Value,
+		}
+
+		err = s.updateCounter(ctx, c)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	}
+
+	err = s.insertCounter(ctx, counter)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *storage) insertCounter(ctx context.Context, counter *entity2.MetricCounter) error {
+	query := "INSERT INTO counter(title, delta) VALUES($1, $2)"
+	_, err := s.db.Exec(ctx, query, counter.Name, counter.Value)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *storage) updateCounter(ctx context.Context, counter *entity2.MetricCounter) error {
+	query := "UPDATE counter SET delta = $2 where title = $1"
+	_, err := s.db.Exec(ctx, query, counter.Name, counter.Value)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
 
 // GetGauge - возвращает значение Gauge из хранилища
 func (s *storage) GetGaugeValue(name string) (*entity2.GaugeValue, error) {
-	//value, ok := s.memStorage.gauge[name]
-	//if ok {
-	//	return &value, nil
-	//}
-	//
-	//return nil, nil
+	ctx := context.Background()
 
-	return nil, nil
+	var v *entity2.GaugeValue
+	query := "SELECT value FROM gauge where title = $1"
+	row := s.db.QueryRow(ctx, query, name)
+
+	err := row.Scan(&v)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println(v)
+
+	return v, nil
 }
 
 // GetCounter - возвращает значение Counter из хранилища
 func (s *storage) GetCounterValue(name string) (*entity2.CounterValue, error) {
-	//value, ok := s.memStorage.counter[name]
-	//if ok {
-	//	return &value, nil
-	//}
-	//
-	//return nil, nil
+	ctx := context.Background()
 
-	return nil, nil
+	var v *entity2.CounterValue
+	query := "SELECT value FROM counter where title = $1"
+	row := s.db.QueryRow(ctx, query, name)
+
+	err := row.Scan(&v)
+	if err != nil {
+		return nil, err
+	}
+
+	return v, nil
+}
+
+func (s *storage) getGaugeMetrics(ctx context.Context) (*map[string]float64, error) {
+	v := make(map[string]float64, 0)
+
+	query := "SELECT title, value FROM gauge"
+	rows, err := s.db.Query(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var (
+			title string
+			value float64
+		)
+
+		err := rows.Scan(&title, &value)
+		if err != nil {
+			return nil, err
+		}
+
+		v[title] = value
+	}
+
+	return &v, nil
+}
+
+func (s *storage) getCounterMetrics(ctx context.Context) (*map[string]int64, error) {
+	v := make(map[string]int64, 0)
+
+	query := "SELECT title, delta FROM counter"
+	rows, err := s.db.Query(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var (
+			title string
+			delta int64
+		)
+
+		err := rows.Scan(&title, &delta)
+		if err != nil {
+			return nil, err
+		}
+
+		v[title] = delta
+	}
+
+	return &v, nil
 }
 
 func (s *storage) GetAllMetrics() *metric.AllMetrics {
-	//return &metric.AllMetrics{
-	//	Gauge:   s.memStorage.gauge,
-	//	Counter: s.memStorage.counter,
-	//}
+	ctx := context.Background()
 
-	return nil
+	gauge, err := s.getGaugeMetrics(ctx)
+	if err != nil {
+		return nil
+	}
+
+	counter, err := s.getCounterMetrics(ctx)
+	if err != nil {
+		return nil
+	}
+
+	return &metric.AllMetrics{
+		Gauge:   *gauge,
+		Counter: *counter,
+	}
 }
 
 func (s *storage) Ping(ctx context.Context) error {

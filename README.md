@@ -95,3 +95,10 @@ mv cmd/agent/main cmd/agent/agent
 go build -o cmd/memory cmd/memory/main.go
 mv cmd/memory/main cmd/memory/memory
 ```
+
+### Миграции
+
+Добавление миграции
+`migrate create -ext sql -dir internal/server/config/db/migrations -seq create_users_table`
+
+
