@@ -36,7 +36,7 @@ func NewStorageComposition(cfg *config.Config, logger logging.Logger, router *ch
 
 		storage = sql3.NewStorage(sql.DB)
 
-		logger.Info("Регистрация /ping Router", sql)
+		logger.Info("Регистрация /ping Router")
 		pingHandler := ping.NewHandler(logger, storage)
 		pingHandler.Register(router)
 	} else {
