@@ -74,7 +74,7 @@ func (u metricService) SaveGaugeMetric(ctx context.Context, metric *entity2.Metr
 
 	err = u.storage.SaveGauge(ctx, metricsGauge)
 	if err != nil {
-		u.logger.Error("Ошибка сохранения метрики", err)
+		u.logger.Error("Ошибка сохранения метрики ", err)
 		return err
 	}
 
@@ -100,7 +100,7 @@ func (u metricService) SaveCounterMetric(ctx context.Context, metric *entity2.Me
 
 	err = u.storage.SaveCounter(ctx, metricsCounter)
 	if err != nil {
-		u.logger.Error("Ошибка сохранения метрики", err)
+		u.logger.Error("Ошибка сохранения метрики ", err)
 		return err
 	}
 

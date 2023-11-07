@@ -2,7 +2,7 @@ package sql
 
 import (
 	"context"
-	"database/sql"
+	"errors"
 	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
@@ -26,13 +26,13 @@ func NewStorage(db *pgx.Conn) *storage {
 // SaveGauge новое значение должно замещать предыдущее.
 func (s *storage) SaveGauge(ctx context.Context, gauge *entity2.MetricGauge) error {
 	_, err := s.GetGaugeValue(gauge.Name)
-	hasGauge := !(err == sql.ErrNoRows)
-	if err != nil && !hasGauge {
+	isNoOldValue := errors.Is(err, pgx.ErrNoRows)
+	if err != nil && !isNoOldValue {
 		return err
 	}
 
-	if hasGauge {
-		err := s.updateGauge(ctx, gauge)
+	if isNoOldValue {
+		err = s.insertGauge(ctx, gauge)
 		if err != nil {
 			return err
 		}
@@ -40,7 +40,7 @@ func (s *storage) SaveGauge(ctx context.Context, gauge *entity2.MetricGauge) err
 		return nil
 	}
 
-	err = s.insertGauge(ctx, gauge)
+	err = s.updateGauge(ctx, gauge)
 	if err != nil {
 		return err
 	}
@@ -71,19 +71,14 @@ func (s *storage) updateGauge(ctx context.Context, gauge *entity2.MetricGauge) e
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
 func (s *storage) SaveCounter(ctx context.Context, counter *entity2.MetricCounter) error {
 	oldValue, err := s.GetCounterValue(counter.Name)
-	hasCounter := !(err == sql.ErrNoRows)
-	if err != nil && !hasCounter {
+	isNoOldValue := errors.Is(err, pgx.ErrNoRows)
+
+	if err != nil && !isNoOldValue {
 		return err
 	}
 
-	if hasCounter {
-		c := &entity2.MetricCounter{
-			Type:  counter.Type,
-			Name:  counter.Name,
-			Value: *oldValue + counter.Value,
-		}
-
-		err = s.updateCounter(ctx, c)
+	if isNoOldValue {
+		err = s.insertCounter(ctx, counter)
 		if err != nil {
 			return err
 		}
@@ -91,7 +86,13 @@ func (s *storage) SaveCounter(ctx context.Context, counter *entity2.MetricCounte
 		return nil
 	}
 
-	err = s.insertCounter(ctx, counter)
+	c := &entity2.MetricCounter{
+		Type:  counter.Type,
+		Name:  counter.Name,
+		Value: *oldValue + counter.Value,
+	}
+
+	err = s.updateCounter(ctx, c)
 	if err != nil {
 		return err
 	}
@@ -142,7 +143,7 @@ func (s *storage) GetCounterValue(name string) (*entity2.CounterValue, error) {
 	ctx := context.Background()
 
 	var v *entity2.CounterValue
-	query := "SELECT value FROM counter where title = $1"
+	query := "SELECT delta FROM counter where title = $1"
 	row := s.db.QueryRow(ctx, query, name)
 
 	err := row.Scan(&v)
