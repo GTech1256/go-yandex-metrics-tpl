@@ -65,7 +65,7 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	var metricLoaderService MetricLoaderService = nil
 	// пустое значение отключает функцию записи на диск
-	if cfg.GetIsEnabledFileWrite() {
+	if cfg.GetIsEnabledFileWrite() && !cfg.GetIsEnabledSQLStore() {
 		fileStorage, err := file2.NewFileStorage(*cfg.FileStoragePath)
 		if err != nil {
 			logger.Error("Ошибка инцилизации fileStorage ", err)
