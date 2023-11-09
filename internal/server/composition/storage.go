@@ -20,6 +20,7 @@ type storage interface {
 	GetCounterValue(name string) (*entity2.CounterValue, error)
 	GetAllMetrics() *metric.AllMetrics
 	Ping(ctx context.Context) error
+	SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error
 }
 
 func NewStorageComposition(cfg *config.Config, logger logging.Logger, router *chi.Mux) (storage, error) {

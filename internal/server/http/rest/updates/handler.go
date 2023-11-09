@@ -5,12 +5,10 @@ import (
 	"encoding/json"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/converter"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"net/http"
-	"strconv"
 )
 
 type MetricValidator interface {
@@ -19,7 +17,7 @@ type MetricValidator interface {
 }
 
 type Service interface {
-	SaveCounterMetric(ctx context.Context, metric *entity.MetricFields) error
+	SaveMetricJSONs(ctx context.Context, metrics []*entity.MetricJSON) error
 	SaveGaugeMetric(ctx context.Context, metric *entity.MetricFields) error
 	GetMetricValue(ctx context.Context, metric *updateInterface.GetMetricValueDto) (*string, error)
 }
@@ -44,89 +42,31 @@ func (h handler) Register(router *chi.Mux) {
 
 // Updates POST /updates
 func (h handler) Updates(writer http.ResponseWriter, request *http.Request) {
-	var ms *[]*entity.MetricJSON
-	ctx := context.Background()
+	ctx := request.Context()
+
+	// Получение метрики из запроса
+	var m []*entity.MetricJSON
 
 	decoder := json.NewDecoder(request.Body)
-	err := decoder.Decode(&ms)
+	err := decoder.Decode(&m)
 	if err != nil {
 		h.logger.Error(err)
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	for _, m := range *ms {
+	// Сохранение метрики
+	err = h.service.SaveMetricJSONs(ctx, m)
 
-		mType := h.metricValidator.GetValidType(m.MType)
-
-		switch mType {
-		case entity.Gauge:
-			mg := converter.MetricsGaugeToMetricFields(*m)
-			err := h.service.SaveGaugeMetric(ctx, &mg)
-			if err != nil {
-				h.logger.Error(err)
-				writer.WriteHeader(http.StatusBadRequest)
-				return
-			}
-
-			mv := converter.MetricsToMetricValueDTO(*m)
-			value, err := h.service.GetMetricValue(ctx, &mv)
-			if err != nil {
-				h.logger.Error(err)
-				writer.WriteHeader(http.StatusBadRequest)
-				return
-			}
-
-			valueFloat, err := strconv.ParseFloat(*value, 64)
-			if err != nil {
-				h.logger.Error(err)
-				writer.WriteHeader(http.StatusInternalServerError)
-				return
-			}
-
-			m.Value = &valueFloat
-		case entity.Counter:
-			mc := converter.MetricsCounterToMetricFields(*m)
-			err := h.service.SaveCounterMetric(ctx, &mc)
-			if err != nil {
-				h.logger.Error(err)
-				writer.WriteHeader(http.StatusBadRequest)
-				return
-			}
-
-			mv := converter.MetricsToMetricValueDTO(*m)
-			value, err := h.service.GetMetricValue(ctx, &mv)
-			if err != nil {
-				h.logger.Error(err)
-				writer.WriteHeader(http.StatusBadRequest)
-				return
-			}
-
-			valueInt, err := strconv.ParseInt(*value, 10, 64)
-			if err != nil {
-				h.logger.Error(err)
-				writer.WriteHeader(http.StatusInternalServerError)
-				return
-			}
-
-			m.Delta = &valueInt
-		default:
-			h.logger.Error("Неизвестный тип метрики ", m)
-			writer.WriteHeader(http.StatusBadRequest)
-			return
-		}
+	if err != nil {
+		writer.WriteHeader(http.StatusBadRequest)
+		return
 	}
-	//
-	//res, err := json.Marshal(m)
-	//if err != nil {
-	//	return
-	//}
-	//
-	//writer.Header().Add("Content-Type", "application/json")
+
+	// Ответ
 	writer.WriteHeader(http.StatusOK)
-	//_, err = writer.Write()
-	//if err != nil {
-	//	h.logger.Error(err)
-	//	return
-	//}
+	if err != nil {
+		h.logger.Error(err)
+		return
+	}
 }

@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/converter"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/middlware/guard"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric/converter"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
 	"net/http"
@@ -20,6 +20,7 @@ type MetricValidator interface {
 }
 
 type Service interface {
+	SaveMetricJSON(ctx context.Context, metric *entity.MetricJSON) error
 	SaveCounterMetric(ctx context.Context, metric *entity.MetricFields) error
 	SaveGaugeMetric(ctx context.Context, metric *entity.MetricFields) error
 	GetMetricValue(ctx context.Context, metric *updateInterface.GetMetricValueDto) (*string, error)
@@ -53,9 +54,10 @@ func (h handler) UpdateRest(writer http.ResponseWriter, request *http.Request) {
 
 // Update POST /update
 func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
-	var m *entity.MetricJSON
-	ctx := context.Background()
+	ctx := request.Context()
 
+	// Получение метрики из запроса
+	var m *entity.MetricJSON
 	decoder := json.NewDecoder(request.Body)
 	err := decoder.Decode(&m)
 	if err != nil {
@@ -64,70 +66,21 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	mType := h.metricValidator.GetValidType(m.MType)
-
-	switch mType {
-	case entity.Gauge:
-		mg := converter.MetricsGaugeToMetricFields(*m)
-		err := h.service.SaveGaugeMetric(ctx, &mg)
-		if err != nil {
-			h.logger.Error(err)
-			writer.WriteHeader(http.StatusBadRequest)
-			return
-		}
-
-		mv := converter.MetricsToMetricValueDTO(*m)
-		value, err := h.service.GetMetricValue(ctx, &mv)
-		if err != nil {
-			h.logger.Error(err)
-			writer.WriteHeader(http.StatusBadRequest)
-			return
-		}
-
-		valueFloat, err := strconv.ParseFloat(*value, 64)
-		if err != nil {
-			h.logger.Error(err)
-			writer.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-
-		m.Value = &valueFloat
-	case entity.Counter:
-		mc := converter.MetricsCounterToMetricFields(*m)
-		err := h.service.SaveCounterMetric(ctx, &mc)
-		if err != nil {
-			h.logger.Error(err)
-			writer.WriteHeader(http.StatusBadRequest)
-			return
-		}
-
-		mv := converter.MetricsToMetricValueDTO(*m)
-		value, err := h.service.GetMetricValue(ctx, &mv)
-		if err != nil {
-			h.logger.Error(err)
-			writer.WriteHeader(http.StatusBadRequest)
-			return
-		}
-
-		valueInt, err := strconv.ParseInt(*value, 10, 64)
-		if err != nil {
-			h.logger.Error(err)
-			writer.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-
-		m.Delta = &valueInt
-	default:
-		h.logger.Error("Неизвестный тип метрики ", m)
+	// Сохранение метрики
+	err = h.service.SaveMetricJSON(ctx, m)
+	if err != nil {
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	res, err := json.Marshal(m)
+	// Формирование JSON ответа
+	res, err := h.getMetricResponse(ctx, *m)
 	if err != nil {
+		writer.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
+	// Ответ
 	writer.Header().Add("Content-Type", "application/json")
 	writer.WriteHeader(http.StatusOK)
 	_, err = writer.Write(res)
@@ -135,4 +88,29 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 		h.logger.Error(err)
 		return
 	}
+}
+
+func (h handler) getMetricResponse(ctx context.Context, m entity.MetricJSON) ([]byte, error) {
+	// Получение метрики из сервиса
+	v := converter.MetricJSONToMetricValueDTO(m)
+	newData, err := h.service.GetMetricValue(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+
+	if m.MType == "counter" {
+		int, err := strconv.ParseInt(*newData, 10, 64)
+		if err != nil {
+			return nil, err
+		}
+		m.Delta = &int
+	} else if m.MType == "gauge" {
+		float, err := strconv.ParseFloat(*newData, 64)
+		if err != nil {
+			return nil, err
+		}
+		m.Value = &float
+	}
+
+	return json.Marshal(newData)
 }

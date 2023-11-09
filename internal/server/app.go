@@ -46,6 +46,8 @@ type MetricService interface {
 	SaveCounterMetric(ctx context.Context, metric *entity2.MetricFields) error
 	GetMetricValue(ctx context.Context, metric *updateInterface.GetMetricValueDto) (*string, error)
 	GetMetrics(ctx context.Context) (*metric.AllMetrics, error)
+	SaveMetricJSONs(ctx context.Context, metrics []*entity2.MetricJSON) error
+	SaveMetricJSON(ctx context.Context, metric *entity2.MetricJSON) error
 }
 
 type MetricValidator interface {

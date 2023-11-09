@@ -2,7 +2,9 @@ package metric
 
 import (
 	"context"
+	"errors"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/config"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
@@ -26,6 +28,7 @@ type Storage interface {
 	GetGaugeValue(name string) (*entity2.GaugeValue, error)
 	GetCounterValue(name string) (*entity2.CounterValue, error)
 	GetAllMetrics() *metric2.AllMetrics
+	SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error
 }
 
 type MetricLoaderService interface {
@@ -153,4 +156,34 @@ func (u metricService) GetMetrics(ctx context.Context) (*metric2.AllMetrics, err
 	storageMetrics := u.storage.GetAllMetrics()
 
 	return storageMetrics, nil
+}
+
+func (u metricService) SaveMetricJSON(ctx context.Context, metric *entity2.MetricJSON) error {
+	mType := u.metricValidator.GetValidType(metric.MType)
+
+	switch mType {
+	case entity.Gauge:
+		mg := converter.MetricsJSONGaugeToMetricFields(*metric)
+		err := u.SaveGaugeMetric(ctx, &mg)
+		if err != nil {
+			u.logger.Error(err)
+			return err
+		}
+	case entity.Counter:
+		mc := converter.MetricsJSONCounterToMetricFields(*metric)
+		err := u.SaveCounterMetric(ctx, &mc)
+		if err != nil {
+			u.logger.Error(err)
+			return err
+		}
+	default:
+		u.logger.Error("Неизвестный тип метрики ", metric)
+		return errors.New("unkown type")
+	}
+
+	return nil
+}
+
+func (u metricService) SaveMetricJSONs(ctx context.Context, metrics []*entity2.MetricJSON) error {
+	return u.storage.SaveMetricBatch(ctx, metrics)
 }
