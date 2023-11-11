@@ -2,10 +2,12 @@ package sql
 
 import (
 	"context"
+	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql/converter"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
+	"time"
 )
 
 type Executor interface {
@@ -20,6 +22,7 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 		return err
 	}
 
+	start := time.Now()
 	for _, metric := range metrics {
 		if metric.GetIsGauge() {
 			err := s.saveGauge(ctx, converter.MetricJSONToMetricGauge(metric), tx)
@@ -33,7 +36,7 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 			}
 		}
 	}
-
+	fmt.Println("SaveMetricBatch:", time.Since(start))
 	err = tx.Commit(ctx)
 	if err != nil {
 		return err

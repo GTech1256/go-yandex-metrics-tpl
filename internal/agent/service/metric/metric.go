@@ -10,6 +10,7 @@ import (
 type UpdateAPI interface {
 	SendUpdate(ctx context.Context, updateDto dto.Update) error
 	SendUpdateJSON(ctx context.Context, updateDto dto.Update) error
+	SendUpdates(ctx context.Context, updateDto []*dto.Update) error
 }
 
 type Repository interface {

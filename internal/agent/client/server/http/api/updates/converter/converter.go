@@ -19,8 +19,6 @@ var (
 )
 
 func UpdateDTOToMetrics(update *dto.Update) (*Metrics, error) {
-	//v, _ := json.MarshalIndent(update, "", "    ")
-
 	m := &Metrics{
 		ID:    update.Name,
 		MType: update.Type,
