@@ -5,6 +5,7 @@ import (
 	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql/converter"
 )
 
 var (
@@ -82,5 +83,23 @@ func (s *storage) GetAllMetrics() *metric.AllMetrics {
 }
 
 func (s *storage) Ping(ctx context.Context) error {
+	return nil
+}
+
+func (u *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error {
+	for _, m := range metrics {
+		if m.GetIsGauge() {
+			err := u.SaveGauge(ctx, converter.MetricJSONToMetricGauge(m))
+			if err != nil {
+				return err
+			}
+		} else if m.GetIsCounter() {
+			err := u.SaveCounter(ctx, converter.MetricJSONToMetricCounter(m))
+			if err != nil {
+				return err
+			}
+		}
+	}
+
 	return nil
 }

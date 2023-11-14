@@ -2,7 +2,6 @@ package sql
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
@@ -21,103 +20,6 @@ func NewStorage(db *pgx.Conn) *storage {
 	return &storage{
 		db: db,
 	}
-}
-
-// SaveGauge новое значение должно замещать предыдущее.
-func (s *storage) SaveGauge(ctx context.Context, gauge *entity2.MetricGauge) error {
-	_, err := s.GetGaugeValue(gauge.Name)
-	isNoOldValue := errors.Is(err, pgx.ErrNoRows)
-	if err != nil && !isNoOldValue {
-		return err
-	}
-
-	if isNoOldValue {
-		err = s.insertGauge(ctx, gauge)
-		if err != nil {
-			return err
-		}
-
-		return nil
-	}
-
-	err = s.updateGauge(ctx, gauge)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (s *storage) insertGauge(ctx context.Context, gauge *entity2.MetricGauge) error {
-	query := "INSERT INTO gauge(title, value) VALUES($1, $2)"
-	_, err := s.db.Exec(ctx, query, gauge.Name, gauge.Value)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (s *storage) updateGauge(ctx context.Context, gauge *entity2.MetricGauge) error {
-	query := "UPDATE gauge SET value = $2 where title = $1"
-	_, err := s.db.Exec(ctx, query, gauge.Name, gauge.Value)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
-func (s *storage) SaveCounter(ctx context.Context, counter *entity2.MetricCounter) error {
-	oldValue, err := s.GetCounterValue(counter.Name)
-	isNoOldValue := errors.Is(err, pgx.ErrNoRows)
-
-	if err != nil && !isNoOldValue {
-		return err
-	}
-
-	if isNoOldValue {
-		err = s.insertCounter(ctx, counter)
-		if err != nil {
-			return err
-		}
-
-		return nil
-	}
-
-	c := &entity2.MetricCounter{
-		Type:  counter.Type,
-		Name:  counter.Name,
-		Value: *oldValue + counter.Value,
-	}
-
-	err = s.updateCounter(ctx, c)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (s *storage) insertCounter(ctx context.Context, counter *entity2.MetricCounter) error {
-	query := "INSERT INTO counter(title, delta) VALUES($1, $2)"
-	_, err := s.db.Exec(ctx, query, counter.Name, counter.Value)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (s *storage) updateCounter(ctx context.Context, counter *entity2.MetricCounter) error {
-	query := "UPDATE counter SET delta = $2 where title = $1"
-	_, err := s.db.Exec(ctx, query, counter.Name, counter.Value)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
 
 // GetGauge - возвращает значение Gauge из хранилища

@@ -14,6 +14,7 @@ import (
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/counter"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/gauge"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/updates"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/value"
 	file2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/file"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/service/metric"
@@ -45,6 +46,8 @@ type MetricService interface {
 	SaveCounterMetric(ctx context.Context, metric *entity2.MetricFields) error
 	GetMetricValue(ctx context.Context, metric *updateInterface.GetMetricValueDto) (*string, error)
 	GetMetrics(ctx context.Context) (*metric.AllMetrics, error)
+	SaveMetricJSONs(ctx context.Context, metrics []*entity2.MetricJSON) error
+	SaveMetricJSON(ctx context.Context, metric *entity2.MetricJSON) error
 }
 
 type MetricValidator interface {
@@ -103,6 +106,10 @@ func (a App) handlersRegister() {
 	a.logger.Info("Регистрация /update/* Router")
 	updateHandler := update.NewHandler(a.logger, a.metricService, a.metricValidator)
 	updateHandler.Register(a.router)
+
+	a.logger.Info("Регистрация /updates Router")
+	updatesHandler := updates.NewHandler(a.logger, a.metricService, a.metricValidator)
+	updatesHandler.Register(a.router)
 
 	a.logger.Info("Регистрация /value/ Router")
 	valueHandler := value.NewHandler(a.logger, a.metricService, a.metricValidator)
