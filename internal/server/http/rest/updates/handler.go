@@ -58,6 +58,7 @@ func (h handler) Updates(writer http.ResponseWriter, request *http.Request) {
 	// Сохранение метрики
 	err = h.service.SaveMetricJSONs(ctx, m)
 	if err != nil {
+		h.logger.Error(err)
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
