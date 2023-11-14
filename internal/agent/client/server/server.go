@@ -5,6 +5,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
 	serverHttp "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/api/update"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/api/updates"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 )
 
@@ -13,29 +14,40 @@ type UpdateAPI interface {
 	SendUpdateJSON(ctx context.Context, updateDto dto.Update) error
 }
 
+type UpdatesAPI interface {
+	SendUpdates(ctx context.Context, updateDto []*dto.Update) error
+}
+
 type client struct {
 	host       string
 	httpClient serverHttp.ClientHTTP
 	logger     logging.Logger
-	api        UpdateAPI
+	updateAPI  UpdateAPI
+	updatesAPI UpdatesAPI
 }
 
 func New(host string, logger logging.Logger) *client {
 	httpClient := serverHttp.New()
-	api := update.New(httpClient, host, logger)
+	updateAPI := update.New(httpClient, host, logger)
+	updatesAPI := updates.New(httpClient, host, logger)
 
 	return &client{
 		host:       host,
 		httpClient: httpClient,
 		logger:     logger,
-		api:        api,
+		updateAPI:  updateAPI,
+		updatesAPI: updatesAPI,
 	}
 }
 
 func (c *client) SendUpdate(ctx context.Context, updateDto dto.Update) error {
-	return c.api.SendUpdate(ctx, updateDto)
+	return c.updateAPI.SendUpdate(ctx, updateDto)
 }
 
 func (c *client) SendUpdateJSON(ctx context.Context, updateDto dto.Update) error {
-	return c.api.SendUpdateJSON(ctx, updateDto)
+	return c.updateAPI.SendUpdateJSON(ctx, updateDto)
+}
+
+func (c *client) SendUpdates(ctx context.Context, updateDto []*dto.Update) error {
+	return c.updatesAPI.SendUpdates(ctx, updateDto)
 }

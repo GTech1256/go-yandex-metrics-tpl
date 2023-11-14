@@ -86,15 +86,15 @@ func (s *storage) Ping(ctx context.Context) error {
 	return nil
 }
 
-func (u *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error {
+func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error {
 	for _, m := range metrics {
 		if m.GetIsGauge() {
-			err := u.SaveGauge(ctx, converter.MetricJSONToMetricGauge(m))
+			err := s.SaveGauge(ctx, converter.MetricJSONToMetricGauge(m))
 			if err != nil {
 				return err
 			}
 		} else if m.GetIsCounter() {
-			err := u.SaveCounter(ctx, converter.MetricJSONToMetricCounter(m))
+			err := s.SaveCounter(ctx, converter.MetricJSONToMetricCounter(m))
 			if err != nil {
 				return err
 			}

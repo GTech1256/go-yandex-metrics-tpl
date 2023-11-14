@@ -37,7 +37,7 @@ func NewHandler(logger logging2.Logger, service Service, metricValidator MetricV
 }
 
 func (h handler) Register(router *chi.Mux) {
-	router.Post("/updates", h.Updates)
+	router.Post("/updates/", h.Updates)
 }
 
 // Updates POST /updates
@@ -57,7 +57,6 @@ func (h handler) Updates(writer http.ResponseWriter, request *http.Request) {
 
 	// Сохранение метрики
 	err = h.service.SaveMetricJSONs(ctx, m)
-
 	if err != nil {
 		writer.WriteHeader(http.StatusBadRequest)
 		return
@@ -65,8 +64,4 @@ func (h handler) Updates(writer http.ResponseWriter, request *http.Request) {
 
 	// Ответ
 	writer.WriteHeader(http.StatusOK)
-	if err != nil {
-		h.logger.Error(err)
-		return
-	}
 }

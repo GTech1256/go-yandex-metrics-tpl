@@ -37,7 +37,7 @@ func (s *storage) saveGauge(ctx context.Context, gauge *entity2.MetricGauge, exe
 }
 
 func (s *storage) insertGauge(ctx context.Context, gauge *entity2.MetricGauge, executor Executor) error {
-	_, err := executor.Exec(ctx, INSERT_GAUGE, gauge.Name, gauge.Value)
+	_, err := executor.Exec(ctx, InsertGauge, gauge.Name, gauge.Value)
 	if err != nil {
 		return err
 	}
@@ -46,7 +46,7 @@ func (s *storage) insertGauge(ctx context.Context, gauge *entity2.MetricGauge, e
 }
 
 func (s *storage) updateGauge(ctx context.Context, gauge *entity2.MetricGauge, executor Executor) error {
-	_, err := executor.Exec(ctx, UPDATE_GAUGE, gauge.Name, gauge.Value)
+	_, err := executor.Exec(ctx, UpdateGauge, gauge.Name, gauge.Value)
 	if err != nil {
 		return err
 	}

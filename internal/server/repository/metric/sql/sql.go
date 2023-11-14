@@ -2,7 +2,6 @@ package sql
 
 import (
 	"context"
-	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	"github.com/jackc/pgx/v5"
@@ -34,8 +33,6 @@ func (s *storage) GetGaugeValue(name string) (*entity2.GaugeValue, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Println(v)
 
 	return v, nil
 }

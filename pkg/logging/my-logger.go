@@ -46,24 +46,31 @@ func (m *MyLogger) GetLogger() *logrus.Entry {
 }
 
 func (m *MyLogger) WithFields(fields logrus.Fields) Logger {
-	newEntry := m.Entry.WithFields(fields)
 	m.mx.Lock()
 	defer m.mx.Unlock()
+
+	newEntry := m.Entry.WithFields(fields)
+
 	newEntry.Data["file"] = fileInfo(2)
+
 	return &MyLogger{Entry: newEntry}
 }
 
 func (m *MyLogger) WithField(key string, value interface{}) Logger {
-	newEntry := m.Entry.WithField(key, value)
 	m.mx.Lock()
 	defer m.mx.Unlock()
+
+	newEntry := m.Entry.WithField(key, value)
+
 	newEntry.Data["file"] = fileInfo(2)
+
 	return &MyLogger{Entry: newEntry}
 }
 
 func (m *MyLogger) Error(args ...interface{}) {
 	m.mx.Lock()
 	defer m.mx.Unlock()
+
 	m.Entry.Data["file"] = fileInfo(2)
 	m.Entry.Error(args...)
 }
@@ -71,6 +78,7 @@ func (m *MyLogger) Error(args ...interface{}) {
 func (m *MyLogger) Info(args ...interface{}) {
 	m.mx.Lock()
 	defer m.mx.Unlock()
+
 	m.Entry.Data["file"] = fileInfo(2)
 	m.Entry.Info(args...)
 }
@@ -78,6 +86,7 @@ func (m *MyLogger) Info(args ...interface{}) {
 func (m *MyLogger) Infof(format string, args ...interface{}) {
 	m.mx.Lock()
 	defer m.mx.Unlock()
+
 	m.Entry.Data["file"] = fileInfo(2)
 	m.Entry.Infof(format, args...)
 }
@@ -85,6 +94,7 @@ func (m *MyLogger) Infof(format string, args ...interface{}) {
 func (m *MyLogger) Errorf(format string, args ...interface{}) {
 	m.mx.Lock()
 	defer m.mx.Unlock()
+
 	m.Entry.Data["file"] = fileInfo(2)
 	m.Entry.Errorf(format, args...)
 }

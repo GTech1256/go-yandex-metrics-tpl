@@ -44,7 +44,7 @@ func (s *storage) saveCounter(ctx context.Context, counter *entity2.MetricCounte
 }
 
 func (s *storage) insertCounter(ctx context.Context, counter *entity2.MetricCounter, executor Executor) error {
-	_, err := executor.Exec(ctx, INSERT_COUNTER, counter.Name, counter.Value)
+	_, err := executor.Exec(ctx, InsertCounter, counter.Name, counter.Value)
 	if err != nil {
 		return err
 	}
@@ -53,7 +53,7 @@ func (s *storage) insertCounter(ctx context.Context, counter *entity2.MetricCoun
 }
 
 func (s *storage) updateCounter(ctx context.Context, counter *entity2.MetricCounter, executor Executor) error {
-	_, err := executor.Exec(ctx, UPDATE_COUNTER, counter.Name, counter.Value)
+	_, err := executor.Exec(ctx, UpdateCounter, counter.Name, counter.Value)
 	if err != nil {
 		return err
 	}
