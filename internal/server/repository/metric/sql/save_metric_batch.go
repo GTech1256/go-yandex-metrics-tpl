@@ -5,6 +5,7 @@ import (
 	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql/converter"
+	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/retry"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"time"
@@ -13,6 +14,11 @@ import (
 type Executor interface {
 	Exec(ctx context.Context, sql string, arguments ...any) (pgconn.CommandTag, error)
 }
+
+var (
+	ErrMetricJSONToMetricGaugeConvertation   = "Конвертировать MetricJSON в MetricGauge не удалось"
+	ErrMetricJSONToMetricCounterConvertation = "Конвертировать MetricJSON в MetricCounter не удалось"
+)
 
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
 func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error {
@@ -37,10 +43,26 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 		}
 	}
 	fmt.Println("SaveMetricBatch:", time.Since(start))
-	err = tx.Commit(ctx)
+
+	err = retry.MakeRetry(
+		func() error {
+			err = tx.Commit(ctx)
+
+			// Ошибка чтения данных из сети или БД из-за проблем соединения.
+			if err != nil {
+				s.logger.Errorf("Ошибка применении транзакции %w", err)
+				return err
+			}
+
+			return nil
+		},
+	)
+
 	if err != nil {
+		s.logger.Errorf("Не удалось сохранить метрику батчем %w", err)
 		return err
 	}
 
+	s.logger.Errorf("Удалось сохранить метрику батчем %w", err)
 	return nil
 }

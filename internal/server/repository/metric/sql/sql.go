@@ -4,18 +4,28 @@ import (
 	"context"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
+	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgconn"
 
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/lib/pq"
 )
 
 type storage struct {
-	db *pgx.Conn
+	logger logging.MyLogger
+	db     DB
 }
 
-func NewStorage(db *pgx.Conn) *storage {
+type DB interface {
+	QueryRow(ctx context.Context, sql string, args ...any) pgx.Row
+	Query(ctx context.Context, sql string, args ...any) (pgx.Rows, error)
+	Ping(ctx context.Context) error
+	Exec(ctx context.Context, sql string, arguments ...any) (pgconn.CommandTag, error)
+	BeginTx(ctx context.Context, txOptions pgx.TxOptions) (pgx.Tx, error)
+}
 
+func NewStorage(db DB) *storage {
 	return &storage{
 		db: db,
 	}

@@ -2,14 +2,15 @@ package composition
 
 import (
 	"context"
+	"errors"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/config"
+	sql2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/db/sql"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/ping"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/memory"
 	sql3 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
-	sql2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/sql"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -23,6 +24,10 @@ type storage interface {
 	SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error
 }
 
+var (
+	ErrNoSQLConnection = errors.New("Нет подключения к БД")
+)
+
 func NewStorageComposition(cfg *config.Config, logger logging.Logger, router *chi.Mux) (storage, error) {
 	var storage storage
 
@@ -32,7 +37,7 @@ func NewStorageComposition(cfg *config.Config, logger logging.Logger, router *ch
 		//defer sql.DB.Close()
 		if err != nil {
 			logger.Error(err)
-			return nil, err
+			return nil, ErrNoSQLConnection
 		}
 
 		storage = sql3.NewStorage(sql.DB)

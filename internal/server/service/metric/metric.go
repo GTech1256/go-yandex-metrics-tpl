@@ -3,6 +3,7 @@ package metric
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/config"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
@@ -68,14 +69,23 @@ func (u metricService) SaveGaugeMetric(ctx context.Context, metric *entity.Metri
 		return err
 	}
 
+	fmt.Println("dwa as")
+
+	fmt.Println(*metricGaugeValue)
+
+	return nil
+
 	metricsGauge := &entity.MetricGauge{
 		Type:  entity.Gauge,
 		Name:  metric.MetricName,
 		Value: entity.GaugeValue(*metricGaugeValue),
 	}
+	fmt.Println(metricsGauge)
 
 	err = u.storage.SaveGauge(ctx, metricsGauge)
+	fmt.Println("###")
 	if err != nil {
+		fmt.Println("$$$$$$")
 		u.logger.Error("Ошибка сохранения метрики ", err)
 		return err
 	}
@@ -134,6 +144,9 @@ func (u metricService) GetMetricValue(ctx context.Context, metric *updateInterfa
 			result = &r
 		}
 	case entity.Gauge:
+		fmt.Println("1")
+		fmt.Println(u.storage, metric.Name)
+		fmt.Println("3")
 		gaugeMetricValue, err := u.storage.GetGaugeValue(metric.Name)
 		if err != nil {
 			u.logger.Error(err)

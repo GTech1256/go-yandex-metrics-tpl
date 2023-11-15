@@ -2,32 +2,45 @@ package sql
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/retry"
 	"github.com/golang-migrate/migrate/v4"
-	"github.com/jackc/pgx/v5"
-	"time"
-
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type SQL struct {
-	DB *pgx.Conn
+	DB *pgxpool.Pool
 }
 
+var (
+	ErrConfig     = errors.New("неправильный путь для подключения")
+	ErrCreatePool = errors.New("пул соединений не получилось создать")
+	ErrPing       = errors.New("ping не прошел")
+)
+
 func NewSQL(host string) (*SQL, error) {
-	db, err := pgx.Connect(context.Background(), host)
+	config, err := pgxpool.ParseConfig(host)
 	if err != nil {
-		return nil, err
+		return nil, ErrConfig
 	}
 
-	// TODO: CONNECTION POOL
-	// https://github.com/jackc/pgx/wiki/Getting-started-with-pgx#using-a-connection-pool
+	ctx := context.Background()
+	var db *pgxpool.Pool
 
-	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
-	defer cancel()
-	if err = db.Ping(ctx); err != nil {
-		return nil, err
+	err = retry.MakeRetry(func() error {
+		db, err = pgxpool.NewWithConfig(ctx, config)
+
+		return err
+	})
+	if err != nil {
+		return nil, ErrCreatePool
+	}
+
+	if err = pingWithRetry(ctx, db); err != nil {
+		return nil, ErrPing
 	}
 
 	s := &SQL{
@@ -36,15 +49,19 @@ func NewSQL(host string) (*SQL, error) {
 
 	err = s.MigrateDown(host)
 	if err != nil {
-		fmt.Println("ERROR:", err)
 	}
 
 	err = s.MigrateUp(host)
 	if err != nil {
-		fmt.Println("ERROR:", err)
 	}
 
 	return s, nil
+}
+
+func pingWithRetry(ctx context.Context, db *pgxpool.Pool) error {
+	return retry.MakeRetry(func() error {
+		return db.Ping(ctx)
+	})
 }
 
 func (q SQL) MigrateUp(dataSourceName string) error {

@@ -8,7 +8,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/api"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
 	dto2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/metric/dto"
-	"github.com/avast/retry-go/v4"
+	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/retry"
 	"time"
 )
 
@@ -17,8 +17,6 @@ var (
 )
 
 const BATCH = true
-
-var a = false
 
 func (s *service) StartReport(ctx context.Context, reportInterval time.Duration) error {
 	s.logger.Info("Запуск Report")
@@ -32,10 +30,6 @@ func (s *service) StartReport(ctx context.Context, reportInterval time.Duration)
 			ticker.Stop()
 			return nil
 		case <-ticker.C:
-			if a == true {
-				return nil
-			}
-			a = true
 			s.logger.Info("Тик Report")
 
 			metrics, err := s.repository.GetMetrics()
@@ -46,7 +40,7 @@ func (s *service) StartReport(ctx context.Context, reportInterval time.Duration)
 			if metrics != nil {
 				err := s.sendMetricRetry(ctx, metrics)
 				if err != nil {
-					return err
+					s.logger.Error(err)
 				}
 
 			} else {
@@ -58,16 +52,12 @@ func (s *service) StartReport(ctx context.Context, reportInterval time.Duration)
 }
 
 func (s *service) sendMetricRetry(ctx context.Context, metrics *entity.Metrics) error {
-	attempt := 0
-
-	err := retry.Do(
+	err := retry.MakeRetry(
 		func() error {
-			attempt++
-			// Your code that needs to be retried
 			err := s.sendMetric(ctx, metrics)
 
 			if err != nil {
-				s.logger.Errorf("Ошибка отправки метрики Attempt: %v, Err: %v", attempt, err)
+				s.logger.Errorf("Ошибка отправки метрики Err: %v", err)
 			}
 
 			if errors.Is(err, api.ErrRequestDo) || errors.Is(err, api.ErrInvalidResponseStatus) {
@@ -75,31 +65,9 @@ func (s *service) sendMetricRetry(ctx context.Context, metrics *entity.Metrics) 
 				return err
 			}
 
-			return err
+			return nil
 		},
-		retry.DelayType(func(n uint, err error, config *retry.Config) time.Duration {
-
-			fmt.Println(n, "NNNN")
-			switch n {
-			case 0:
-				fmt.Println(1)
-				return 1 * time.Second
-			case 1:
-				fmt.Println(2)
-				return 3 * time.Second
-			case 2:
-				fmt.Println(3)
-				return 5 * time.Second
-			default:
-
-				fmt.Println("DEFAULT")
-				return retry.BackOffDelay(n, err, config)
-			}
-		}),
-		retry.Attempts(4),
 	)
-
-	s.logger.Info("END END END END END")
 
 	if err != nil {
 		s.logger.Error(ErrSend)

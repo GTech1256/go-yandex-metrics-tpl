@@ -75,6 +75,14 @@ func (m *MyLogger) Error(args ...interface{}) {
 	m.Entry.Error(args...)
 }
 
+func (m *MyLogger) Errorf(format string, args ...interface{}) {
+	m.mx.Lock()
+	defer m.mx.Unlock()
+
+	m.Entry.Data["file"] = fileInfo(2)
+	m.Entry.Errorf(format, args...)
+}
+
 func (m *MyLogger) Info(args ...interface{}) {
 	m.mx.Lock()
 	defer m.mx.Unlock()
@@ -91,10 +99,18 @@ func (m *MyLogger) Infof(format string, args ...interface{}) {
 	m.Entry.Infof(format, args...)
 }
 
-func (m *MyLogger) Errorf(format string, args ...interface{}) {
+func (m *MyLogger) Fatal(args ...interface{}) {
 	m.mx.Lock()
 	defer m.mx.Unlock()
 
 	m.Entry.Data["file"] = fileInfo(2)
-	m.Entry.Errorf(format, args...)
+	m.Entry.Fatal(args...)
+}
+
+func (m *MyLogger) Fatalf(format string, args ...interface{}) {
+	m.mx.Lock()
+	defer m.mx.Unlock()
+
+	m.Entry.Data["file"] = fileInfo(2)
+	m.Entry.Fatalf(format, args...)
 }

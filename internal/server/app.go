@@ -63,7 +63,7 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 
 	storage, err := composition.NewStorageComposition(cfg, logger, router)
 	if err != nil {
-		logger.Error(err)
+		logger.Fatal(err)
 	}
 
 	var metricLoaderService MetricLoaderService = nil

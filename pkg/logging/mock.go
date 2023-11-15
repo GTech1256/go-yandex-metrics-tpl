@@ -23,6 +23,10 @@ func (m *LoggerMock) Error(args ...interface{}) {
 	m.Called(args...)
 }
 
+func (m *LoggerMock) Errorf(format string, args ...interface{}) {
+	m.Called(append([]interface{}{format}, args...))
+}
+
 func (m *LoggerMock) Info(args ...interface{}) {
 	m.Called(args...)
 }
@@ -31,6 +35,10 @@ func (m *LoggerMock) Infof(format string, args ...interface{}) {
 	m.Called(append([]interface{}{format}, args...))
 }
 
-func (m *LoggerMock) Errorf(format string, args ...interface{}) {
+func (m *LoggerMock) Fatal(args ...interface{}) {
+	m.Called(args...)
+}
+
+func (m *LoggerMock) Fatalf(format string, args ...interface{}) {
 	m.Called(append([]interface{}{format}, args...))
 }
