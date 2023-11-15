@@ -16,7 +16,7 @@ func Test_service_StartReport(t *testing.T) {
 	// Arrange
 	ctx := context.Background()
 	reportInterval := time.Duration(5) * time.Millisecond
-	mockMetric := &agentEntity.Metric{
+	mockMetric := &agentEntity.Metrics{
 		agentEntity.MetricFields{
 			MetricType:  "testType",
 			MetricName:  "testName",

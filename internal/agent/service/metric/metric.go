@@ -15,7 +15,7 @@ type UpdateAPI interface {
 
 type Repository interface {
 	LoadMetric(ctx context.Context) error
-	GetMetrics() (*agentEntity.Metric, error)
+	GetMetrics() (*agentEntity.Metrics, error)
 }
 
 type service struct {

@@ -16,7 +16,7 @@ func (m *MockRepository) LoadMetric(ctx context.Context) error {
 	return args.Error(0)
 }
 
-func (m *MockRepository) GetMetrics() (*agentEntity.Metric, error) {
+func (m *MockRepository) GetMetrics() (*agentEntity.Metrics, error) {
 	args := m.Called()
-	return args.Get(0).(*agentEntity.Metric), args.Error(1)
+	return args.Get(0).(*agentEntity.Metrics), args.Error(1)
 }

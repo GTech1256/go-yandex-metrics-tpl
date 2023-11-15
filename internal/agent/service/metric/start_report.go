@@ -3,15 +3,22 @@ package metric
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/api"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
 	dto2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/metric/dto"
+	"github.com/avast/retry-go/v4"
 	"time"
 )
 
 var (
 	ErrSend = errors.New("метрика не отправлена")
 )
+
+const BATCH = true
+
+var a = false
 
 func (s *service) StartReport(ctx context.Context, reportInterval time.Duration) error {
 	s.logger.Info("Запуск Report")
@@ -25,6 +32,10 @@ func (s *service) StartReport(ctx context.Context, reportInterval time.Duration)
 			ticker.Stop()
 			return nil
 		case <-ticker.C:
+			if a == true {
+				return nil
+			}
+			a = true
 			s.logger.Info("Тик Report")
 
 			metrics, err := s.repository.GetMetrics()
@@ -33,17 +44,11 @@ func (s *service) StartReport(ctx context.Context, reportInterval time.Duration)
 			}
 
 			if metrics != nil {
-				//err := s.sendMetricBatch(ctx, metrics)
-				//if err != nil {
-				//	return err
-				//}
-				for _, m := range *metrics {
-					s.logger.Info("Отправка метрики")
-					err := s.sendMetric(ctx, &m)
-					if err != nil {
-						s.logger.Errorf("Ошибка отпраки метрики %v", err)
-					}
+				err := s.sendMetricRetry(ctx, metrics)
+				if err != nil {
+					return err
 				}
+
 			} else {
 				s.logger.Info("Нет метрики для отправки")
 			}
@@ -52,31 +57,106 @@ func (s *service) StartReport(ctx context.Context, reportInterval time.Duration)
 	}
 }
 
-func (s *service) sendMetric(ctx context.Context, metric *entity.MetricFields) error {
-	s.logger.Infof("Отправка %v", metric.MetricName)
+func (s *service) sendMetricRetry(ctx context.Context, metrics *entity.Metrics) error {
+	attempt := 0
 
-	if err := s.server.SendUpdate(ctx, dto2.MetricFromService(metric)); err != nil {
-		s.logger.Errorf("Ошибка отправки %v %v", metric.MetricName, err)
+	err := retry.Do(
+		func() error {
+			attempt++
+			// Your code that needs to be retried
+			err := s.sendMetric(ctx, metrics)
 
+			if err != nil {
+				s.logger.Errorf("Ошибка отправки метрики Attempt: %v, Err: %v", attempt, err)
+			}
+
+			if errors.Is(err, api.ErrRequestDo) || errors.Is(err, api.ErrInvalidResponseStatus) {
+				s.logger.Errorf("Еще попытка отправить метрику")
+				return err
+			}
+
+			return err
+		},
+		retry.DelayType(func(n uint, err error, config *retry.Config) time.Duration {
+
+			fmt.Println(n, "NNNN")
+			switch n {
+			case 0:
+				fmt.Println(1)
+				return 1 * time.Second
+			case 1:
+				fmt.Println(2)
+				return 3 * time.Second
+			case 2:
+				fmt.Println(3)
+				return 5 * time.Second
+			default:
+
+				fmt.Println("DEFAULT")
+				return retry.BackOffDelay(n, err, config)
+			}
+		}),
+		retry.Attempts(4),
+	)
+
+	s.logger.Info("END END END END END")
+
+	if err != nil {
+		s.logger.Error(ErrSend)
 		return ErrSend
+	}
+
+	s.logger.Info("Метрика отправлена")
+
+	return nil
+}
+
+func (s *service) sendMetric(ctx context.Context, metrics *entity.Metrics) error {
+	fmt.Println("sendMetric|sendMetric|sendMetric|sendMetric|sendMetric")
+
+	if BATCH {
+		err := s.sendMetricBatch(ctx, metrics)
+		if err != nil {
+			return err
+		}
+	} else {
+		for _, m := range *metrics {
+			s.logger.Info("Отправка метрики")
+			err := s.sendMetricItem(ctx, &m)
+			if err != nil {
+				s.logger.Errorf("Ошибка отправки метрики %w", err)
+			}
+		}
 	}
 
 	return nil
 }
 
-func (s *service) sendMetricBatch(ctx context.Context, metric *entity.Metric) error {
-	updateDTOs := make([]*dto.Update, 0, len(*metric))
+func (s *service) sendMetricItem(ctx context.Context, metric *entity.MetricFields) error {
+	s.logger.Infof("Отправка %v", metric.MetricName)
 
-	for _, m := range *metric {
+	if err := s.server.SendUpdate(ctx, dto2.MetricFromService(metric)); err != nil {
+		s.logger.Error(err)
+
+		return err
+	}
+
+	return nil
+}
+
+func (s *service) sendMetricBatch(ctx context.Context, metrics *entity.Metrics) error {
+	updateDTOs := make([]*dto.Update, 0, len(*metrics))
+
+	for _, m := range *metrics {
 		updateDTO := dto2.MetricFromService(&m)
 		updateDTOs = append(updateDTOs, &updateDTO)
 	}
 
 	s.logger.Infof("Отправка sendMetricBatch")
 	if err := s.server.SendUpdates(ctx, updateDTOs); err != nil {
-		s.logger.Errorf("Ошибка отправки")
+		s.logger.Error(err)
 
-		return ErrSend
+		return err
 	}
 	s.logger.Infof("sendMetricBatch успешно отправлена")
 

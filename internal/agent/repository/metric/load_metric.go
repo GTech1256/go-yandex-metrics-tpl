@@ -21,7 +21,7 @@ func (r *repository) LoadMetric(ctx context.Context) error {
 	// Read full mem stats
 	runtime.ReadMemStats(&rtm)
 
-	m := entity.Metric{
+	m := entity.Metrics{
 		{
 			MetricType:  string(entity.Gauge),
 			MetricName:  "Alloc",

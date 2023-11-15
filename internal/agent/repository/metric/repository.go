@@ -5,7 +5,7 @@ import (
 )
 
 type memStorage struct {
-	metrics *agentEntity.Metric
+	metrics *agentEntity.Metrics
 }
 
 type repository struct {
