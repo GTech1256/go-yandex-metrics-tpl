@@ -69,12 +69,6 @@ func (u metricService) SaveGaugeMetric(ctx context.Context, metric *entity.Metri
 		return err
 	}
 
-	fmt.Println("dwa as")
-
-	fmt.Println(*metricGaugeValue)
-
-	return nil
-
 	metricsGauge := &entity.MetricGauge{
 		Type:  entity.Gauge,
 		Name:  metric.MetricName,
