@@ -3,7 +3,6 @@ package metric
 import (
 	"context"
 	"errors"
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/api"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
@@ -80,8 +79,6 @@ func (s *service) sendMetricRetry(ctx context.Context, metrics *entity.Metrics) 
 }
 
 func (s *service) sendMetric(ctx context.Context, metrics *entity.Metrics) error {
-	fmt.Println("sendMetric|sendMetric|sendMetric|sendMetric|sendMetric")
-
 	if BATCH {
 		err := s.sendMetricBatch(ctx, metrics)
 		if err != nil {
@@ -120,7 +117,7 @@ func (s *service) sendMetricBatch(ctx context.Context, metrics *entity.Metrics) 
 		updateDTOs = append(updateDTOs, &updateDTO)
 	}
 
-	s.logger.Infof("Отправка sendMetricBatch")
+	s.logger.Info("Отправка sendMetricBatch")
 	if err := s.server.SendUpdates(ctx, updateDTOs); err != nil {
 		s.logger.Error(err)
 

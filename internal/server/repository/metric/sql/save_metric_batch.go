@@ -50,7 +50,7 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 
 			// Ошибка чтения данных из сети или БД из-за проблем соединения.
 			if err != nil {
-				s.logger.Errorf("Ошибка применении транзакции %w", err)
+				s.logger.Errorf("Ошибка применении транзакции %v", err)
 				return err
 			}
 
@@ -59,10 +59,10 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 	)
 
 	if err != nil {
-		s.logger.Errorf("Не удалось сохранить метрику батчем %w", err)
+		s.logger.Errorf("Не удалось сохранить метрику батчем %v", err)
 		return err
 	}
 
-	s.logger.Errorf("Удалось сохранить метрику батчем %w", err)
+	s.logger.Errorf("Удалось сохранить метрику батчем %v", err)
 	return nil
 }

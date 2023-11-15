@@ -46,7 +46,7 @@ func Test_service_StartPoll(t *testing.T) {
 
 }
 
-func Test_service_sendMetric(t *testing.T) {
+func Test_service_sendMetricItem(t *testing.T) {
 	ctx := context.Background()
 	// создаем тестовый контекст и метрику
 	testMetric := &entity.MetricFields{
@@ -70,7 +70,7 @@ func Test_service_sendMetric(t *testing.T) {
 	s := &service{client, mockLogger, repo}
 
 	// вызываем функцию sendMetric
-	err := s.sendMetric(ctx, testMetric)
+	err := s.sendMetricItem(ctx, testMetric)
 
 	// проверяем, что ошибки нет
 	assert.NoError(t, err)
