@@ -22,7 +22,7 @@ var (
 
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
 func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error {
-
+	fmt.Println("SQL")
 	tx, err := s.db.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		return err
@@ -59,10 +59,13 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 	)
 
 	if err != nil {
+
+		fmt.Println(33)
 		s.logger.Errorf("Не удалось сохранить метрику батчем %v", err)
 		return err
 	}
 
-	s.logger.Errorf("Удалось сохранить метрику батчем %v", err)
+	s.logger.Info("Метрик сохранена батчем")
+
 	return nil
 }

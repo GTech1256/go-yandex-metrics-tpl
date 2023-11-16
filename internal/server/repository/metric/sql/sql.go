@@ -2,6 +2,7 @@ package sql
 
 import (
 	"context"
+	"errors"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
@@ -13,7 +14,7 @@ import (
 )
 
 type storage struct {
-	logger logging.MyLogger
+	logger logging.Logger
 	db     DB
 }
 
@@ -25,9 +26,10 @@ type DB interface {
 	BeginTx(ctx context.Context, txOptions pgx.TxOptions) (pgx.Tx, error)
 }
 
-func NewStorage(db DB) *storage {
+func NewStorage(db DB, logger logging.Logger) *storage {
 	return &storage{
-		db: db,
+		db:     db,
+		logger: logger,
 	}
 }
 
@@ -40,6 +42,11 @@ func (s *storage) GetGaugeValue(name string) (*entity2.GaugeValue, error) {
 	row := s.db.QueryRow(ctx, query, name)
 
 	err := row.Scan(&v)
+
+	if errors.Is(err, pgx.ErrNoRows) {
+		return nil, nil
+	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -56,6 +63,11 @@ func (s *storage) GetCounterValue(name string) (*entity2.CounterValue, error) {
 	row := s.db.QueryRow(ctx, query, name)
 
 	err := row.Scan(&v)
+
+	//if errors.Is(err, pgx.ErrNoRows) {
+	//	return nil, nil
+	//}
+
 	if err != nil {
 		return nil, err
 	}
@@ -79,6 +91,11 @@ func (s *storage) getGaugeMetrics(ctx context.Context) (*map[string]float64, err
 		)
 
 		err := rows.Scan(&title, &value)
+
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, nil
+		}
+
 		if err != nil {
 			return nil, err
 		}
