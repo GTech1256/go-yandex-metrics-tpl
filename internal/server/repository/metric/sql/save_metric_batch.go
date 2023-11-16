@@ -31,15 +31,21 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 	start := time.Now()
 	for _, metric := range metrics {
 		if metric.GetIsGauge() {
+			s.logger.Info("Save metric Gauge %+v", metric)
 			err := s.saveGauge(ctx, converter.MetricJSONToMetricGauge(metric), tx)
 			if err != nil {
+				s.logger.Error("Save metric Gauge %+v", metric)
 				return err
 			}
 		} else if metric.GetIsCounter() {
+			s.logger.Info("Save metric Counter %+v", metric)
 			err := s.saveCounter(ctx, converter.MetricJSONToMetricCounter(metric), tx)
 			if err != nil {
+				s.logger.Error("Save metric Counter %+v", metric)
 				return err
 			}
+		} else {
+			s.logger.Infof("Unknown metric %+v", metric)
 		}
 	}
 	fmt.Println("SaveMetricBatch:", time.Since(start))
@@ -57,6 +63,8 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 			return nil
 		},
 	)
+
+	//err = tx.Commit(ctx)
 
 	if err != nil {
 
