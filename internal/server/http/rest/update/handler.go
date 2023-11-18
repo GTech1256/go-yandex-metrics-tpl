@@ -3,7 +3,6 @@ package update
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	http2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/converter"
@@ -69,37 +68,30 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 
 	switch mType {
 	case entity.Gauge:
-		fmt.Println("00001")
 		mg := converter.MetricsGaugeToMetricFields(*m)
-		fmt.Println("mg", mg)
+
 		err := h.service.SaveGaugeMetric(ctx, &mg)
 		if err != nil {
 			h.logger.Error(err)
 			writer.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		fmt.Println("err", err)
-		fmt.Println("00000")
 
 		mv := converter.MetricsToMetricValueDTO(*m)
-		fmt.Println("00000", mv)
+
 		value, err := h.service.GetMetricValue(ctx, &mv)
-		fmt.Println("00000")
 		if err != nil {
 			h.logger.Error(err)
 			writer.WriteHeader(http.StatusBadRequest)
 			return
 		}
 
-		fmt.Println("00000")
 		valueFloat, err := strconv.ParseFloat(*value, 64)
-		fmt.Println("00000")
 		if err != nil {
 			h.logger.Error(err)
 			writer.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		fmt.Println("00000")
 
 		m.Value = &valueFloat
 	case entity.Counter:

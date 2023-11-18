@@ -24,6 +24,7 @@ type DB interface {
 	Ping(ctx context.Context) error
 	Exec(ctx context.Context, sql string, arguments ...any) (pgconn.CommandTag, error)
 	BeginTx(ctx context.Context, txOptions pgx.TxOptions) (pgx.Tx, error)
+	//Test()
 }
 
 func NewStorage(db DB, logger logging.Logger) *storage {
@@ -35,11 +36,15 @@ func NewStorage(db DB, logger logging.Logger) *storage {
 
 // GetGauge - возвращает значение Gauge из хранилища
 func (s *storage) GetGaugeValue(name string) (*entity2.GaugeValue, error) {
+	return s.getGaugeValue(name, s.db)
+}
+
+func (s *storage) getGaugeValue(name string, executor Executor) (*entity2.GaugeValue, error) {
 	ctx := context.Background()
 
 	var v *entity2.GaugeValue
 	query := "SELECT value FROM gauge where title = $1"
-	row := s.db.QueryRow(ctx, query, name)
+	row := executor.QueryRow(ctx, query, name)
 
 	err := row.Scan(&v)
 
@@ -56,30 +61,30 @@ func (s *storage) GetGaugeValue(name string) (*entity2.GaugeValue, error) {
 
 // GetCounter - возвращает значение Counter из хранилища
 func (s *storage) GetCounterValue(name string) (*entity2.CounterValue, error) {
+	return s.getCounterValue(name, s.db)
+}
+
+// GetCounter - возвращает значение Counter из хранилища
+func (s *storage) getCounterValue(name string, executor Executor) (*entity2.CounterValue, error) {
 	ctx := context.Background()
 
-	var v *entity2.CounterValue
+	var value *entity2.CounterValue
 	query := "SELECT delta FROM counter where title = $1"
-	row := s.db.QueryRow(ctx, query, name)
+	row := executor.QueryRow(ctx, query, name)
 
-	err := row.Scan(&v)
-
-	//if errors.Is(err, pgx.ErrNoRows) {
-	//	return nil, nil
-	//}
-
+	err := row.Scan(&value)
 	if err != nil {
 		return nil, err
 	}
 
-	return v, nil
+	return value, nil
 }
 
-func (s *storage) getGaugeMetrics(ctx context.Context) (*map[string]float64, error) {
+func (s *storage) getGaugeMetrics(ctx context.Context, executor Executor) (*map[string]float64, error) {
 	v := make(map[string]float64, 0)
 
 	query := "SELECT title, value FROM gauge"
-	rows, err := s.db.Query(ctx, query)
+	rows, err := executor.Query(ctx, query)
 	if err != nil {
 		return nil, err
 	}
@@ -106,11 +111,11 @@ func (s *storage) getGaugeMetrics(ctx context.Context) (*map[string]float64, err
 	return &v, nil
 }
 
-func (s *storage) getCounterMetrics(ctx context.Context) (*map[string]int64, error) {
+func (s *storage) getCounterMetrics(ctx context.Context, executor Executor) (*map[string]int64, error) {
 	v := make(map[string]int64, 0)
 
 	query := "SELECT title, delta FROM counter"
-	rows, err := s.db.Query(ctx, query)
+	rows, err := executor.Query(ctx, query)
 	if err != nil {
 		return nil, err
 	}
@@ -135,12 +140,12 @@ func (s *storage) getCounterMetrics(ctx context.Context) (*map[string]int64, err
 func (s *storage) GetAllMetrics() *metric.AllMetrics {
 	ctx := context.Background()
 
-	gauge, err := s.getGaugeMetrics(ctx)
+	gauge, err := s.getGaugeMetrics(ctx, s.db)
 	if err != nil {
 		return nil
 	}
 
-	counter, err := s.getCounterMetrics(ctx)
+	counter, err := s.getCounterMetrics(ctx, s.db)
 	if err != nil {
 		return nil
 	}

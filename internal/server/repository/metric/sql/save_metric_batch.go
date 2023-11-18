@@ -2,7 +2,6 @@ package sql
 
 import (
 	"context"
-	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql/converter"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/retry"
@@ -13,6 +12,8 @@ import (
 
 type Executor interface {
 	Exec(ctx context.Context, sql string, arguments ...any) (pgconn.CommandTag, error)
+	QueryRow(ctx context.Context, sql string, args ...any) pgx.Row
+	Query(ctx context.Context, sql string, args ...any) (pgx.Rows, error)
 }
 
 var (
@@ -22,7 +23,6 @@ var (
 
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
 func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error {
-	fmt.Println("SQL")
 	tx, err := s.db.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		return err
@@ -48,7 +48,7 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 			s.logger.Infof("Unknown metric %+v", metric)
 		}
 	}
-	fmt.Println("SaveMetricBatch:", time.Since(start))
+	s.logger.Info("SaveMetricBatch:", time.Since(start))
 
 	err = retry.MakeRetry(
 		func() error {
@@ -63,12 +63,7 @@ func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.Metric
 			return nil
 		},
 	)
-
-	//err = tx.Commit(ctx)
-
 	if err != nil {
-
-		fmt.Println(33)
 		s.logger.Errorf("Не удалось сохранить метрику батчем %v", err)
 		return err
 	}

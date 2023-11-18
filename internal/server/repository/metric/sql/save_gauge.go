@@ -3,7 +3,6 @@ package sql
 import (
 	"context"
 	"errors"
-	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/jackc/pgx/v5"
 )
@@ -14,9 +13,7 @@ func (s *storage) SaveGauge(ctx context.Context, gauge *entity2.MetricGauge) err
 
 // SaveGauge новое значение должно замещать предыдущее.
 func (s *storage) saveGauge(ctx context.Context, gauge *entity2.MetricGauge, executor Executor) error {
-	v, err := s.GetGaugeValue(gauge.Name)
-
-	fmt.Println(err, v, "KO")
+	_, err := s.getGaugeValue(gauge.Name, executor)
 	isNoOldValue := errors.Is(err, pgx.ErrNoRows)
 	if err != nil && !isNoOldValue {
 		return err
