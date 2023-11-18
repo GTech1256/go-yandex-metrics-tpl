@@ -8,6 +8,7 @@ import (
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/ping"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/memory"
 	sql3 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/go-chi/chi/v5"
@@ -46,7 +47,7 @@ func NewStorageComposition(cfg *config.Config, logger logging.Logger, router *ch
 		pingHandler := ping.NewHandler(logger, storage)
 		pingHandler.Register(router)
 	} else {
-		//storage = memory.NewStorage()
+		storage = memory.NewStorage()
 	}
 
 	return storage, nil

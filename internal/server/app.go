@@ -65,6 +65,9 @@ func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 	if err != nil {
 		logger.Fatal(err)
 	}
+	if storage == nil {
+		logger.Fatal("Storage is nil!", storage)
+	}
 
 	var metricLoaderService MetricLoaderService = nil
 	// пустое значение отключает функцию записи на диск
