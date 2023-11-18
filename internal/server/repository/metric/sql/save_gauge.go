@@ -14,12 +14,12 @@ func (s *storage) SaveGauge(ctx context.Context, gauge *entity2.MetricGauge) err
 // SaveGauge новое значение должно замещать предыдущее.
 func (s *storage) saveGauge(ctx context.Context, gauge *entity2.MetricGauge, executor Executor) error {
 	_, err := s.getGaugeValue(gauge.Name, executor)
-	isNoOldValue := errors.Is(err, pgx.ErrNoRows)
-	if err != nil && !isNoOldValue {
+	isUniqueValue := errors.Is(err, pgx.ErrNoRows)
+	if err != nil && !isUniqueValue {
 		return err
 	}
 
-	if isNoOldValue {
+	if isUniqueValue {
 		err = s.insertGauge(ctx, gauge, executor)
 		if err != nil {
 			return err

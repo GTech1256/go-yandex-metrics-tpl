@@ -14,15 +14,13 @@ func (s *storage) SaveCounter(ctx context.Context, counter *entity2.MetricCounte
 // SaveCounter новое значение должно добавляться к предыдущему, если какое-то значение уже было известно серверу.
 func (s *storage) saveCounter(ctx context.Context, counter *entity2.MetricCounter, executor Executor) error {
 	oldValue, err := s.getCounterValue(counter.Name, executor)
-	isNoOldValue := errors.Is(err, pgx.ErrNoRows)
+	isUniqueValue := errors.Is(err, pgx.ErrNoRows)
 
-	if err != nil && !isNoOldValue {
+	if err != nil && !isUniqueValue {
 		return err
 	}
 
-	s.logger.Info("isNoOldValue", isNoOldValue)
-
-	if isNoOldValue {
+	if isUniqueValue {
 		err = s.insertCounter(ctx, counter, executor)
 		if err != nil {
 			return err

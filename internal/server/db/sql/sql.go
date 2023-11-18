@@ -49,10 +49,12 @@ func NewSQL(host string) (*SQL, error) {
 
 	err = s.MigrateDown(host)
 	if err != nil {
+		fmt.Println("ERROR: MigrationDown", err)
 	}
 
 	err = s.MigrateUp(host)
 	if err != nil {
+		fmt.Println("ERROR: MigrationUp", err)
 	}
 
 	return s, nil

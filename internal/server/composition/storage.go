@@ -26,7 +26,7 @@ type storage interface {
 }
 
 var (
-	ErrNoSQLConnection = errors.New("Нет подключения к БД")
+	ErrNoSQLConnection = errors.New("нет подключения к БД")
 )
 
 func NewStorageComposition(cfg *config.Config, logger logging.Logger, router *chi.Mux) (storage, error) {

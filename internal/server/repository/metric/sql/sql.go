@@ -47,11 +47,6 @@ func (s *storage) getGaugeValue(name string, executor Executor) (*entity2.GaugeV
 	row := executor.QueryRow(ctx, query, name)
 
 	err := row.Scan(&v)
-
-	if errors.Is(err, pgx.ErrNoRows) {
-		return nil, nil
-	}
-
 	if err != nil {
 		return nil, err
 	}
