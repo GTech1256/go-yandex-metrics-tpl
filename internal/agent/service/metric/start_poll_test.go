@@ -24,7 +24,6 @@ func Test_service_StartPoll(t *testing.T) {
 
 	mockLogger := new(logging.LoggerMock)
 
-	//cfg := new(mock2.MockConfig)
 	cfg := config.NewConfig()
 
 	// Assert

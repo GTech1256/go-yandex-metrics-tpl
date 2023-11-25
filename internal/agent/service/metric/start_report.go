@@ -15,8 +15,6 @@ var (
 	ErrSend = errors.New("метрика не отправлена")
 )
 
-//const BATCH = true
-
 func (s *service) StartReport(ctx context.Context, reportInterval time.Duration) error {
 	s.logger.Info("Запуск Report")
 
