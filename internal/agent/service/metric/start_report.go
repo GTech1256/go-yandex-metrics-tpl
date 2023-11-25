@@ -15,7 +15,7 @@ var (
 	ErrSend = errors.New("метрика не отправлена")
 )
 
-const BATCH = true
+//const BATCH = true
 
 func (s *service) StartReport(ctx context.Context, reportInterval time.Duration) error {
 	s.logger.Info("Запуск Report")
@@ -79,7 +79,7 @@ func (s *service) sendMetricRetry(ctx context.Context, metrics *entity.Metrics) 
 }
 
 func (s *service) sendMetric(ctx context.Context, metrics *entity.Metrics) error {
-	if BATCH {
+	if *s.cfg.Batch {
 		err := s.sendMetricBatch(ctx, metrics)
 		if err != nil {
 			return err

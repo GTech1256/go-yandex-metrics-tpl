@@ -26,8 +26,9 @@ type Storage interface {
 	SaveCounter(ctx context.Context, counter *entity.MetricCounter) error
 	GetGaugeValue(name string) (*entity.GaugeValue, error)
 	GetCounterValue(name string) (*entity.CounterValue, error)
-	GetAllMetrics() *metric2.AllMetrics
+	GetAllMetrics(ctx context.Context) *metric2.AllMetrics
 	SaveMetricBatch(ctx context.Context, metrics []*entity.MetricJSON) error
+	Ping(ctx context.Context) error
 }
 
 type MetricLoaderService interface {
@@ -152,7 +153,7 @@ func (u metricService) GetMetricValue(ctx context.Context, metric *updateInterfa
 }
 
 func (u metricService) GetMetrics(ctx context.Context) (*metric2.AllMetrics, error) {
-	storageMetrics := u.storage.GetAllMetrics()
+	storageMetrics := u.storage.GetAllMetrics(ctx)
 
 	return storageMetrics, nil
 }
@@ -185,4 +186,8 @@ func (u metricService) SaveMetricJSON(ctx context.Context, metric *entity.Metric
 
 func (u metricService) SaveMetricJSONs(ctx context.Context, metrics []*entity.MetricJSON) error {
 	return u.storage.SaveMetricBatch(ctx, metrics)
+}
+
+func (u metricService) Ping(ctx context.Context) error {
+	return u.storage.Ping(ctx)
 }

@@ -75,7 +75,7 @@ func (s *storage) GetCounterValue(name string) (*entity2.CounterValue, error) {
 	return nil, nil
 }
 
-func (s *storage) GetAllMetrics() *metric.AllMetrics {
+func (s *storage) GetAllMetrics(ctx context.Context) *metric.AllMetrics {
 	return &metric.AllMetrics{
 		Gauge:   s.memStorage.gauge,
 		Counter: s.memStorage.counter,

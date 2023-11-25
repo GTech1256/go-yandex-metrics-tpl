@@ -132,9 +132,7 @@ func (s *storage) getCounterMetrics(ctx context.Context, executor Executor) (*ma
 	return &v, nil
 }
 
-func (s *storage) GetAllMetrics() *metric.AllMetrics {
-	ctx := context.Background()
-
+func (s *storage) GetAllMetrics(ctx context.Context) *metric.AllMetrics {
 	gauge, err := s.getGaugeMetrics(ctx, s.db)
 	if err != nil {
 		return nil

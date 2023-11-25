@@ -3,6 +3,7 @@ package metric
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/config"
 	agentEntity "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
 	mock2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/metric/mock"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
@@ -28,8 +29,9 @@ func Test_service_StartReport(t *testing.T) {
 	repo := new(mock2.MockRepository)
 	client := new(mock2.MockClient)
 	mockLogger := new(logging.LoggerMock)
+	cfg := config.NewConfig()
 
-	s := New(client, mockLogger, repo)
+	s := New(client, mockLogger, repo, cfg)
 
 	// Assert
 	repo.On("GetMetrics").Return(mockMetric, nil)

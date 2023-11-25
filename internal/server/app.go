@@ -10,6 +10,7 @@ import (
 	home "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/gzip"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/logging"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/ping"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update"
 	updateInterface "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/interface"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update/rest/counter"
@@ -48,6 +49,7 @@ type MetricService interface {
 	GetMetrics(ctx context.Context) (*metric.AllMetrics, error)
 	SaveMetricJSONs(ctx context.Context, metrics []*entity2.MetricJSON) error
 	SaveMetricJSON(ctx context.Context, metric *entity2.MetricJSON) error
+	Ping(ctx context.Context) error
 }
 
 type MetricValidator interface {
@@ -117,6 +119,10 @@ func (a App) handlersRegister() {
 	a.logger.Info("Регистрация /value/ Router")
 	valueHandler := value.NewHandler(a.logger, a.metricService, a.metricValidator)
 	valueHandler.Register(a.router)
+
+	a.logger.Info("Регистрация /ping Router")
+	pingHandler := ping.NewHandler(a.logger, a.metricService)
+	pingHandler.Register(a.router)
 
 	a.logger.Info("Регистрация / Router")
 	homeHandler := home.NewHandler(a.logger, a.metricService)

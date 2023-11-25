@@ -7,7 +7,6 @@ import (
 	sql2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/db/sql"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/ping"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/memory"
 	sql3 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
@@ -19,10 +18,9 @@ type storage interface {
 	SaveCounter(ctx context.Context, counter *entity2.MetricCounter) error
 	GetGaugeValue(name string) (*entity2.GaugeValue, error)
 	GetCounterValue(name string) (*entity2.CounterValue, error)
-	GetAllMetrics() *metric.AllMetrics
+	GetAllMetrics(ctx context.Context) *metric.AllMetrics
 	Ping(ctx context.Context) error
 	SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error
-	//Test()
 }
 
 var (
@@ -42,10 +40,6 @@ func NewStorageComposition(cfg *config.Config, logger logging.Logger, router *ch
 		}
 
 		storage = sql3.NewStorage(sql.DB, logger)
-
-		logger.Info("Регистрация /ping Router")
-		pingHandler := ping.NewHandler(logger, storage)
-		pingHandler.Register(router)
 	} else {
 		storage = memory.NewStorage()
 	}
