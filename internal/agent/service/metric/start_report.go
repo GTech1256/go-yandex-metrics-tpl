@@ -78,8 +78,10 @@ func (s *service) sendMetricRetry(ctx context.Context, metrics *entity.Metrics) 
 
 func (s *service) sendMetric(ctx context.Context, metrics *entity.Metrics) error {
 	if *s.cfg.Batch {
+		s.logger.Info("Отправка метрики Батчем")
 		err := s.sendMetricBatch(ctx, metrics)
 		if err != nil {
+			s.logger.Errorf("Ошибка отправки батчем %w", err)
 			return err
 		}
 	} else {

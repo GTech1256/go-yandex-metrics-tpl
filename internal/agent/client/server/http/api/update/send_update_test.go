@@ -3,7 +3,7 @@ package update
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
-	serverHttp "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http"
+	serverHttp "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/client"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -24,7 +24,7 @@ func Test_client_Post(t *testing.T) {
 	}
 
 	requestURL := getRequestURL(host, &update)
-	
+
 	// Устанавливаем ожидаемые вызовы для мока ClientHTTP
 	mockHTTPClient.On("NewRequest", http.MethodPost, requestURL, mock.Anything).Return(&http.Request{}, nil)
 	bodyMock := new(serverHttp.BodyMock)

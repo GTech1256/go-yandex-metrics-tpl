@@ -9,6 +9,7 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
 	home "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/gzip"
+	hashguard "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/hash_guard"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/middlware/logging"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/ping"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/http/rest/update"
@@ -61,6 +62,11 @@ type MetricValidator interface {
 
 func New(cfg *config.Config, logger logging2.Logger) (*App, error) {
 	router := chi.NewRouter()
+	if cfg.HashKey != nil {
+		router.Use(func(handler http.Handler) http.Handler {
+			return hashguard.WithHashGuard(handler, []byte(*cfg.HashKey), logger)
+		})
+	}
 	router.Use(gzip.WithGzip)
 
 	storage, err := composition.NewStorageComposition(cfg, logger, router)
