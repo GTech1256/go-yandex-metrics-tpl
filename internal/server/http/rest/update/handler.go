@@ -69,6 +69,7 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 	switch mType {
 	case entity.Gauge:
 		mg := converter.MetricsGaugeToMetricFields(*m)
+
 		err := h.service.SaveGaugeMetric(ctx, &mg)
 		if err != nil {
 			h.logger.Error(err)
@@ -77,6 +78,7 @@ func (h handler) Update(writer http.ResponseWriter, request *http.Request) {
 		}
 
 		mv := converter.MetricsToMetricValueDTO(*m)
+
 		value, err := h.service.GetMetricValue(ctx, &mv)
 		if err != nil {
 			h.logger.Error(err)

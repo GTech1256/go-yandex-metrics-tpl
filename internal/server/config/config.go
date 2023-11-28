@@ -16,6 +16,8 @@ type Config struct {
 	FileStoragePath *string
 
 	Restore *bool
+
+	DatabaseDSN *string
 }
 
 func NewConfig() *Config {
@@ -26,14 +28,16 @@ func (c *Config) Load() {
 	var (
 		// Hack для тестирования
 		command                                       = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
-		port                                          = command.String("a", ":8080", "address and port to run metric")
+		port                                          = command.String("a", ":8080", "address and port to run memory")
 		portEnv, portEnvPresent                       = os.LookupEnv("ADDRESS")
-		storeInterval                                 = command.Int("i", 300, "the number of seconds after which the metric is saved to disk")
+		storeInterval                                 = command.Int("i", 300, "the number of seconds after which the memory is saved to disk")
 		storeIntervalEnv, storeIntervalEnvPresent     = os.LookupEnv("STORE_INTERVAL")
 		fileStoragePath                               = command.String("f", "/tmp/metrics-db.json", "the path to the file for saving metrics")
 		fileStoragePathEnv, fileStoragePathEnvPresent = os.LookupEnv("FILE_STORAGE_PATH")
 		restore                                       = command.Bool("r", true, "the path to the file for saving metrics")
 		restoreEnv, restoreEnvPresent                 = os.LookupEnv("RESTORE")
+		databaseDSN                                   = command.String("d", "", "the path to database connection")
+		databaseDSNEnv, databaseDSNEnvPresent         = os.LookupEnv("DATABASE_DSN")
 	)
 
 	c.Port = port
@@ -62,6 +66,11 @@ func (c *Config) Load() {
 		}
 	}
 
+	c.DatabaseDSN = databaseDSN
+	if databaseDSNEnvPresent {
+		c.DatabaseDSN = &databaseDSNEnv
+	}
+
 	// Тесты запускают несколько раз метод Load.
 	// А несколько раз flag.Parse() нельзя вызывать
 	// Из-за этого хак с командными флагами
@@ -71,4 +80,9 @@ func (c *Config) Load() {
 // пустое значение отключает функцию записи на диск
 func (c Config) GetIsEnabledFileWrite() bool {
 	return *c.FileStoragePath != ""
+}
+
+// пустое значение отключает функцию записи в SQL DB
+func (c Config) GetIsEnabledSQLStore() bool {
+	return *c.DatabaseDSN != ""
 }

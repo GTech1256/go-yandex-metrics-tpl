@@ -24,7 +24,7 @@ func New(cfg *config.Config, logger logging.Logger) (*App, error) {
 	serverClient := server.New(serverHost, logger)
 
 	mr := metricRepository.New()
-	ms := metricService.New(serverClient, logger, mr)
+	ms := metricService.New(serverClient, logger, mr, cfg)
 
 	go func() {
 		err := ms.StartPoll(ctx, pollIntervalDuration)

@@ -1,4 +1,4 @@
-package metric
+package memory
 
 import (
 	"context"

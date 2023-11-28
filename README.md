@@ -68,7 +68,7 @@ metricstest -test.v -test.run=^TestIteration1$ -agent-binary-path=cmd/agent/agen
 #### Запуск
 
 ```shell
-./metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$ -binary-path=/Users/ribakakin/Desktop/web/go-practicum/go-yandex-metrics-tpl/cmd/metric/metric
+./metricstest-darwin-arm64 -test.v -test.run=^TestIteration1$ -binary-path=/Users/ribakakin/Desktop/web/go-practicum/go-yandex-metrics-tpl/cmd/memory/memory
 ```
 ```shell
 ./autotests/metricstest-darwin-arm64 -test.v -test.run=^TestIteration2[AB]*$ \
@@ -92,6 +92,13 @@ mv cmd/agent/main cmd/agent/agent
 ```
 
 ```shell
-go build -o cmd/metric cmd/metric/main.go
-mv cmd/metric/main cmd/metric/metric
+go build -o cmd/memory cmd/memory/main.go
+mv cmd/memory/main cmd/memory/memory
 ```
+
+### Миграции
+
+Добавление миграции
+`migrate create -ext sql -dir internal/server/config/db/migrations -seq create_users_table`
+
+

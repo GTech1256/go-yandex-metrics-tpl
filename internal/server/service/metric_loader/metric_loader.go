@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	metric2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
-	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/file"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/file"
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"time"
 )
@@ -16,7 +16,7 @@ type FileStorage interface {
 }
 
 type MetricProvider interface {
-	GetAllMetrics() *metric2.AllMetrics
+	GetAllMetrics(ctx context.Context) *metric2.AllMetrics
 }
 type MetricLoaderService struct {
 	logger         logging2.Logger
@@ -61,7 +61,7 @@ func (u MetricLoaderService) StartMetricsToDiskInterval(ctx context.Context, int
 }
 
 func (u MetricLoaderService) saveMetricsToDisk(ctx context.Context) error {
-	metrics := u.metricProvider.GetAllMetrics()
+	metrics := u.metricProvider.GetAllMetrics(ctx)
 	u.logger.Info("Сохранение всех Метрик на диск ", metrics)
 
 	err := u.storage.Truncate()

@@ -15,6 +15,9 @@ type Config struct {
 
 	// PollInterval - Флаг -p=<ЗНАЧЕНИЕ> позволяет переопределять pollInterval — частоту опроса метрик из пакета runtime (по умолчанию 2 секунды).
 	PollInterval *int
+
+	// Batch - Флаг -b=<ЗНАЧЕНИЕ> указывает отправлять метрику массивом JSON или отправлять каждую метрику отдельно (по умолчанию отдельно(false)).
+	Batch *bool
 }
 
 func NewConfig() *Config {
@@ -26,12 +29,14 @@ func (c *Config) Load() {
 	var (
 		// Hack для тестирования
 		command                                     = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
-		serverPort                                  = command.String("a", ":8080", "address and port to run metric")
+		serverPort                                  = command.String("a", ":8080", "address and port to run memory")
 		serverPortEnv, serverPortEnvPresent         = os.LookupEnv("ADDRESS")
-		reportInterval                              = command.Int("r", 10, "frequency of sending metrics to the metric")
+		reportInterval                              = command.Int("r", 10, "frequency of sending metrics to the memory")
 		reportIntervalEnv, reportIntervalEnvPresent = os.LookupEnv("REPORT_INTERVAL")
 		pollInterval                                = command.Int("p", 2, "the frequency of polling metrics")
 		pollIntervalEnv, pollIntervalEnvPresent     = os.LookupEnv("POLL_INTERVAL")
+		batch                                       = command.Bool("b", false, "the frequency of polling metrics")
+		batchEnv, batchEnvPresent                   = os.LookupEnv("BATCH")
 	)
 
 	c.ServerPort = serverPort
@@ -52,6 +57,14 @@ func (c *Config) Load() {
 		atoi, err := strconv.Atoi(pollIntervalEnv)
 		if err == nil {
 			c.PollInterval = &atoi
+		}
+	}
+
+	c.Batch = batch
+	if batchEnvPresent {
+		batchBool, err := strconv.ParseBool(batchEnv)
+		if err == nil {
+			c.Batch = &batchBool
 		}
 	}
 

@@ -3,6 +3,7 @@ package metric
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/config"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/domain/entity"
 	mock2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/service/metric/mock"
 	logging "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
@@ -23,12 +24,14 @@ func Test_service_StartPoll(t *testing.T) {
 
 	mockLogger := new(logging.LoggerMock)
 
+	cfg := config.NewConfig()
+
 	// Assert
 	repo.On("LoadMetric", ctx).Return(nil)
 	mockLogger.On("Info", "Запуск Pool")
 	mockLogger.On("Info", "Тик Pool")
 
-	service := New(client, mockLogger, repo)
+	service := New(client, mockLogger, repo, cfg)
 
 	// Act
 	go func() {
@@ -46,7 +49,7 @@ func Test_service_StartPoll(t *testing.T) {
 
 }
 
-func Test_service_sendMetric(t *testing.T) {
+func Test_service_sendMetricItem(t *testing.T) {
 	ctx := context.Background()
 	// создаем тестовый контекст и метрику
 	testMetric := &entity.MetricFields{
@@ -67,10 +70,12 @@ func Test_service_sendMetric(t *testing.T) {
 	mockLogger := new(logging.LoggerMock)
 	mockLogger.On("Infof", []interface{}{"Отправка %v", testMetric.MetricName})
 
-	s := &service{client, mockLogger, repo}
+	cfg := config.NewConfig()
+
+	s := &service{client, mockLogger, repo, cfg}
 
 	// вызываем функцию sendMetric
-	err := s.sendMetric(ctx, testMetric)
+	err := s.sendMetricItem(ctx, testMetric)
 
 	// проверяем, что ошибки нет
 	assert.NoError(t, err)

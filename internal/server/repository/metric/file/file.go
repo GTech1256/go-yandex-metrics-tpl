@@ -3,6 +3,8 @@ package file
 import (
 	"bufio"
 	"encoding/json"
+	"errors"
+	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/retry"
 	"os"
 )
 
@@ -19,7 +21,7 @@ type fileStorage struct {
 }
 
 func NewFileStorage(fileStoragePath string) (*fileStorage, error) {
-	file, err := os.OpenFile(fileStoragePath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, err := openFileRetry(fileStoragePath)
 	if err != nil {
 		return nil, err
 	}
@@ -29,6 +31,31 @@ func NewFileStorage(fileStoragePath string) (*fileStorage, error) {
 		file: file,
 		rw:   rw,
 	}, nil
+}
+
+func openFileRetry(fileStoragePath string) (*os.File, error) {
+	var file *os.File
+	var err error
+
+	err = retry.MakeRetry(
+		func() error {
+			file, err = os.OpenFile(fileStoragePath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+			// Когда файл заблокирован другим процессом
+			// делается еще попытка
+			if errors.Is(err, os.ErrExist) {
+				return err
+			}
+
+			return nil
+		},
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return file, err
 }
 
 func (s *fileStorage) readLine() (*MetricJSON, error) {

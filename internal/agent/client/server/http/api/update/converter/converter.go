@@ -15,7 +15,7 @@ type Metrics struct {
 }
 
 var (
-	ErrNotValidType = errors.New("not valid type")
+	ErrNotValidType = errors.New("структура имеет не валидное поле Type для метрики")
 )
 
 func UpdateDTOToMetrics(update *dto.Update) (*Metrics, error) {

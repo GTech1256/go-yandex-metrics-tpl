@@ -1,10 +1,11 @@
-package metric
+package memory
 
 import (
 	"context"
 	"fmt"
 	entity2 "github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/entity"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/domain/metric"
+	"github.com/GTech1256/go-yandex-metrics-tpl/internal/server/repository/metric/sql/converter"
 )
 
 var (
@@ -74,9 +75,31 @@ func (s *storage) GetCounterValue(name string) (*entity2.CounterValue, error) {
 	return nil, nil
 }
 
-func (s *storage) GetAllMetrics() *metric.AllMetrics {
+func (s *storage) GetAllMetrics(ctx context.Context) *metric.AllMetrics {
 	return &metric.AllMetrics{
 		Gauge:   s.memStorage.gauge,
 		Counter: s.memStorage.counter,
 	}
+}
+
+func (s *storage) Ping(ctx context.Context) error {
+	return nil
+}
+
+func (s *storage) SaveMetricBatch(ctx context.Context, metrics []*entity2.MetricJSON) error {
+	for _, m := range metrics {
+		if m.GetIsGauge() {
+			err := s.SaveGauge(ctx, converter.MetricJSONToMetricGauge(m))
+			if err != nil {
+				return err
+			}
+		} else if m.GetIsCounter() {
+			err := s.SaveCounter(ctx, converter.MetricJSONToMetricCounter(m))
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
 }
