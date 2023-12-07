@@ -106,21 +106,23 @@ func (s *service) sendMetricBatchController(ctx context.Context, metrics *entity
 }
 
 func (s *service) sendMetricWorkerPool(ctx context.Context, metrics *entity.Metrics, workerCount int) {
-	// воркер, который достает метрику из канала и отправляет
-	worker := func(idx int, metricsForSendCh chan *entity.MetricFields) {
-		// Обработка каждой метрики воркером
-		for metric := range metricsForSendCh {
-			err := s.sendMetricItem(ctx, metric)
-			if err != nil {
-				s.logger.Errorf("Ошибка отправки метрик по одной", err)
+	s.metricWorkerOnce.Do(func() {
+		// воркер, который достает метрику из канала и отправляет
+		worker := func(idx int, metricsForSendCh chan *entity.MetricFields) {
+			// Обработка каждой метрики воркером
+			for metric := range metricsForSendCh {
+				err := s.sendMetricItem(ctx, metric)
+				if err != nil {
+					s.logger.Errorf("Ошибка отправки метрик по одной", err)
+				}
 			}
 		}
-	}
 
-	// Создание воркеров
-	for w := 1; w <= workerCount; w++ {
-		go worker(w, s.metricsForSendCh)
-	}
+		// Создание воркеров
+		for w := 1; w <= workerCount; w++ {
+			go worker(w, s.metricsForSendCh)
+		}
+	})
 
 	// Наполнение канала метик для последующей обработки их с помощью пула воркеров
 	for _, m := range *metrics {

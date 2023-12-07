@@ -72,7 +72,9 @@ func Test_service_sendMetricItem(t *testing.T) {
 
 	cfg := config.NewConfig()
 
-	s := &service{client, mockLogger, repo, cfg}
+	metricsForSendCh := make(chan *entity.MetricFields, 1024)
+
+	s := &service{server: client, logger: mockLogger, repository: repo, cfg: cfg, metricsForSendCh: metricsForSendCh}
 
 	// вызываем функцию sendMetric
 	err := s.sendMetricItem(ctx, testMetric)
