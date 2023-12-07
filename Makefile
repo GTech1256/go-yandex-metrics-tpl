@@ -23,7 +23,7 @@ run-server:
 	air
 
 run-agent:
-	KEY="tmp/KNKB8" BATCH=true go run cmd/agent/main.go
+	RATE_LIMIT=2 KEY="tmp/KNKB8" BATCH=false go run cmd/agent/main.go
 
 test:
 	go test -count=1 ./...

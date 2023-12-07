@@ -21,9 +21,13 @@ type Config struct {
 
 	// HashKey - Флаг -k=<ЗНАЧЕНИЕ> При наличии ключа агент должен вычислять хеш и передавать в HTTP-заголовке запроса с именем HashSHA256.
 	HashKey *string
+
+	// RateLimit - Флаг -l=<ЗНАЧЕНИЕ> Ограничивает количество одновременно исходящих запросов на сервер «сверху».
+	RateLimit *int
 }
 
-const EmptyHashKey = ""
+const EmptyStringFlagValue = ""
+const EmptyIntFlagValue = 0
 
 func NewConfig() *Config {
 	return &Config{}
@@ -42,8 +46,10 @@ func (c *Config) Load() {
 		pollIntervalEnv, pollIntervalEnvPresent     = os.LookupEnv("POLL_INTERVAL")
 		batch                                       = command.Bool("b", false, "request by batch strategy")
 		batchEnv, batchEnvPresent                   = os.LookupEnv("BATCH")
-		hashKey                                     = command.String("k", EmptyHashKey, "вычисляет хеш для подписи данных по ключу")
+		hashKey                                     = command.String("k", EmptyStringFlagValue, "вычисляет хеш для подписи данных по ключу")
 		hashKeyEnv, hashKeyEnvPresent               = os.LookupEnv("KEY")
+		rateLimit                                   = command.Int("l", EmptyIntFlagValue, "лимит одновременно исходящих запросов на сервер")
+		rateLimitEnv, rateLimitEnvPresent           = os.LookupEnv("RATE_LIMIT")
 	)
 
 	c.ServerPort = serverPort
@@ -75,11 +81,21 @@ func (c *Config) Load() {
 		}
 	}
 
-	if *hashKey != EmptyHashKey {
+	if *hashKey != EmptyStringFlagValue {
 		c.HashKey = hashKey
 	}
 	if hashKeyEnvPresent {
 		c.HashKey = &hashKeyEnv
+	}
+
+	if *rateLimit != EmptyIntFlagValue {
+		c.RateLimit = rateLimit
+	}
+	if rateLimitEnvPresent {
+		atoi, err := strconv.Atoi(rateLimitEnv)
+		if err == nil {
+			c.RateLimit = &atoi
+		}
 	}
 
 	// Тесты запускают несколько раз метод Load.

@@ -77,6 +77,10 @@ func (s *service) sendMetricRetry(ctx context.Context, metrics *entity.Metrics) 
 }
 
 func (s *service) sendMetric(ctx context.Context, metrics *entity.Metrics) error {
+	return s.sendMetricBatchController(ctx, metrics)
+}
+
+func (s *service) sendMetricBatchController(ctx context.Context, metrics *entity.Metrics) error {
 	if *s.cfg.Batch {
 		s.logger.Info("Отправка метрики Батчем")
 		err := s.sendMetricBatch(ctx, metrics)
@@ -85,16 +89,43 @@ func (s *service) sendMetric(ctx context.Context, metrics *entity.Metrics) error
 			return err
 		}
 	} else {
-		for _, m := range *metrics {
-			s.logger.Info("Отправка метрики")
-			err := s.sendMetricItem(ctx, &m)
-			if err != nil {
-				s.logger.Errorf("Ошибка отправки метрики %w", err)
+		if s.cfg.RateLimit != nil {
+			s.sendMetricWorkerPool(ctx, metrics, *s.cfg.RateLimit)
+		} else {
+			for _, m := range *metrics {
+				s.logger.Info("Отправка метрики")
+				err := s.sendMetricItem(ctx, &m)
+				if err != nil {
+					s.logger.Errorf("Ошибка отправки метрики %w", err)
+				}
 			}
 		}
 	}
 
 	return nil
+}
+
+func (s *service) sendMetricWorkerPool(ctx context.Context, metrics *entity.Metrics, workerCount int) {
+	// воркер, который достает метрику из канала и отправляет
+	worker := func(idx int, metricsForSendCh chan *entity.MetricFields) {
+		// Обработка каждой метрики воркером
+		for metric := range metricsForSendCh {
+			err := s.sendMetricItem(ctx, metric)
+			if err != nil {
+				s.logger.Errorf("Ошибка отправки метрик по одной", err)
+			}
+		}
+	}
+
+	// Создание воркеров
+	for w := 1; w <= workerCount; w++ {
+		go worker(w, s.metricsForSendCh)
+	}
+
+	// Наполнение канала метик для последующей обработки их с помощью пула воркеров
+	for _, m := range *metrics {
+		s.metricsForSendCh <- &m
+	}
 }
 
 func (s *service) sendMetricItem(ctx context.Context, metric *entity.MetricFields) error {
