@@ -18,7 +18,12 @@ type Config struct {
 	Restore *bool
 
 	DatabaseDSN *string
+
+	// HashKey - Флаг -k=<ЗНАЧЕНИЕ> При наличии ключа агент должен вычислять хеш и передавать в HTTP-заголовке запроса с именем HashSHA256.
+	HashKey *string
 }
+
+const EmptyHashKey = ""
 
 func NewConfig() *Config {
 	return &Config{}
@@ -38,6 +43,8 @@ func (c *Config) Load() {
 		restoreEnv, restoreEnvPresent                 = os.LookupEnv("RESTORE")
 		databaseDSN                                   = command.String("d", "", "the path to database connection")
 		databaseDSNEnv, databaseDSNEnvPresent         = os.LookupEnv("DATABASE_DSN")
+		hashKey                                       = command.String("k", EmptyHashKey, "вычисляет хеш для подписи данных по ключу")
+		hashKeyEnv, hashKeyEnvPresent                 = os.LookupEnv("KEY")
 	)
 
 	c.Port = port
@@ -69,6 +76,13 @@ func (c *Config) Load() {
 	c.DatabaseDSN = databaseDSN
 	if databaseDSNEnvPresent {
 		c.DatabaseDSN = &databaseDSNEnv
+	}
+	
+	if *hashKey != EmptyHashKey {
+		c.HashKey = hashKey
+	}
+	if hashKeyEnvPresent {
+		c.HashKey = &hashKeyEnv
 	}
 
 	// Тесты запускают несколько раз метод Load.

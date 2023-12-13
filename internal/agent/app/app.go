@@ -21,7 +21,7 @@ func New(cfg *config.Config, logger logging.Logger) (*App, error) {
 	ctx := context.Background()
 
 	serverHost := fmt.Sprintf("http://%v", *cfg.ServerPort)
-	serverClient := server.New(serverHost, logger)
+	serverClient := server.New(serverHost, logger, cfg.HashKey)
 
 	mr := metricRepository.New()
 	ms := metricService.New(serverClient, logger, mr, cfg)

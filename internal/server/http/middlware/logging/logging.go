@@ -4,6 +4,7 @@ import (
 	logging2 "github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"github.com/sirupsen/logrus"
 	"net/http"
+	"runtime/debug"
 	"time"
 )
 
@@ -40,15 +41,15 @@ func (rw *responseWriter) Write(b []byte) (int, error) {
 
 func WithLogging(h http.Handler, logger logging2.Logger) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
-		//defer func() {
-		//	if err := recover(); err != nil {
-		//		w.WriteHeader(http.StatusInternalServerError)
-		//		logger.Error(
-		//			"err", err,
-		//			"trace", debug.Stack(),
-		//		)
-		//	}
-		//}()
+		defer func() {
+			if err := recover(); err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				logger.Error(
+					"err", err,
+					"trace", debug.Stack(),
+				)
+			}
+		}()
 
 		start := time.Now()
 		wrapped := wrapResponseWriter(w)

@@ -60,7 +60,7 @@ func (s updates) SendUpdates(ctx context.Context, updateDto []*dto.Update) error
 	res, err := s.HTTPClient.Do(req)
 	if err != nil {
 		s.logger.Error("client: error making service request: %s\n", err)
-		
+
 		return api.ErrRequestDo
 	}
 	defer res.Body.Close()

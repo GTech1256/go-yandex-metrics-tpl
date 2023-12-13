@@ -18,7 +18,16 @@ type Config struct {
 
 	// Batch - Флаг -b=<ЗНАЧЕНИЕ> указывает отправлять метрику массивом JSON или отправлять каждую метрику отдельно (по умолчанию отдельно(false)).
 	Batch *bool
+
+	// HashKey - Флаг -k=<ЗНАЧЕНИЕ> При наличии ключа агент должен вычислять хеш и передавать в HTTP-заголовке запроса с именем HashSHA256.
+	HashKey *string
+
+	// RateLimit - Флаг -l=<ЗНАЧЕНИЕ> Ограничивает количество одновременно исходящих запросов на сервер «сверху».
+	RateLimit *int
 }
+
+const EmptyStringFlagValue = ""
+const EmptyIntFlagValue = 0
 
 func NewConfig() *Config {
 	return &Config{}
@@ -35,8 +44,12 @@ func (c *Config) Load() {
 		reportIntervalEnv, reportIntervalEnvPresent = os.LookupEnv("REPORT_INTERVAL")
 		pollInterval                                = command.Int("p", 2, "the frequency of polling metrics")
 		pollIntervalEnv, pollIntervalEnvPresent     = os.LookupEnv("POLL_INTERVAL")
-		batch                                       = command.Bool("b", false, "the frequency of polling metrics")
+		batch                                       = command.Bool("b", false, "request by batch strategy")
 		batchEnv, batchEnvPresent                   = os.LookupEnv("BATCH")
+		hashKey                                     = command.String("k", EmptyStringFlagValue, "вычисляет хеш для подписи данных по ключу")
+		hashKeyEnv, hashKeyEnvPresent               = os.LookupEnv("KEY")
+		rateLimit                                   = command.Int("l", EmptyIntFlagValue, "лимит одновременно исходящих запросов на сервер")
+		rateLimitEnv, rateLimitEnvPresent           = os.LookupEnv("RATE_LIMIT")
 	)
 
 	c.ServerPort = serverPort
@@ -65,6 +78,23 @@ func (c *Config) Load() {
 		batchBool, err := strconv.ParseBool(batchEnv)
 		if err == nil {
 			c.Batch = &batchBool
+		}
+	}
+
+	if *hashKey != EmptyStringFlagValue {
+		c.HashKey = hashKey
+	}
+	if hashKeyEnvPresent {
+		c.HashKey = &hashKeyEnv
+	}
+
+	if *rateLimit != EmptyIntFlagValue {
+		c.RateLimit = rateLimit
+	}
+	if rateLimitEnvPresent {
+		atoi, err := strconv.Atoi(rateLimitEnv)
+		if err == nil {
+			c.RateLimit = &atoi
 		}
 	}
 

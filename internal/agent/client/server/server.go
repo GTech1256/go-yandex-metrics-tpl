@@ -3,9 +3,9 @@ package server
 import (
 	"context"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/dto"
-	serverHttp "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/api/update"
 	"github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/api/updates"
+	httpClient "github.com/GTech1256/go-yandex-metrics-tpl/internal/agent/client/server/http/client"
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 )
 
@@ -20,20 +20,20 @@ type UpdatesAPI interface {
 
 type client struct {
 	host       string
-	httpClient serverHttp.ClientHTTP
+	httpClient httpClient.ClientHTTP
 	logger     logging.Logger
 	updateAPI  UpdateAPI
 	updatesAPI UpdatesAPI
 }
 
-func New(host string, logger logging.Logger) *client {
-	httpClient := serverHttp.New()
-	updateAPI := update.New(httpClient, host, logger)
-	updatesAPI := updates.New(httpClient, host, logger)
+func New(host string, logger logging.Logger, HashKey *string) *client {
+	httpClientInstance := httpClient.New(HashKey, logger)
+	updateAPI := update.New(httpClientInstance, host, logger)
+	updatesAPI := updates.New(httpClientInstance, host, logger)
 
 	return &client{
 		host:       host,
-		httpClient: httpClient,
+		httpClient: httpClientInstance,
 		logger:     logger,
 		updateAPI:  updateAPI,
 		updatesAPI: updatesAPI,
