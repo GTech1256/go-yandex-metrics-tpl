@@ -5,7 +5,6 @@ import (
 	"github.com/GTech1256/go-yandex-metrics-tpl/pkg/logging"
 	"io"
 	netHTTP "net/http"
-	"time"
 )
 
 type httpClient struct {
@@ -21,7 +20,6 @@ func New(HashKey *string, logger logging.Logger) ClientHTTP {
 }
 
 func (h httpClient) NewRequest(method, url string, body io.Reader) (*netHTTP.Request, error) {
-	time.Sleep(time.Second)
 	r, err := netHTTP.NewRequest(method, url, body)
 	if err != nil {
 		return nil, err
